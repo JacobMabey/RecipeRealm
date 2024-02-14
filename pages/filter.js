@@ -1,16 +1,7 @@
+import { StyleSheet } from 'react-native';
+
 export default Filter = () => {
     return (
-        <div>
-            <h1 styles={styles.title}>Filter</h1>
-        </div>
+        <h1>Filter</h1>
     );
 };
-
-const styles = StyleSheet.create({
-    title: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: '#ecf0f1',
-      padding: 8,
-    }
-  });

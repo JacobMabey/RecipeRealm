@@ -1,4 +1,3 @@
-//import { Text, SafeAreaView, StyleSheet } from 'react-native';
 
 // You can import supported modules from npm
 import Home from "./pages/index";
@@ -13,14 +12,35 @@ import {
 // or any files within the Snack
 //import AssetExample from './components/AssetExample';
 
+function HomeScreen({navigation}) {
+  return (
+    <Home />
+  );
+}
+
+function FilterScreen({navigation}) {
+  return (
+    <Filter />
+  );
+}
+
 export default function App() {
   return (
-    <Router>
+    <SafeAreaView>
+      <h1>hello</h1>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Filter" component={FilterScreen}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+    /*<Router>
         <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/filter" element={<Filter />} />
         </Routes>
-    </Router>
+    </Router>*/
     /*<SafeAreaView style={styles.container}>
       <Text style={styles.paragraph}>
         Change code in the editor and watch it change on your phone! Save to get a shareable url.
