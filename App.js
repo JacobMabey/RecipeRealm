@@ -60,14 +60,29 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.searchBarContainer}>
           <TextInput
             style={styles.searchBar}
-            placeholder="Search for recipes"
+            placeholder="Browse for recipes"
             onSubmitEditing={() => navigation.navigate('RecipePage')}
           />
+        </View>
+        <View style={styles.searchBarContainer}>
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Browse for Ingredients"
+            onSubmitEditing={() => navigation.navigate('Ingredients')}/>
         </View>
         <View>
       <TouchableOpacity style={styles.pageButton}>
       <Text>My Cook Book</Text>
-      
+      </TouchableOpacity>
+      </View>
+       <View>
+      <TouchableOpacity style={styles.pageButton}>
+      <Text>My Meal Planning</Text>
+      </TouchableOpacity>
+      </View>
+      <View>
+      <TouchableOpacity style={styles.pageButton}>
+      <Text>My Grocery List</Text>
       </TouchableOpacity>
       </View>
       </View>
@@ -78,9 +93,16 @@ export default function HomeScreen({ navigation }) {
   );
 }
 function RecipePage({navigation}){
-  <view>
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
   
-  </view>
+  </View>
+  </ScrollView>
+  </SafeAreaView>
 
 }
 
@@ -101,8 +123,13 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     position: 'absolute',
+    borderColor: 'black',
+    borderWidth:1,
+    borderRadius:50,
+    padding:4,
     top: 10,
     right: 10,
+    backgroundColor:'#95fbff'
   },
   tabsContainer: {
     flexDirection: 'row',
@@ -112,7 +139,7 @@ const styles = StyleSheet.create({
   tabButton: {
     padding: 10,
     borderColor: 'black',
-    width: 80,
+    width: 85,
     borderWidth:1,
     textAlign: 'center',
     alignItems:'center',
@@ -120,6 +147,7 @@ const styles = StyleSheet.create({
   },
     pageButton: {
     padding: 10,
+    margin:2,
     borderColor: 'black',
     width: 150,
     borderWidth:1,
@@ -130,16 +158,23 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 150,
-    margin: 10,
+    margin: 2,
+    borderColor:'black',
+    borderWidth:1,
+    bottom:2
   },
   searchBarContainer: {
-    padding: 20,
+    padding: 5,
+
   },
   searchBar: {
     height: 40,
     borderColor: 'gray',
+    backgroundColor:'#a9ffbb' ,
+    borderRadius: 50,
     borderWidth: 1,
     padding: 10,
     width: '100%',
   },
 });
+
