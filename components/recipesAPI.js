@@ -13,7 +13,7 @@ const RecipesHook = () => {
         const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
         const PARAMS = `?apiKey=${APIKEY}`;
         const FETCH_URL = `${BASE_URL}${PARAMS}`;
-    
+
         fetch(FETCH_URL)
             .then((response) => {
                 if (!response.ok) {
@@ -22,7 +22,7 @@ const RecipesHook = () => {
                 return response.json();
             })
             .then((json) => {
-                if (json.results && json.results.length > 0) {
+                if (json.results && json.results.length > 0 && json.results.length < 2) {
                     setRecipes(json.results);
                 } else {
                     console.error('No results found');
@@ -33,7 +33,7 @@ const RecipesHook = () => {
 
     const RecipeInformation = ({ id }) => {
         const [recipeInfo, setRecipeInfo] = useState(null);
-    
+
         useEffect(() => {
             console.log('Fetching recipe information for ID:', id);
             const fetchRecipeInformation = async () => {
@@ -53,11 +53,11 @@ const RecipesHook = () => {
             };
             fetchRecipeInformation();
         }, [id]);
-    
+
         if (!recipeInfo) {
             return <Text>Loading...</Text>;
         }
-    
+
         return (
             <View>
                 {recipeInfo.diets.map((diet, index) => (
@@ -83,12 +83,12 @@ const RecipesHook = () => {
         <View>
             {recipes.map((recipe, index) => (
                 <View key={index}>
-                <RecipesFormat
-                    name={recipe.title}
-                    image={recipe.image}
-                    onPress={() => RecipeInformation({ id: recipe.id })}
-                />
-            </View>
+                    <RecipesFormat
+                        name={recipe.title}
+                        image={recipe.image}
+                        onPress={() => RecipeInformation({ id: recipe.id })}
+                    />
+                </View>
             ))}
         </View>
     );
