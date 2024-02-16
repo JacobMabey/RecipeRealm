@@ -9,78 +9,114 @@ Lunch = [];
 Dinner = [];
 Dessert = [];
 
+
+
 //these should be the basic for the images 
-function getBreakfeastItem (entry)
+function getBreakfeastImage (entry)
 {
     return BreakfeastImages[entry];
 }
-
-function addBreakfeastItem (item)
+function addBreakfeastImage (item)
 {
     BreakfeastImages.Push(item);
 }
-function getLunchItem (entry)
+
+function getLunchImage (entry)
 {
     return LunchImages[entry];
 }
-
-function addLuchItem (item)
+function addLuchImage (item)
 {
     LunchImages.Push(item);
 }
-function getDinnerItem (entry)
+
+function getDinnerImage (entry)
 {
     return DinnerImages[entry];
 }
-
-function addDinnerItem (item)
+function addDinnerImage (item)
 {
     DinnerImages.Push(item);
 }
-function getDessertItem (entry)
+
+function getDessertImage (entry)
 {
     return DessertImages[entry];
 }
-
-function addDessertItem (item)
+function addDessertImage (item)
 {
     DessertImages.Push(item);
 }
 
-// need to make the recpie object then I'll come back and rewrite these
+// Passes actual recipie data into a temp array
 function getBreakfeastItem (entry)
 {
     return Breakfeast[entry];
 }
-
-function addBreakfeastItem (item)
+function addBreakfeastItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
 {
-    Breakfeast.Push(item);
+    const recipeData = {
+        _RecipeName: recipieName,
+        _CalorieCount: calorieCount,
+        _Instruction: instruction,
+        _Utinciels: utinciels,
+        _TimeEst: timeEst,
+        _NutrientionalWarnings: nutrientionalWarnings,
+        _Ingredients: ingredient
+    };
+    Breakfeast.Push(recipeData);
 }
+
 function getLunchItem (entry)
 {
     return Lunch[entry];
 }
-
-function addLuchItem (item)
+function addLuchItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
 {
-    Lunch.Push(item);
+    const recipeData = {
+        _RecipeName: recipieName,
+        _CalorieCount: calorieCount,
+        _Instruction: instruction,
+        _Utinciels: utinciels,
+        _TimeEst: timeEst,
+        _NutrientionalWarnings: nutrientionalWarnings,
+        _Ingredients: ingredient
+    };
+    Lunch.Push(recipeData);
 }
+
 function getDinnerItem (entry)
 {
     return Dinner[entry];
 }
-
-function addDinnerItem (item)
+function addDinnerItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
 {
-    Dinner.Push(item);
+    const recipeData = {
+        _RecipeName: recipieName,
+        _CalorieCount: calorieCount,
+        _Instruction: instruction,
+        _Utinciels: utinciels,
+        _TimeEst: timeEst,
+        _NutrientionalWarnings: nutrientionalWarnings,
+        _Ingredients: ingredient
+    };
+    Dinner.Push(recipeData);
 }
+
 function getDessertItem (entry)
 {
     return Dessert[entry];
 }
-
-function addDessertItem (item)
+function addDessertItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
 {
-    Breakfeast.Push(item);
+    const recipeData = {
+        _RecipeName: recipieName,
+        _CalorieCount: calorieCount,
+        _Instruction: instruction,
+        _Utinciels: utinciels,
+        _TimeEst: timeEst,
+        _NutrientionalWarnings: nutrientionalWarnings,
+        _Ingredients: ingredient
+    };
+    Breakfeast.Push(recipeData);
 }
