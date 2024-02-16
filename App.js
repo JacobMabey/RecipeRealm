@@ -9,9 +9,53 @@ import { Text,
   Image
  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-export default function HomeScreen({ navigation }) {
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Breakfast"
+          component={RecipePageBreakfast}
+          options={{ title: 'Breakfast' }}
+        />
+        <Stack.Screen
+        name="Featured"
+        component={FeaturedRecipes}
+        
+        />
+                <Stack.Screen
+        name="Lunch"
+        component={RecipePageLunch}
+        
+        />
+                <Stack.Screen
+        name="Dinner"
+        component={RecipePageDinner}
+        
+        />
+                <Stack.Screen
+        name="Desserts"
+        component={RecipePageDesserts}
+        
+        />
+        {/* Add other screens similarly */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function Home({ navigation }) {
   // Define your images for the image cycler
   const imageUrls = [
     'image1.jpg',
@@ -23,8 +67,10 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+    
     <ScrollView>
-    <NavigationContainer>
+    
+    
       <View style={styles.container}>
         <Text style={styles.header}>Recipe Realm</Text>
         <TouchableOpacity style={styles.loginButton}>
@@ -33,16 +79,19 @@ export default function HomeScreen({ navigation }) {
 
         {/* Tabs Section */}
         <View style={styles.tabsContainer}>
-          <TouchableOpacity style={styles.tabButton}>
-            <Text>Breakfast</Text>
+          <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+            <Text>Breakfast</Text>  
           </TouchableOpacity>
-          <TouchableOpacity style={styles.tabButton}>
+
+          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
             <Text>Lunch</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.tabButton}>
+
+          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
             <Text>Dinner</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.tabButton}>
+
+          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Desserts')}>
             <Text>Desserts</Text>
           </TouchableOpacity>
         </View>
@@ -50,7 +99,7 @@ export default function HomeScreen({ navigation }) {
         {/* Image Cycler Section */}
         <ScrollView horizontal>
           {imageUrls.map((url, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate('FeaturedRecipes')}>
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
               <Image source={{ uri: url }} style={styles.image} />
             </TouchableOpacity>
           ))}
@@ -61,8 +110,9 @@ export default function HomeScreen({ navigation }) {
           <TextInput
             style={styles.searchBar}
             placeholder="Browse for recipes"
-            onSubmitEditing={() => navigation.navigate('RecipePage')}
+            onSubmitEditing={() => navigation.navigate('Recipes')}
           />
+          <Stack.Screen name="Recipes" component={RecipePage} />
         </View>
         <View style={styles.searchBarContainer}>
           <TextInput
@@ -70,13 +120,15 @@ export default function HomeScreen({ navigation }) {
             placeholder="Browse for Ingredients"
             onSubmitEditing={() => navigation.navigate('Ingredients')}/>
         </View>
+
         <View>
       <TouchableOpacity style={styles.pageButton}>
       <Text>My Cook Book</Text>
       </TouchableOpacity>
       </View>
        <View>
-      <TouchableOpacity style={styles.pageButton}>
+      <TouchableOpacity style={styles.pageButton}
+      onPress={() => navigation.navigate('MealPlanning')}>
       <Text>My Meal Planning</Text>
       </TouchableOpacity>
       </View>
@@ -87,12 +139,25 @@ export default function HomeScreen({ navigation }) {
       </View>
       </View>
       
-      </NavigationContainer>
+     
     </ScrollView>
     </SafeAreaView>
   );
 }
 function RecipePage({navigation}){
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
+}
+function FeaturedRecipes({navigation}){
   <SafeAreaView style={{ flex: 1 }}>
   <ScrollView>
   <View style={styles.container}>
@@ -107,13 +172,112 @@ function RecipePage({navigation}){
 }
 
 
+function Cookbook({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+function MealPlanning({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+function GroceryLists({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+function RecipePageBreakfast({navigation}){
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
+
+}
+
+function RecipePageLunch({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+function RecipePageDinner({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+function RecipePageDesserts({navigation}){
+  <SafeAreaView style={{ flex: 1 }}>
+  <ScrollView>
+  
+  <View style={styles.container}>
+  <TouchableOpacity style={styles.pageButton}>
+      <Text>Home Page</Text>
+      </TouchableOpacity>
+  
+  </View>
+  </ScrollView>
+  </SafeAreaView>
+
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    padding: '10%',
     backgroundColor: '#ffa21a',
+    
+    
   },
   header: {
     fontSize: 24,
@@ -177,4 +341,3 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
-
