@@ -3,18 +3,14 @@
 import Home from "./pages/index";
 import Filter from "./pages/filter";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-
 // or any files within the Snack
 //import AssetExample from './components/AssetExample';
 
 function HomeScreen({navigation}) {
   return (
-    <Home />
+    <View>
+      <h1>hello again</h1>
+    </View>
   );
 }
 

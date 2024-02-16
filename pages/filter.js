@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-export default Filter = () => {
+const Filter = () => {
     return (
         <h1>Filter</h1>
     );
 };
+
+export default Filter;
