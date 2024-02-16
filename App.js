@@ -44,11 +44,27 @@ export default function App() {
         component={RecipePageDinner}
         
         />
-                <Stack.Screen
+                        <Stack.Screen
         name="Desserts"
         component={RecipePageDesserts}
         
         />
+                <Stack.Screen
+        name="cookbook"
+        component={Cookbook}
+        
+        />
+              <Stack.Screen
+        name="planning"
+        component={MealPlanning}
+        
+        />
+              <Stack.Screen
+        name="Grocery"
+        component={GroceryLists}
+        
+        />
+
         {/* Add other screens similarly */}
       </Stack.Navigator>
     </NavigationContainer>
@@ -122,18 +138,22 @@ function Home({ navigation }) {
         </View>
 
         <View>
-      <TouchableOpacity style={styles.pageButton}>
+      <TouchableOpacity style={styles.pageButton}
+       onPress={() => navigation.navigate('cookbook')}>
       <Text>My Cook Book</Text>
       </TouchableOpacity>
       </View>
+
        <View>
       <TouchableOpacity style={styles.pageButton}
-      onPress={() => navigation.navigate('MealPlanning')}>
+      onPress={() => navigation.navigate('planning')}>
       <Text>My Meal Planning</Text>
       </TouchableOpacity>
       </View>
+
       <View>
-      <TouchableOpacity style={styles.pageButton}>
+      <TouchableOpacity style={styles.pageButton}
+      onPress={() => navigation.navigate('Grocery')}>
       <Text>My Grocery List</Text>
       </TouchableOpacity>
       </View>
@@ -149,7 +169,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
-          <TouchableOpacity style={styles.pageButton}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
         </View>
@@ -158,57 +178,61 @@ return (
 );
 }
 function FeaturedRecipes({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 
 
 function Cookbook({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 function MealPlanning({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 function GroceryLists({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 function RecipePageBreakfast({navigation}){
@@ -227,45 +251,45 @@ return (
 }
 
 function RecipePageLunch({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 function RecipePageDinner({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 function RecipePageDesserts({navigation}){
-  <SafeAreaView style={{ flex: 1 }}>
-  <ScrollView>
-  
-  <View style={styles.container}>
-  <TouchableOpacity style={styles.pageButton}>
-      <Text>Home Page</Text>
-      </TouchableOpacity>
-  
-  </View>
-  </ScrollView>
-  </SafeAreaView>
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
 
 }
 
