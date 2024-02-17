@@ -6,7 +6,7 @@ Dessert = [];
 
 
 
-// Passes actual recipie data into a temp array
+// Passes actual recipie data into a temp array(see top)
 function getBreakfeastItem (entry)
 {
     return Breakfeast[entry];
