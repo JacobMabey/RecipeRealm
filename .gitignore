@@ -1,1 +1,66 @@
-node_modules\*
+# Node.js dependencies
+node_modules/
+
+# Expo development server cache
+.cache/
+expo-debug/
+
+# React Native Android build folder
+android/build/
+android/app/build/
+
+# React Native iOS build folder
+ios/build/
+ios/Pods/
+ios/Podfile.lock
+ios/*.xcworkspace
+
+# Metro Bundler cache
+metro-cache/
+metro/
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# IDE files
+.vscode/
+*.code-workspace
+
+# macOS files
+.DS_Store
+
+# Android files
+*.apk
+*.aab
+
+# Gradle files
+.gradle/
+
+# Build files
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+
+# Environment variables
+.env*
+
+# Expo web build
+web-build/
+
+# Jest cache
+__tests__/coverage/
+__tests__/report/
+
+# Expo release build files
+.expo/
+.expo-shared/
+
+# Pexels API key file (if applicable)
+pexels-api-key.json
