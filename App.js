@@ -10,6 +10,10 @@ import { Text,
  } from 'react-native';
  import { NavigationContainer } from '@react-navigation/native';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+ //Pages
+ import Home from "./pages/index.js"
+ import Filter from "./pages/filter.js"
  
  
 const Stack = createNativeStackNavigator();
@@ -18,17 +22,21 @@ export default function App() {
  
   return (
     <SafeAreaView>
+
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home}/>
-          <Stack.Screen name="Breakfast" component={RecipePageBreakfast}/>
+          <Stack.Screen name="Home" component={Home}
+              options={{ headerShown: false }}/>
+              
+          <Stack.Screen name="Filter" component={Filter}
+              options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
 }
  
-function Home({ navigation }) {
+/*function Home({ navigation }) {
   // Define your images for the image cycler
   const imageUrls = [
     'image1.jpg',
@@ -39,8 +47,7 @@ function Home({ navigation }) {
   ];
  
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-
+    <SafeAreaView>
     <ScrollView>
    
    
@@ -50,7 +57,7 @@ function Home({ navigation }) {
           <Text>Login / Sign Up</Text>
         </TouchableOpacity>
  
-        {/* Tabs Section */}
+        {/* Tabs Section *}
         <View style={styles.tabsContainer}>
           <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
             <Text>Breakfast</Text>  
@@ -69,7 +76,7 @@ function Home({ navigation }) {
           </TouchableOpacity>
         </View>
  
-        {/* Image Cycler Section */}
+        {/* Image Cycler Section *}
         <ScrollView horizontal>
           {imageUrls.map((url, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
@@ -78,7 +85,7 @@ function Home({ navigation }) {
           ))}
         </ScrollView>
  
-        {/* Recipe Search Bar */}
+        {/* Recipe Search Bar *}
         <View style={styles.searchBarContainer}>
           <TextInput
             style={styles.searchBar}
@@ -120,7 +127,7 @@ function Home({ navigation }) {
     </ScrollView>
     </SafeAreaView>
   );
-}
+}*/
 function RecipePage({navigation}){
 return (
     <SafeAreaView style={{ flex: 1 }}>
