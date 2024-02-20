@@ -10,6 +10,7 @@ import { Text,
     
  import { NavigationContainer } from '@react-navigation/native';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Dimensions } from 'react-native-web';
 
 const Home = () => {
     // Define your images for the image cycler
@@ -22,33 +23,58 @@ const Home = () => {
   ];
  
   return (
-    <SafeAreaView>
-   
-   
-      <View style={styles.container}>
-
-        <View style={styles.tabsContainer}>
-          <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-            <Text>Breakfast</Text>  
-          </TouchableOpacity>
- 
-          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
-            <Text>Lunch</Text>
-          </TouchableOpacity>
- 
-          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
-            <Text>Dinner</Text>
-          </TouchableOpacity>
- 
-          <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Desserts')}>
-            <Text>Desserts</Text>
-          </TouchableOpacity>
-        </View>
- 
+        <View style={styles.container}>
+            <View style={styles.tabsContainer} >
+                <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                    <Text>Breakfast</Text>  
+                </TouchableOpacity>
         
-      </View>
-     
-    </SafeAreaView>
+                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
+                    <Text>Lunch</Text>
+                </TouchableOpacity>
+        
+                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
+                    <Text>Dinner</Text>
+                </TouchableOpacity>
+        
+                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
+                    <Text>Filter</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={{flexDirection: 'row'}}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
+                    {imageUrls.map((url, index) => (
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
+                        <Image source={{ uri: url }} style={styles.image} />
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            </View>
+            
+
+            <View>
+                <TouchableOpacity style={styles.pageButton}
+                onPress={() => navigation.navigate('cookbook')}>
+                <Text>My Cook Book</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View>
+                <TouchableOpacity style={styles.pageButton}
+                onPress={() => navigation.navigate('planning')}>
+                <Text>My Meal Planning</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View>
+                <TouchableOpacity style={styles.pageButton}
+                onPress={() => navigation.navigate('Grocery')}>
+                <Text>My Grocery List</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+        
   );
 };
 
@@ -56,53 +82,35 @@ export default Home;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '10%',
-      backgroundColor: '#ffa21a',
-     
-     
-    },
-    header: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 10,
-      right:80
-    },
-    loginButton: {
-      position: 'absolute',
-      borderColor: 'black',
-      borderWidth:1,
-      borderRadius:50,
-      padding:4,
-      top: 10,
-      right: 10,
-      backgroundColor:'#95fbff'
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        width: Dimensions.get('window').width,
+        backgroundColor: '#ffa21a',
     },
     tabsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginVertical: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        marginVertical: 0,
     },
     tabButton: {
-      padding: 10,
-      borderColor: 'black',
-      width: 85,
-      borderWidth:1,
-      textAlign: 'center',
-      alignItems:'center',
-      backgroundColor:'#5ad263'
+        borderColor: 'black',
+        width: '25%',
+        borderWidth:1,
+        textAlign: 'center',
+        alignItems:'center',
+        backgroundColor:'#5ad263'
     },
-      pageButton: {
-      padding: 10,
-      margin:2,
-      borderColor: 'black',
-      width: 150,
-      borderWidth:1,
-      textAlign: 'center',
-      alignItems:'center',
-      backgroundColor:'#5ad263'
+    pageButton: {
+        padding: 30,
+        borderColor: 'black',
+        width: Dimensions.get('window').width,
+        borderWidth:1,
+        textAlign: 'center',
+        alignItems:'center',
+        backgroundColor:'#5ad263'
     },
     image: {
       width: 200,
