@@ -12,7 +12,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions } from 'react-native-web';
 
-const Home = () => {
+import Filter from "./filter.js";
+import Featured from "./featured.js";
+
+const Home = ({navigation}) => {
     // Define your images for the image cycler
 const imageUrls = [
     'image1.jpg',
@@ -42,15 +45,13 @@ const imageUrls = [
                 </TouchableOpacity>
             </View>
 
-            <View style={{flexDirection: 'row'}}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
-                    {imageUrls.map((url, index) => (
-                        <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
-                        <Image source={{ uri: url }} style={styles.image} />
-                        </TouchableOpacity>
-                    ))}
-                </ScrollView>
-            </View>
+            <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
+                {imageUrls.map((url, index) => (
+                    <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
+                    <Image source={{ uri: url }} style={styles.image} />
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
             
             {/*
             <View style={styles.searchBarContainer}>
