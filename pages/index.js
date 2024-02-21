@@ -1,28 +1,28 @@
 import { Text,
     SafeAreaView,
-     TouchableOpacity,
-     TextInput, View,
-     Button,
-     StyleSheet,
-     ScrollView,
-     Image
-    } from 'react-native';
+    TouchableOpacity,
+    TextInput, View,
+    Button,
+    StyleSheet,
+    ScrollView,
+    Image
+} from 'react-native';
     
- import { NavigationContainer } from '@react-navigation/native';
- import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions } from 'react-native-web';
 
 const Home = () => {
     // Define your images for the image cycler
-  const imageUrls = [
+const imageUrls = [
     'image1.jpg',
     'image2.jpg',
     'image3.jpg',
     'image4.jpg',
     'image5.jpg',
-  ];
- 
-  return (
+];
+
+    return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
                 <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
@@ -52,7 +52,22 @@ const Home = () => {
                 </ScrollView>
             </View>
             
-
+            {/*
+            <View style={styles.searchBarContainer}>
+                <TextInput
+                    style={styles.searchBar}
+                    placeholder="Browse for recipes"
+                    onSubmitEditing={() => navigation.navigate('Recipes')}/>
+                    <Stack.Screen name="Recipes" component={RecipePage} />
+            </View>
+            <View style={styles.searchBarContainer}>
+                <TextInput
+                    style={styles.searchBar}
+                    placeholder="Browse for Ingredients"
+                    onSubmitEditing={() => navigation.navigate('Ingredients')}/>
+            </View>
+            */}
+        
             <View>
                 <TouchableOpacity style={styles.pageButton}
                 onPress={() => navigation.navigate('cookbook')}>
@@ -75,7 +90,7 @@ const Home = () => {
             </View>
         </View>
         
-  );
+    );
 };
 
 export default Home;
@@ -113,24 +128,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#5ad263'
     },
     image: {
-      width: 200,
-      height: 150,
-      margin: 2,
-      borderColor:'black',
-      borderWidth:1,
-      bottom:2
-    },
-    searchBarContainer: {
-      padding: 5,
-   
-    },
-    searchBar: {
-      height: 40,
-      borderColor: 'gray',
-      backgroundColor:'#a9ffbb' ,
-      borderRadius: 50,
-      borderWidth: 1,
-      padding: 10,
-      width: '100%',
+        width: 200,
+        height: 150,
+        margin: 2,
+        borderColor:'black',
+        borderWidth:1,
+        bottom:2
     },
   });

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Filter = () => {
+const Featured = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -14,4 +14,4 @@ const Filter = () => {
     );
 };
 
-export default Filter;
+export default Featured;
