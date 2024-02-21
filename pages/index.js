@@ -13,7 +13,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions } from 'react-native-web';
 
 import Filter from "./filter.js";
-import Featured from "./featured.js";
 
 import RecipeAPI from "../components/recipesAPI.js";
 
@@ -45,7 +44,7 @@ const imageUrls = [
 
             <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
                 {imageUrls.map((url, index) => (
-                    <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
+                    <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
                     <RecipeAPI/>
                     </TouchableOpacity>
                 ))}
