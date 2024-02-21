@@ -15,14 +15,12 @@ import { Dimensions } from 'react-native-web';
 import Filter from "./filter.js";
 import Featured from "./featured.js";
 
+import RecipeAPI from "../components/recipesAPI.js";
+
 const Home = ({navigation}) => {
     // Define your images for the image cycler
 const imageUrls = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg',
-    'image4.jpg',
-    'image5.jpg',
+    RecipeAPI,
 ];
 
     return (
@@ -48,7 +46,7 @@ const imageUrls = [
             <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
                 {imageUrls.map((url, index) => (
                     <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
-                    <Image source={{ uri: url }} style={styles.image} />
+                    <RecipeAPI/>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
