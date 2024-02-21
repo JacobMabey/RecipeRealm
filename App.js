@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text,
  SafeAreaView,
   TouchableOpacity,
@@ -10,6 +10,8 @@ import { Text,
  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RecipesAPI from './components/recipesAPI'
+import RecipeInformation from './components/recipeInformation'; 
 
 
 const Stack = createNativeStackNavigator();
@@ -65,6 +67,7 @@ export default function App() {
         
         />
 
+
         {/* Add other screens similarly */}
       </Stack.Navigator>
     </NavigationContainer>
@@ -74,11 +77,9 @@ export default function App() {
 function Home({ navigation }) {
   // Define your images for the image cycler
   const imageUrls = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg',
-    'image4.jpg',
-    'image5.jpg',
+    RecipesAPI,
+
+
   ];
 
   return (
@@ -113,10 +114,10 @@ function Home({ navigation }) {
         </View>
 
         {/* Image Cycler Section */}
-        <ScrollView horizontal>
+             <ScrollView horizontal>
           {imageUrls.map((url, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
-              <Image source={{ uri: url }} style={styles.image} />
+              <RecipesAPI/>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -177,11 +178,12 @@ return (
     </SafeAreaView>
 );
 }
-function FeaturedRecipes({navigation}){
+function FeaturedRecipes({navigation, route}){
 return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipeInformation/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
