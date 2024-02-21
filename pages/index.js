@@ -14,7 +14,9 @@ import { Dimensions } from 'react-native-web';
 
 import Filter from "./filter.js";
 
-import RecipeAPI from "../components/recipesAPI.js";
+import RecipesAPI from './components/recipesAPI';
+import RecipeInformation from './components/recipeInformation'; 
+import RecipesParams from './components/recipesParamsAPI';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
