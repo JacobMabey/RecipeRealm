@@ -17,7 +17,6 @@ const Filter = ({navigation}) => {
                     <TextInput style={styles.searchBar} placeholder="Search For Recipes"
                         onSubmitEditing={() => navigation.navigate('Home')}/>
                 </View>
-
         </View>
     );
 };
