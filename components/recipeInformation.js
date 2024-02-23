@@ -15,8 +15,6 @@ const RecipeInformation = () => {
         setLoading(false);
         return;
       }
-
-        const APIKEY = '886b123c34d44502a4cedaae4f11a007';
       const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
       const PARAMS = `?apiKey=${APIKEY}`;
       const FETCH_URL = `${BASE_URL}${PARAMS}`;

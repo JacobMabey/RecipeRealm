@@ -12,78 +12,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RecipesAPI from './components/recipesAPI'
 import RecipeInformation from './components/recipeInformation'; 
-import RecipesParams from './components/recipesParams';
+
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Breakfast"
-          component={RecipePageBreakfast}
-          options={{ title: 'Breakfast' }}
-        />
-        <Stack.Screen
-        name="Featured"
-        component={FeaturedRecipes}
-        
-        />
-                <Stack.Screen
-        name="Lunch"
-        component={RecipePageLunch}
-        
-        />
-                <Stack.Screen
-        name="Dinner"
-        component={RecipePageDinner}
-        
-        />
-                        <Stack.Screen
-        name="Desserts"
-        component={RecipePageDesserts}
-        
-        />
-                <Stack.Screen
-        name="cookbook"
-        component={Cookbook}
-        
-        />
-              <Stack.Screen
-        name="planning"
-        component={MealPlanning}
-        
-        />
-              <Stack.Screen
-        name="Grocery"
-        component={GroceryLists}
-        
-        />
-
-
-        {/* Add other screens similarly */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-function Home({ navigation }) {
-  // Define your images for the image cycler
-  const imageUrls = [
-    RecipesAPI,
-
-
-  ];
-
-  return (
     <SafeAreaView style={{ flex: 1 }}>
     
     <ScrollView>
@@ -115,12 +50,6 @@ function Home({ navigation }) {
         </View>
 
         {/* Image Cycler Section */}
-             <ScrollView horizontal>
-          {imageUrls.map((url, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate('Featured')}>
-              <RecipesAPI/>
-            </TouchableOpacity>
-          ))}
         </ScrollView>
 
         {/* Recipe Search Bar */}
@@ -243,7 +172,6 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
-        <RecipesParams type="breakfast"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -259,7 +187,6 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
-        <RecipesParams type="italian"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -274,7 +201,6 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
-        <RecipesParams type="dinner"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -289,7 +215,6 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
-        <RecipesParams type="dessert"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -335,16 +260,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: 'black',
     width: 85,
-    borderWidth:1,
-    textAlign: 'center',
-    alignItems:'center',
-    backgroundColor:'#5ad263'
-  },
-    pageButton: {
-    padding: 10,
-    margin:2,
-    borderColor: 'black',
-    width: 150,
     borderWidth:1,
     textAlign: 'center',
     alignItems:'center',
