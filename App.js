@@ -14,76 +14,11 @@ import RecipesAPI from './components/recipesAPI'
 import RecipeInformation from './components/recipeInformation'; 
 
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Breakfast"
-          component={RecipePageBreakfast}
-          options={{ title: 'Breakfast' }}
-        />
-        <Stack.Screen
-        name="Featured"
-        component={FeaturedRecipes}
-        
-        />
-                <Stack.Screen
-        name="Lunch"
-        component={RecipePageLunch}
-        
-        />
-                <Stack.Screen
-        name="Dinner"
-        component={RecipePageDinner}
-        
-        />
-                        <Stack.Screen
-        name="Desserts"
-        component={RecipePageDesserts}
-        
-        />
-                <Stack.Screen
-        name="cookbook"
-        component={Cookbook}
-        
-        />
-              <Stack.Screen
-        name="planning"
-        component={MealPlanning}
-        
-        />
-              <Stack.Screen
-        name="Grocery"
-        component={GroceryLists}
-        
-        />
-
-        {/* Add other screens similarly */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-function Home({ navigation }) {
-  // Define your images for the image cycler
-  const imageUrls = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg',
-    'image4.jpg',
-    'image5.jpg',
-  ];
-
-  return (
     <SafeAreaView style={{ flex: 1 }}>
     
     <ScrollView>
@@ -115,8 +50,6 @@ function Home({ navigation }) {
         </View>
 
         {/* Image Cycler Section */}
-        <ScrollView horizontal>
-          <RecipesAPI/>
         </ScrollView>
 
         {/* Recipe Search Bar */}
@@ -327,16 +260,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: 'black',
     width: 85,
-    borderWidth:1,
-    textAlign: 'center',
-    alignItems:'center',
-    backgroundColor:'#5ad263'
-  },
-    pageButton: {
-    padding: 10,
-    margin:2,
-    borderColor: 'black',
-    width: 150,
     borderWidth:1,
     textAlign: 'center',
     alignItems:'center',

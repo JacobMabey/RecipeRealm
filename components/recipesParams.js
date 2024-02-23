@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Pressable, Image, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const RecipesHook = () => {
+const RecipesParamsHook = ({ type }) => {
   const [recipes, setRecipes] = useState([]);
-  useEffect(() => {
-  grabRecipes();
-}, []);
+  const [loading, setLoading] = useState(true);
 
-  const grabRecipes = () => {
+  useEffect(() => {
+    grabRecipesParams(type);
+  }, [type]);
+
+  const grabRecipesParams = (type) => {
+    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-    const PARAMS = `?apiKey=${APIKEY}&number=3`;
+    const PARAMS = `?apiKey=${APIKEY}&number=5&type=${type}`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
 
     fetch(FETCH_URL)
@@ -22,6 +25,7 @@ const RecipesHook = () => {
         return response.json();
       })
       .then((json) => {
+        setLoading(false);
         if (json.results && json.results.length > 0) {
           const formattedRecipes = json.results.map((recipe) => ({
             id: recipe.id,
@@ -33,7 +37,10 @@ const RecipesHook = () => {
           console.error('No results found');
         }
       })
-      .catch((error) => console.error('Error fetching recipes:', error));
+      .catch((error) => {
+        setLoading(false);
+        console.error('Error fetching recipes:', error);
+      });
   };
 
   const saveValueFunction = async (id) => {
@@ -44,34 +51,44 @@ const RecipesHook = () => {
     }
   };
 
-  const RecipesFormat = ({ id, name, image }) => {
-    const navigation = useNavigation();
+ 
 
-    const navigateToRecipeInfo = () => {
-      saveValueFunction(id);
-      navigation.navigate('Featured');
-    };
+  const RecipesFormat = ({ id, name, image }) => {
+    const navigation = useNavigation(); 
+    const navigateToRecipeInfo = (id) => {
+    saveValueFunction(id);
+    navigation.navigate('Featured');
+  };
 
     return (
       <View style={styles.recipeContainer}>
         <Text style={styles.title}>{name}</Text>
-        <Pressable onPress={navigateToRecipeInfo}>
-          <Image source={{ uri: image }} style={styles.image} />
+        <Pressable onPress={() => navigateToRecipeInfo(id)}>
+          <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.image} />
         </Pressable>
       </View>
     );
   };
 
+  if (loading) {
+    return (
+      <View style={styles.loader}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
   return (
+    <View>
       {recipes.map((recipe) => (
-        <View key={recipe.id}>
-          <RecipesFormat
-            id={recipe.id}
-            image={recipe.image}
-          />
-        </View>
+        <RecipesFormat
+          key={recipe.id}
+          id={recipe.id}
+          name={recipe.title}
+          image={recipe.image}
+        />
       ))}
-    </ScrollView>
+    </View>
   );
 };
 
@@ -86,7 +103,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
+    width: 200,
+    height: 150,
+    margin: 2,
+    borderColor: 'black',
+    borderWidth: 1,
+    bottom: 2,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
-export default RecipesHook;
+export default RecipesParamsHook;
