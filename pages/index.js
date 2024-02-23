@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Text,
     SafeAreaView,
     TouchableOpacity,
@@ -10,7 +11,7 @@ import { Text,
     
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Dimensions } from 'react-native-web';
+import { Dimensions, Pressable } from 'react-native-web';
 
 import Filter from "./filter.js";
 
@@ -21,36 +22,39 @@ import RecipesParams from '../components/recipesParams.js';
 const Home = ({navigation}) => {
     // Define your images for the image cycler
 const imageUrls = [
-    RecipeAPI,
+    RecipesAPI,
 ];
 
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-                    <Text>Breakfast</Text>  
-                </TouchableOpacity>
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                    <Text style={styles.tabButtonText}>Breakfast</Text>  
+                </Pressable>
         
-                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
-                    <Text>Lunch</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
+                    <Text style={styles.tabButtonText}>Lunch</Text>
+                </Pressable>
         
-                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
-                    <Text>Dinner</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
+                    <Text style={styles.tabButtonText}>Dinner</Text>
+                </Pressable>
         
-                <TouchableOpacity style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
-                    <Text>Filter</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
+                    <Text style={styles.tabButtonText}>Filter</Text>
+                </Pressable>
             </View>
 
-            <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
-                {imageUrls.map((url, index) => (
-                    <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
-                    <RecipesAPI/>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+            <View>
+                <h1 style={styles.featuredTitle}>Featured</h1>
+                <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
+                    {imageUrls.map((url, index) => (
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
+                            <RecipesAPI/>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            </View>
             
             {/*
             <View style={styles.searchBarContainer}>
@@ -71,21 +75,24 @@ const imageUrls = [
             <View>
                 <TouchableOpacity style={styles.pageButton}
                 onPress={() => navigation.navigate('cookbook')}>
-                <Text>My Cook Book</Text>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book'/>
+                <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
                 onPress={() => navigation.navigate('planning')}>
-                <Text>My Meal Planning</Text>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar'/>
+                <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
                 onPress={() => navigation.navigate('Grocery')}>
-                <Text>My Grocery List</Text>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart'/>
+                <Text style={styles.pageButtonText}>My Grocery List</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -99,40 +106,56 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
         alignSelf: 'stretch',
         width: Dimensions.get('window').width,
-        backgroundColor: '#ffa21a',
+        backgroundColor: '#fff',
     },
     tabsContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
         width: '100%',
-        marginVertical: 0,
+        borderColor: '#6BAB5F',
+        borderWidth: 2,
     },
     tabButton: {
-        borderColor: 'black',
         width: '25%',
-        borderWidth:1,
+        height: 30,
         textAlign: 'center',
         alignItems:'center',
-        backgroundColor:'#5ad263'
+        justifyContent: 'center',
+        backgroundColor:'#fff'
+    },
+    tabButtonText: {
+        fontFamily: 'Varela',
+        fontWeight: 'bold',
     },
     pageButton: {
         padding: 30,
-        borderColor: 'black',
+        borderColor: '#6BAB5F',
         width: Dimensions.get('window').width,
-        borderWidth:1,
+        borderWidth: 3,
         textAlign: 'center',
         alignItems:'center',
-        backgroundColor:'#5ad263'
+        backgroundColor:'#ACF39D',
+    },
+    pageButtonIcon: {
+        position: 'absolute',
+        left: '10%',
+        fontSize: 36
+    },
+    pageButtonText: {
+        color: '#171738',
+        fontWeight: '900',
+        fontFamily: 'Varela',
+        fontSize: 20,
     },
     image: {
-        width: 200,
-        height: 150,
-        margin: 2,
-        borderColor:'black',
-        borderWidth:1,
-        bottom:2
+        width: Dimensions.get('window').width / 2.0,
+        height: 250,
     },
-  });
+    featuredTitle: {
+        position: 'absolute',
+        zIndex: 10,
+        width: Dimensions.get('window').width,
+        textAlign: 'center',
+    },
+});

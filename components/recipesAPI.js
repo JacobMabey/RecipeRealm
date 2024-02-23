@@ -12,7 +12,7 @@ const RecipesHook = () => {
   const grabRecipes = () => {
     const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-    const PARAMS = `?apiKey=${APIKEY}&number=3`;
+    const PARAMS = `?apiKey=${APIKEY}&number=6`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
 
     fetch(FETCH_URL)
@@ -55,16 +55,15 @@ const RecipesHook = () => {
 
     return (
       <View style={styles.recipeContainer}>
-        <Text style={styles.title}>{name}</Text>
         <Pressable onPress={navigateToRecipeInfo}>
-          <Image source={{ uri: image }} style={styles.image} />
+          <Image source={{ uri: image }} style={styles.image}/>
         </Pressable>
       </View>
     );
   };
 
   return (
-    <ScrollView>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       {recipes.map((recipe) => (
         <View key={recipe.id}>
           <RecipesFormat
@@ -80,18 +79,14 @@ const RecipesHook = () => {
 
 const styles = StyleSheet.create({
   recipeContainer: {
-    marginBottom: 20,
     alignItems: 'center',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '800',
-    marginBottom: 10,
   },
   image: {
     width: 300,
-    height: 100,
+    height: 250,
   },
+  featuredTitle: {
+  }
 });
 
 export default RecipesHook;
