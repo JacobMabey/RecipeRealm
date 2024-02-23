@@ -83,7 +83,7 @@ const imageUrls = [
             <View>
                 <TouchableOpacity style={styles.pageButton}
                 onPress={() => navigation.navigate('planning')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar'/>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt'/>
                 <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
