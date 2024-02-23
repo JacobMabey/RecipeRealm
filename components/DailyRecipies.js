@@ -1,122 +1,42 @@
-//these will hold the temp images
-BreakfeastImages = [];
-LunchImages = [];
-DinnerImages = [];
-DessertImages = [];
-// these will object refs to recpies holding the temp data
-Breakfeast = [];
-Lunch = [];
-Dinner = [];
-Dessert = [];
+function tester()
+{
+    use('RecipeRealm');
 
-
-
-//these should be the basic for the images 
-function getBreakfeastImage (entry)
-{
-    return BreakfeastImages[entry];
-}
-function addBreakfeastImage (item)
-{
-    BreakfeastImages.Push(item);
-}
-
-function getLunchImage (entry)
-{
-    return LunchImages[entry];
-}
-function addLuchImage (item)
-{
-    LunchImages.Push(item);
-}
-
-function getDinnerImage (entry)
-{
-    return DinnerImages[entry];
-}
-function addDinnerImage (item)
-{
-    DinnerImages.Push(item);
-}
-
-function getDessertImage (entry)
-{
-    return DessertImages[entry];
-}
-function addDessertImage (item)
-{
-    DessertImages.Push(item);
+    // Insert a few documents into the sales collection.
+    db.getCollection('Lastest').insertMany([
+        { 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
+        { 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
+        { 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
+        { 'item': 'xyz', 'price': 5, 'quantity': 20, 'date': new Date('2014-04-04T11:21:39.736Z') },
+        { 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
+        { 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
+        { 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
+        { 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
+    ]);
 }
 
 // Passes actual recipie data into a temp array
-function getBreakfeastItem (entry)
+function getRecipeById (Id)
 {
-    return Breakfeast[entry];
-}
-function addBreakfeastItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
-{
-    const recipeData = {
-        _RecipeName: recipieName,
-        _CalorieCount: calorieCount,
-        _Instruction: instruction,
-        _Utinciels: utinciels,
-        _TimeEst: timeEst,
-        _NutrientionalWarnings: nutrientionalWarnings,
-        _Ingredients: ingredient
-    };
-    Breakfeast.Push(recipeData);
-}
+    use('RecipeRealm');
 
-function getLunchItem (entry)
-{
-    return Lunch[entry];
+    return db.getCollection('Recipes').find({id: Id});
 }
-function addLuchItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
+function addRecipe (id, recipieName, calorieCount, instruction, utinciels, timeEst, ingredient, mealType)
 {
-    const recipeData = {
-        _RecipeName: recipieName,
-        _CalorieCount: calorieCount,
-        _Instruction: instruction,
-        _Utinciels: utinciels,
-        _TimeEst: timeEst,
-        _NutrientionalWarnings: nutrientionalWarnings,
-        _Ingredients: ingredient
-    };
-    Lunch.Push(recipeData);
-}
+    use('RecipeRealm');
 
-function getDinnerItem (entry)
-{
-    return Dinner[entry];
-}
-function addDinnerItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
-{
-    const recipeData = {
-        _RecipeName: recipieName,
-        _CalorieCount: calorieCount,
-        _Instruction: instruction,
-        _Utinciels: utinciels,
-        _TimeEst: timeEst,
-        _NutrientionalWarnings: nutrientionalWarnings,
-        _Ingredients: ingredient
-    };
-    Dinner.Push(recipeData);
-}
+    id = 1;
+    recipieName = 'Test';
+    calorieCount = 40;
+    instruction = "cook like you would one of your french girls";
+    utinciels = "Spoon";
+    timeEst = "40 mins",
+    ingredient = "food, idiot";
+    mealType = "Linner"
 
-function getDessertItem (entry)
-{
-    return Dessert[entry];
-}
-function addDessertItem (recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient)
-{
-    const recipeData = {
-        _RecipeName: recipieName,
-        _CalorieCount: calorieCount,
-        _Instruction: instruction,
-        _Utinciels: utinciels,
-        _TimeEst: timeEst,
-        _NutrientionalWarnings: nutrientionalWarnings,
-        _Ingredients: ingredient
-    };
-    Breakfeast.Push(recipeData);
+    // Insert a few documents into the sales collection.
+    db.getCollection('Recipes').insertOne([
+        { 'id': id, 'item': recipieName, 'calories': calorieCount, 'qusine': 'American', 'instructions': instruction, 'Utinciels': utinciels, 'Time': timeEst, 'ingredients': ingredient, 'meal': mealType}
+    ]);
 }
