@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text,
- SafeAreaView,
+SafeAreaView,
   TouchableOpacity,
   TextInput, View,
   StyleSheet,
   ScrollView,
- } from 'react-native';
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RecipesAPI from './components/recipesAPI'

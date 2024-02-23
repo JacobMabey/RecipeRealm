@@ -51,13 +51,12 @@ const RecipesParamsHook = ({ type }) => {
     }
   };
 
-  const navigateToRecipeInfo = (id) => {
-    saveValueFunction(id);
-    navigation.navigate('Featured');
-  };
-
   const RecipesFormat = ({ id, name, image }) => {
     const navigation = useNavigation();
+    const navigateToRecipeInfo = (id) => {
+      saveValueFunction(id);
+      navigation.navigate('Featured');
+    };
 
     return (
       <View style={styles.recipeContainer}>
