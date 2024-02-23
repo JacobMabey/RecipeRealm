@@ -5,7 +5,6 @@ Dinner = [];
 Dessert = [];
 
 
-
 // Passes actual recipie data into a temp array(see top)
 function getBreakfeastItem (entry)
 {
