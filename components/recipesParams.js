@@ -10,13 +10,6 @@ const RecipesParamsHook = ({ type }) => {
   useEffect(() => {
     grabRecipesParams(type);
   }, [type]);
-
-  const grabRecipesParams = (type) => {
-    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
-    const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-    const PARAMS = `?apiKey=${APIKEY}&number=5&type=${type}`;
-    const FETCH_URL = `${BASE_URL}${PARAMS}`;
-
     fetch(FETCH_URL)
       .then((response) => {
         if (!response.ok) {
@@ -50,16 +43,9 @@ const RecipesParamsHook = ({ type }) => {
       console.error('Error saving recipe ID:', error);
     }
   };
-
- 
-
-  const RecipesFormat = ({ id, name, image }) => {
-    const navigation = useNavigation(); 
-    const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
     navigation.navigate('Featured');
   };
-
     return (
       <View style={styles.recipeContainer}>
         <Text style={styles.title}>{name}</Text>
@@ -71,7 +57,6 @@ const RecipesParamsHook = ({ type }) => {
   };
 
   if (loading) {
-    return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
@@ -116,5 +101,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default RecipesParamsHook;

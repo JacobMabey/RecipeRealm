@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Text,
- SafeAreaView,
+SafeAreaView,
   TouchableOpacity,
   TextInput, View,
-  Button,
   StyleSheet,
   ScrollView,
-  Image
- } from 'react-native';
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RecipesAPI from './components/recipesAPI'
 import RecipeInformation from './components/recipeInformation'; 
-
+import RecipesParams from './components/recipesParamsAPI'
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
     <SafeAreaView style={{ flex: 1 }}>
     
     <ScrollView>
@@ -48,9 +45,6 @@ export default function App() {
             <Text>Desserts</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Image Cycler Section */}
-        </ScrollView>
 
         {/* Recipe Search Bar */}
         <View style={styles.searchBarContainer}>
@@ -172,6 +166,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="breakfast"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -187,6 +182,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="bread"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -201,6 +197,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="dinner"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -215,6 +212,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="dessert"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -265,13 +263,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     backgroundColor:'#5ad263'
   },
-  image: {
-    width: 200,
-    height: 150,
-    margin: 2,
-    borderColor:'black',
-    borderWidth:1,
-    bottom:2
   },
   searchBarContainer: {
     padding: 5,
