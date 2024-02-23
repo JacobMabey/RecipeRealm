@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RecipesAPI from './components/recipesAPI'
 import RecipeInformation from './components/recipeInformation'; 
+import RecipesParams from './components/recipesParams';
 
 
 const Stack = createNativeStackNavigator();
@@ -242,6 +243,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="breakfast"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -257,6 +259,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="italian"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -271,6 +274,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="dinner"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
@@ -285,6 +289,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
+        <RecipesParams type="dessert"/>
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
             <Text>Home Page</Text>
           </TouchableOpacity>
