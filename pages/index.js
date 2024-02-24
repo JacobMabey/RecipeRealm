@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, Pressable } from 'react-native-web';
 
 import Filter from "./filter.js";
+import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
 import RecipeInformation from '../components/recipeInformation.js'; 
@@ -28,8 +29,8 @@ const imageUrls = [
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-                    <Text style={styles.tabButtonText}>Breakfast</Text>  
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('FeaturedRecipes')}>
+                    <Text style={styles.tabButtonText}>Featured</Text>  
                 </Pressable>
         
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
@@ -101,6 +102,22 @@ const imageUrls = [
 };
 
 export default Home;
+
+function FeaturedRecipes({navigation, route}){
+return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View style={styles.container}>
+        <RecipeInformation/>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
+            <Text>Home Page</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+);
+ 
+}
 
 const styles = StyleSheet.create({
     container: {
