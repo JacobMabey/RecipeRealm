@@ -17,3 +17,18 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
+return (
+    <SafeAreaView>
+
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home}
+              options={{ headerShown: false }}/>
+              
+          <Stack.Screen name="Filter" component={Filter}
+              options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+  );
+}
