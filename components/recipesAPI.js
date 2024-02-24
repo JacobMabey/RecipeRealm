@@ -11,7 +11,7 @@ const RecipesHook = () => {
 
   const grabRecipes = () => {
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-    const PARAMS = `?apiKey=${APIKEY}&number=3`;
+    const PARAMS = `?apiKey=${APIKEY}&number=6`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
 
     fetch(FETCH_URL)
@@ -54,9 +54,8 @@ const RecipesHook = () => {
 
     return (
       <View style={styles.recipeContainer}>
-        <Text style={styles.title}>{name}</Text>
         <Pressable onPress={navigateToRecipeInfo}>
-          <Image source={{ uri: image }} style={styles.image} />
+          <Image source={{ uri: image }} style={styles.image}/>
         </Pressable>
       </View>
     );
@@ -77,16 +76,12 @@ const RecipesHook = () => {
 
 const styles = StyleSheet.create({
   recipeContainer: {
-    marginBottom: 20,
     alignItems: 'center',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '800',
-    marginBottom: 10,
   },
   image: {
   },
+  featuredTitle: {
+  }
 });
 
 export default RecipesHook;

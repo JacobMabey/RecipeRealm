@@ -43,24 +43,30 @@ dist/
 
 # Logs
 *.log
-npm-debug.log*
 
-# Temporary files
-*.tmp
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
 
-# Environment variables
-.env*
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
 
-# Expo web build
-web-build/
+# Keystore files
+*.jks
+*.keystore
 
-# Jest cache
-__tests__/coverage/
-__tests__/report/
+# Google Services (e.g. APIs or Firebase)
+google-services.json
 
-# Expo release build files
+# Android Profiling
+*.hprof
+
+node_modules/*
 .expo/
-.expo-shared/
-
-# Pexels API key file (if applicable)
-pexels-api-key.json
