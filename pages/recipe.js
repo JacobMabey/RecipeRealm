@@ -8,7 +8,7 @@ import { Text,
     Image
 } from 'react-native';
 
-const RecipePage = ({navigation}) => {
+const Recipe = ({navigation}) => {
 return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
@@ -21,7 +21,7 @@ return (
     </SafeAreaView>
 );
 }
-export default RecipePage;
+export default Recipe;
 
 const styles = StyleSheet.create({
     

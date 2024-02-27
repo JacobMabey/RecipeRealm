@@ -17,8 +17,6 @@ import Filter from "./filter.js";
 import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
-import RecipeInformation from '../components/recipeInformation.js'; 
-import RecipesParams from '../components/recipesParams.js';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
@@ -29,8 +27,8 @@ const imageUrls = [
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('FeaturedRecipes')}>
-                    <Text style={styles.tabButtonText}>Featured</Text>  
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                    <Text style={styles.tabButtonText}>Breakfast</Text>  
                 </Pressable>
         
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
@@ -103,21 +101,6 @@ const imageUrls = [
 
 export default Home;
 
-function FeaturedRecipes({navigation, route}){
-return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
-        <View style={styles.container}>
-        <RecipeInformation/>
-          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
-            <Text>Home Page</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-);
- 
-}
 
 const styles = StyleSheet.create({
     container: {
