@@ -14,10 +14,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, Pressable } from 'react-native-web';
 
 import Filter from "./filter.js";
+import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
-import RecipeInformation from '../components/recipeInformation.js'; 
-import RecipesParams from '../components/recipesParams.js';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
@@ -101,6 +100,7 @@ const imageUrls = [
 };
 
 export default Home;
+
 
 const styles = StyleSheet.create({
     container: {

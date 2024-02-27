@@ -10,7 +10,7 @@ const RecipesHook = () => {
 }, []);
 
   const grabRecipes = () => {
-    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+    const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const PARAMS = `?apiKey=${APIKEY}&number=6`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
@@ -50,7 +50,7 @@ const RecipesHook = () => {
 
     const navigateToRecipeInfo = () => {
       saveValueFunction(id);
-      navigation.navigate('Featured');
+      navigation.navigate('Recipe');
     };
 
     return (
@@ -81,11 +81,20 @@ const styles = StyleSheet.create({
   recipeContainer: {
     alignItems: 'center',
   },
+  title: {
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 10,
+  },
   image: {
     width: 300,
-    height: 250,
-  },
-  featuredTitle: {
+    height: 200,
+    objectFit: 'Fill',
+    border: 1,
+    borderColor:'black',
+    borderWidth:1,
+    bottom:2
+
   }
 });
 

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -20,4 +21,12 @@
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6"
   }
+=======
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web"
+    }
+>>>>>>> remotes/origin/main
 }
