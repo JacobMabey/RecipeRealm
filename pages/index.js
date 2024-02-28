@@ -31,12 +31,16 @@ const imageUrls = [
                     <Text style={styles.tabButtonText}>Breakfast</Text>  
                 </Pressable>
         
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
-                    <Text style={styles.tabButtonText}>Lunch</Text>
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Main_Course')}>
+                    <Text style={styles.tabButtonText}>Main course</Text>
                 </Pressable>
         
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
-                    <Text style={styles.tabButtonText}>Dinner</Text>
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Snack')}>
+                    <Text style={styles.tabButtonText}>snack</Text>
+                </Pressable>
+
+                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
+                    <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
         
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>

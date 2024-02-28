@@ -10,7 +10,7 @@ const RecipesHook = () => {
 }, []);
 
   const grabRecipes = () => {
-    const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
+    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const PARAMS = `?apiKey=${APIKEY}&number=6`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
@@ -45,7 +45,7 @@ const RecipesHook = () => {
     }
   };
 
-  const RecipesFormat = ({ id, name, image }) => {
+  const RecipesFormat = ({ id, image }) => {
     const navigation = useNavigation();
 
     const navigateToRecipeInfo = () => {
