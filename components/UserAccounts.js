@@ -1,20 +1,28 @@
-use('RecipeRealm');
+import { MongoClient } from 'mongodb';
+const uri = 'mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/';
+const dbName = 'RecipeRealm';
 
-const registerUser = ({Username, Password, Email, Allergens}) =>{
-    db.getCollection('users').insertOne({ 'Username': Username, 'Password': Password, 'Email': Email, 'Allergens': Allergens });
-} 
+async function registerUser({ Username, Password, Email, Allergens }) {
+    const client = new MongoClient(uri);
 
-const loginUser = ({Username, Password }) => {
-    const user = db.getCollection('users').findOne({ 'Username': Username, 'Password': Password });
-    if (user) {
-        loggedInUserInfo = {
-            Username: user.Username,
-            Password: user.Password,
-            Email: user.Email,
-            Allergens: user.Allergens
-        };
-        navigation.navigate('Home');
-    } else {
-        console.log('Invalid username or password');
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const usersCollection = db.collection('Users');
+        
+        
+        await usersCollection.insertOne({ 'Username': Username, 'Password': Password, 'Email': Email, 'Allergens': Allergens });
+        
+        console.log('User registered successfully');
+    } finally {
+        await client.close();
     }
 }
+
+
+registerUser({
+    Username: 'exampleUser',
+    Password: 'examplePassword',
+    Email: 'user@example.com',
+    Allergens: ['peanuts', 'shellfish']
+});

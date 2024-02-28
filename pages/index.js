@@ -17,6 +17,7 @@ import Filter from "./filter.js";
 import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
+import UserAccounts from '../components/UserAccounts.js';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
@@ -27,7 +28,7 @@ const imageUrls = [
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                <Pressable style={styles.tabButton} onPress={() => UserAccounts.registerUser("Jean Ramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "dairy"])}>
                     <Text style={styles.tabButtonText}>Breakfast</Text>  
                 </Pressable>
         
