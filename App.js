@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text,
-SafeAreaView,
+ SafeAreaView,
   TouchableOpacity,
   TextInput, View,
   StyleSheet,
   ScrollView,
-} from 'react-native';
+ } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,12 +16,11 @@ import Featured from "./pages/featured.js";
 import Breakfast from "./pages/breakfast.js";
 
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-return (
+  return (
     <SafeAreaView>
 
       <NavigationContainer>
