@@ -17,6 +17,7 @@ import Filter from "./filter.js";
 import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
+import { Colors } from 'react-native-paper';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
@@ -45,7 +46,7 @@ const imageUrls = [
             </View>
 
             <View>
-                <h1 style={styles.featuredTitle}>Featured</h1>
+                <Text style={styles.featuredTitle}>Featured</Text>
                 <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
@@ -157,5 +158,6 @@ const styles = StyleSheet.create({
         zIndex: 10,
         width: Dimensions.get('window').width,
         textAlign: 'center',
+
     },
 });

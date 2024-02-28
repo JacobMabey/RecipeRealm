@@ -16,8 +16,8 @@ return (
     <ScrollView>
       <View>
       <RecipesParams type="breakfast"/>
-        <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('Home')}>
-          <Text>Home Page</Text>
+        <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.homeButtonText}>Home Page</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -34,4 +34,16 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
   },
+  homeButton: {
+    alignItems: 'center',
+    backgroundColor: '#A38CCF',
+    padding: 10,
+    marginTop: 30,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  homeButtonText: {
+    fontSize: 24,
+    color: '#FFFFFF',
+  }
 });

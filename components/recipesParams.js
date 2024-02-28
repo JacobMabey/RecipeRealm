@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Dimensions } from 'react-native-web';
  
 const RecipesParamsHook = ({ type }) => {
   const [recipes, setRecipes] = useState([]);
@@ -62,19 +63,21 @@ const RecipesParamsHook = ({ type }) => {
  
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
-    navigation.navigate('Featured');
   };
  
   const RecipesFormat = ({ id, name, image }) => {
     const navigation = useNavigation();
  
     return (
-      <View style={styles.recipeContainer}>
-        <Text style={styles.title}>{name}</Text>
-        <Pressable onPress={() => navigateToRecipeInfo(id)}>
-          <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.image} />
-        </Pressable>
-      </View>
+      <Pressable onPress={() => {
+        navigateToRecipeInfo(id);
+        navigation.navigate('Recipe');
+        }}>
+        <View style={styles.recipeContainer}>
+          <Text style={styles.recipeTitle}>{name}</Text>
+          <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
+        </View>
+      </Pressable>
     );
   };
  
@@ -102,24 +105,34 @@ const RecipesParamsHook = ({ type }) => {
  
 const styles = StyleSheet.create({
   recipeContainer: {
-    marginBottom: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    borderRadius: 50,
     alignItems: 'center',
+    shadowColor: '#171717',
+    shadowOffset: {width: 4, height: 8},
+    shadowOpacity: 0.5,
+    shadowRadius: 15,
+    backgroundColor: '#ACF39D',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: '800',
-    marginBottom: 10,
+  recipeTitle: {
+    fontFamily: 'Roboto',
+    fontSize: 26,
+    fontWeight: 900,
+    marginHorizontal: 15,
+    marginVertical: 5,
+    color: '#171738',
+    width: Dimensions.get('window').width - 80,
   },
-  image: {
-    width: 200,
-    height: 150,
-    margin: 2,
-    borderColor: 'black',
-    borderWidth: 1,
-    bottom: 2,
+  recipeImage: {
+    width: Dimensions.get('window').width - 40,
+    height: (Dimensions.get('window').width - 40) * 1/2,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   loader: {
     flex: 1,
+    marginTop: 200,
     justifyContent: 'center',
     alignItems: 'center',
   },
