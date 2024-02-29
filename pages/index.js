@@ -8,19 +8,17 @@ import { Text,
     ScrollView,
     Image
 } from 'react-native';
-    
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, Pressable } from 'react-native-web';
 
 import Filter from "./filter.js";
-import Recipe from "./recipe.js";
+import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-import UserAccounts from '../components/UserAccounts.js';
+import { registerUser } from '../components/UserAccounts.js';
 
 const Home = ({navigation}) => {
-    // Define your images for the image cycler
 const imageUrls = [
     RecipesAPI,
 ];
@@ -28,9 +26,9 @@ const imageUrls = [
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => UserAccounts.registerUser("Jean Ramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "dairy"])}>
-                    <Text style={styles.tabButtonText}>Breakfast</Text>  
-                </Pressable>
+            <Pressable style={styles.tabButton} onPress={() => registerUser("Jean Ramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "dairy"])}>
+                <Text style={styles.tabButtonText}>Breakfast</Text>
+            </Pressable>
         
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
                     <Text style={styles.tabButtonText}>Lunch</Text>
