@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -76,6 +77,14 @@ const RecipesParamsHook = ({ type }) => {
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeTitle}>{name}</Text>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
+
+          <Pressable style={styles.favButton} onPress={() => {}}>
+            <Icon style={styles.favButtonIcon} color='#171738' name='heart-o'/>
+          </Pressable>
+          
+          <Pressable style={styles.addButton} onPress={() => {}}>
+            <Icon style={styles.addButtonIcon} color='#171738' name='plus-square-o'/>
+          </Pressable>
         </View>
       </Pressable>
     );
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
   },
   recipeTitle: {
     fontFamily: 'Roboto',
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: 900,
     marginHorizontal: 15,
     marginVertical: 5,
@@ -126,7 +135,7 @@ const styles = StyleSheet.create({
   },
   recipeImage: {
     width: Dimensions.get('window').width - 40,
-    height: (Dimensions.get('window').width - 40) * 1/2,
+    height: (Dimensions.get('window').width - 40) * 1/3,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
   },
@@ -136,6 +145,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  favButton: {
+    position: 'absolute',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    padding: 7,
+    margin: 7,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    top: '20%',
+    right: 0,
+  },
+  favButtonIcon: {
+    fontSize: 40
+  },
+  addButton: {
+    position: 'absolute',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    padding: 7,
+    margin: 7,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    top: '50%',
+    right: 0,
+  },
+  addButtonIcon: {
+    fontSize: 40
+  }
 });
  
 export default RecipesParamsHook;
