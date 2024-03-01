@@ -43,10 +43,6 @@ const imageUrls = [
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
                     <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
-                    <Text style={styles.tabButtonText}>Filter</Text>
-                </Pressable>
             </View>
 
             <View>
@@ -60,21 +56,13 @@ const imageUrls = [
                 </ScrollView>
             </View>
             
-            {/*
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for recipes"
-                    onSubmitEditing={() => navigation.navigate('Recipes')}/>
-                    <Stack.Screen name="Recipes" component={RecipePage} />
+            <View>
+                <Pressable style={styles.pageButtonBrowse}
+                onPress={() => navigation.navigate('Filter')}>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search'/>
+                <Text style={styles.pageButtonText}>Browse Recipes</Text>
+                </Pressable>
             </View>
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for Ingredients"
-                    onSubmitEditing={() => navigation.navigate('Ingredients')}/>
-            </View>
-            */}
         
             <View>
                 <TouchableOpacity style={styles.pageButton}
@@ -132,6 +120,15 @@ const styles = StyleSheet.create({
     tabButtonText: {
         fontFamily: 'Varela',
         fontWeight: 'bold',
+    },
+    pageButtonBrowse: {
+        padding: 30,
+        borderColor: '#8774A9',
+        width: Dimensions.get('window').width,
+        borderWidth: 3,
+        textAlign: 'center',
+        alignItems:'center',
+        backgroundColor:'#A38CCF',
     },
     pageButton: {
         padding: 30,
