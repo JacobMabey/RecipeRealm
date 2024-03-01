@@ -22,7 +22,9 @@ export default function App() {
 
   return (
     <SafeAreaView>
-
+      <View style={styles.headerView}>
+        <h1>hello</h1>
+      </View>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home}
@@ -44,3 +46,9 @@ export default function App() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  headerView: {
+    height: 80,
+  }
+})

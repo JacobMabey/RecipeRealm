@@ -111,7 +111,7 @@ const RecipesParamsHook = ({ type }) => {
     </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
   recipeContainer: {
     marginHorizontal: 20,
