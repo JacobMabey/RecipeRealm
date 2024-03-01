@@ -14,7 +14,9 @@ import Filter from "./pages/filter.js";
 import Recipe from "./pages/recipe.js";
 import Featured from "./pages/featured.js";
 import Breakfast from "./pages/breakfast.js";
-
+import Dessert from './pages/dessert.js';
+import Main_course from './pages/main_course.js';
+import Snack from './pages/snack.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +42,15 @@ export default function App() {
               options={{ headerShown: false }}/>
               
           <Stack.Screen name="Breakfast" component={Breakfast}
+              options={{ headerShown: false }}/>
+
+          <Stack.Screen name="Main_Course" component={Main_course}
+              options={{ headerShown: false }}/>
+
+          <Stack.Screen name="Snack" component={Snack}
+              options={{ headerShown: false }}/>
+
+          <Stack.Screen name="Dessert" component={Dessert}
               options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>

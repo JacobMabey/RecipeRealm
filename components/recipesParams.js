@@ -8,26 +8,30 @@ import { Dimensions } from 'react-native-web';
 const RecipesParamsHook = ({ type }) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     grabRecipesParams(type);
   }, [type]);
- 
-  const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets,Cuisines) => {
-    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+
+  const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
+    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
-        apiKey: APIKEY,
-        number: 5,
-        Type: Type,
-        Name: Name,
-        Ingredients: Ingredients,
-        Intolerance: Intolerance,
-        Diets: Diets,
-        Cuisines: Cuisines
+      apiKey: APIKEY,
+      number: 5,
+      Type: Type,
+      Name: Name,
+      Ingredients: Ingredients,
+      Intolerance: Intolerance,
+      Diets: Diets,
+      Cuisines: Cuisines
     });
-    const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
- 
+    const PARAMS = `?apiKey=${APIKEY}&random?number=5&type=${type}`;
+    const FETCH_URL = `${BASE_URL}${PARAMS}`;
+    //const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
+
+
+
     fetch(FETCH_URL)
       .then((response) => {
         if (!response.ok) {
@@ -53,7 +57,7 @@ const RecipesParamsHook = ({ type }) => {
         console.error('Error fetching recipes:', error);
       });
   };
- 
+
   const saveValueFunction = async (id) => {
     try {
       await AsyncStorage.setItem('recipeID', id.toString());
@@ -61,14 +65,14 @@ const RecipesParamsHook = ({ type }) => {
       console.error('Error saving recipe ID:', error);
     }
   };
- 
+
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
   };
- 
+
   const RecipesFormat = ({ id, name, image }) => {
     const navigation = useNavigation();
- 
+
     return (
       <Pressable onPress={() => {
         navigateToRecipeInfo(id);
@@ -89,15 +93,15 @@ const RecipesParamsHook = ({ type }) => {
       </Pressable>
     );
   };
- 
+
   if (loading) {
-  return (
+    return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
- 
+
   return (
     <View>
       {recipes.map((recipe) => (
