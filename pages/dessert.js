@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         width: Dimensions.get('window').width,
-        backgroundColor: '#fff',
+        backgroundColor: '#fef',
     },
 });

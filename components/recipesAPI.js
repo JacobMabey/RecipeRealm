@@ -12,7 +12,7 @@ const RecipesHook = () => {
   const grabRecipes = () => {
     const APIKEY = '886b123c34d44502a4cedaae4f11a007';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
-    const PARAMS = `?apiKey=${APIKEY}&number=6`;
+    const PARAMS = `?apiKey=${APIKEY}&random?number=6`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
 
     fetch(FETCH_URL)
