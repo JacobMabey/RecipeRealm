@@ -1,8 +1,10 @@
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Dimensions } from 'react-native-web';
+ 
 const RecipesParamsHook = ({ type }) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,6 @@ const RecipesParamsHook = ({ type }) => {
 
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
-    navigation.navigate('Featured');
   };
 
   const RecipesFormat = ({ id, name, image }) => {
@@ -72,6 +73,21 @@ const RecipesParamsHook = ({ type }) => {
         <View style={styles.recipeContainer}>
           <Text style={styles.title}>{name}</Text>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.image} />
+      <Pressable onPress={() => {
+        navigateToRecipeInfo(id);
+        navigation.navigate('Recipe');
+        }}>
+        <View style={styles.recipeContainer}>
+          <Text style={styles.recipeTitle}>{name}</Text>
+          <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
+
+          <Pressable style={styles.favButton} onPress={() => {}}>
+            <Icon style={styles.favButtonIcon} color='#171738' name='heart-o'/>
+          </Pressable>
+          
+          <Pressable style={styles.addButton} onPress={() => {}}>
+            <Icon style={styles.addButtonIcon} color='#171738' name='plus-square-o'/>
+          </Pressable>
         </View>
       </Pressable>
     );
@@ -101,40 +117,67 @@ const RecipesParamsHook = ({ type }) => {
 
 const styles = StyleSheet.create({
   recipeContainer: {
-    marginBottom: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    borderRadius: 50,
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    padding: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowColor: '#171717',
+    shadowOffset: {width: 4, height: 8},
+    shadowOpacity: 0.5,
+    shadowRadius: 15,
+    backgroundColor: '#ACF39D',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: '800',
-    marginBottom: 10,
+  recipeTitle: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: 900,
+    marginHorizontal: 15,
+    marginVertical: 5,
+    color: '#171738',
+    width: Dimensions.get('window').width - 80,
   },
-  image: {
-    width: 200,
-    height: 150,
-    margin: 2,
-    borderColor: 'black',
-    borderWidth: 1,
-    bottom: 2,
-    overflow: 'hidden', // Ensure image does not overflow the container
-    borderRadius: 8, // Adjust as needed
+  recipeImage: {
+    width: Dimensions.get('window').width - 40,
+    height: (Dimensions.get('window').width - 40) * 1/3,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   loader: {
     flex: 1,
+    marginTop: 200,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  favButton: {
+    position: 'absolute',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    padding: 7,
+    margin: 7,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    top: '20%',
+    right: 0,
+  },
+  favButtonIcon: {
+    fontSize: 40
+  },
+  addButton: {
+    position: 'absolute',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    padding: 7,
+    margin: 7,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    top: '50%',
+    right: 0,
+  },
+  addButtonIcon: {
+    fontSize: 40
+  }
 });
 
 export default RecipesParamsHook;
