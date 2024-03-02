@@ -14,6 +14,7 @@
     "@realm/react": "^0.6.2",
     "axios": "^1.6.7",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "expo-status-bar": "~1.11.1",
     "express": "^4.18.3",
     "express-session": "^1.18.0",
@@ -27,5 +28,10 @@
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
     "realm": "^12.6.1"
+  },
+  "proxy": {
+    "/api/*": {
+      "target": "http://localhost:5000"
+    }
   }
 }

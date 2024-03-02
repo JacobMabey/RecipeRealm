@@ -1,5 +1,6 @@
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Text,
+import {
+    Text,
     SafeAreaView,
     TouchableOpacity,
     TextInput, View,
@@ -16,45 +17,42 @@ import Filter from "./filter.js";
 import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-const { UsersAccounts } = require('../components/UserAccounts.js');
-let registerAccount = await UsersAccounts.SignUp("jramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "Bread"]);
+import UserAccounts from '../components/UserAccounts.js'
 
 const Home = ({ navigation }) => {
-const imageUrls = [
-            RecipesAPI,
+    const imageUrls = [
+        RecipesAPI,
     ];
 
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => { registerAccount }}>
-                <Text style={styles.tabButtonText}>Breakfast</Text>
-            </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Lunch')}>
+                <UserAccounts />
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Lunch')}>
                     <Text style={styles.tabButtonText}>Lunch</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dinner')}>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dinner')}>
                     <Text style={styles.tabButtonText}>Dinner</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Filter')}>
                     <Text style={styles.tabButtonText}>Filter</Text>
                 </Pressable>
             </View>
 
             <View>
                 <h1 style={styles.featuredTitle}>Featured</h1>
-                <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
+                <ScrollView horizontal style={{ width: Dimensions.get('window').width }}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
-                            <RecipesAPI/>
+                            <RecipesAPI />
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
             </View>
-            
+
             {/*
             <View style={styles.searchBarContainer}>
                 <TextInput
@@ -70,32 +68,32 @@ const imageUrls = [
                     onSubmitEditing={() => navigation.navigate('Ingredients')}/>
             </View>
             */}
-        
+
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('cookbook')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book'/>
-                <Text style={styles.pageButtonText}>My Cook Book</Text>
+                    onPress={() => navigation.navigate('cookbook')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book' />
+                    <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('planning')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt'/>
-                <Text style={styles.pageButtonText}>My Meal Planning</Text>
+                    onPress={() => navigation.navigate('planning')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt' />
+                    <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('Grocery')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart'/>
-                <Text style={styles.pageButtonText}>My Grocery List</Text>
+                    onPress={() => navigation.navigate('Grocery')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart' />
+                    <Text style={styles.pageButtonText}>My Grocery List</Text>
                 </TouchableOpacity>
             </View>
         </View>
-        
+
     );
 };
 
@@ -120,9 +118,9 @@ const styles = StyleSheet.create({
         width: '25%',
         height: 30,
         textAlign: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     tabButtonText: {
         fontFamily: 'Varela',
@@ -134,8 +132,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         borderWidth: 3,
         textAlign: 'center',
-        alignItems:'center',
-        backgroundColor:'#ACF39D',
+        alignItems: 'center',
+        backgroundColor: '#ACF39D',
     },
     pageButtonIcon: {
         position: 'absolute',
