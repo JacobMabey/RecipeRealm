@@ -10,9 +10,8 @@ const RecipesParamsHook = ({ type }) => {
   useEffect(() => {
     grabRecipesParams(type);
   }, [type]);
-
   const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
-    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
+    const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
       apiKey: APIKEY,
@@ -24,7 +23,7 @@ const RecipesParamsHook = ({ type }) => {
       Diets: Diets,
       Cuisines: Cuisines
     });
-    const PARAMS = `?apiKey=${APIKEY}&random?number=5&type=${type}`;
+    const PARAMS = `?apiKey=${APIKEY}&number=5&type=${type}`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
     //const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
 
@@ -66,7 +65,6 @@ const RecipesParamsHook = ({ type }) => {
 
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
-    navigation.navigate('Recipe');
   };
 
   const RecipesFormat = ({ id, name, image }) => {
@@ -75,7 +73,10 @@ const RecipesParamsHook = ({ type }) => {
     return (
       <View style={styles.recipeContainer}>
         <Text style={styles.title}>{name}</Text>
-        <Pressable onPress={() => navigateToRecipeInfo(id)}>
+        <Pressable onPress={() => {
+          navigateToRecipeInfo(id);
+          navigation.navigate('Recipe');
+          }}>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.image} />
         </Pressable>
       </View>
