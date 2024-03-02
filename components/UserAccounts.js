@@ -1,38 +1,42 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+var mongobd = require('mongodb');
+var ObjectId = require('mongodb').ObjectId; 
 
-mongoose.connect('mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/RecipeRealm', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+const connectionString = 'mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/RecipeRealm';
+mongoose.connect(connectionString, {UseUnifiedTopology: true, UseNewUrlParser: true});
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to MongoDB');
+
+connection.once("open", () =>{
+    console.log("Mongoose connected");
 });
 
 const userSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-    email: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     allergens: [String]
-});
+},{collection: "Users"});
+const User = mongoose.model('Users', userSchema);
 
-const User = mongoose.model('User', userSchema);
-
-export async function registerUser(username, password, email, allergens) {
-    try {
-        const user = new User({
-            username,
-            password,
-            email,
-            allergens
-        });
-        await user.save();
-        console.log('User registered successfully');
-        return true;
-    } catch (error) {
-        console.error('Failed to register user:', error.message);
-        return false;
-    }
+exports.dal = {
+registerUser: function(username, password, email, allergens){
+    let newUser = [
+        {
+            ID: new mongoose.Types.ObjectId,
+            Username: username, Password: password, Email: email, allergens: allergens
+        }
+    ];
+    User.insertMany(newUser);
+}
 }
