@@ -17,6 +17,7 @@ import Filter from "./filter.js";
 import Recipe from "./recipe.js";
 
 import RecipesAPI from '../components/recipesAPI.js';
+import { Colors } from 'react-native-paper';
 
 const Home = ({navigation}) => {
     // Define your images for the image cycler
@@ -42,14 +43,10 @@ const imageUrls = [
                 <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
                     <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Filter')}>
-                    <Text style={styles.tabButtonText}>Filter</Text>
-                </Pressable>
             </View>
 
             <View>
-                <h1 style={styles.featuredTitle}>Featured</h1>
+                <Text style={styles.featuredTitle}>Featured</Text>
                 <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
@@ -59,21 +56,13 @@ const imageUrls = [
                 </ScrollView>
             </View>
             
-            {/*
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for recipes"
-                    onSubmitEditing={() => navigation.navigate('Recipes')}/>
-                    <Stack.Screen name="Recipes" component={RecipePage} />
+            <View>
+                <Pressable style={styles.pageButtonBrowse}
+                onPress={() => navigation.navigate('Filter')}>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search'/>
+                <Text style={styles.pageButtonText}>Browse Recipes</Text>
+                </Pressable>
             </View>
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for Ingredients"
-                    onSubmitEditing={() => navigation.navigate('Ingredients')}/>
-            </View>
-            */}
         
             <View>
                 <TouchableOpacity style={styles.pageButton}
@@ -132,6 +121,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Varela',
         fontWeight: 'bold',
     },
+    pageButtonBrowse: {
+        padding: 30,
+        borderColor: '#8774A9',
+        width: Dimensions.get('window').width,
+        borderWidth: 3,
+        textAlign: 'center',
+        alignItems:'center',
+        backgroundColor:'#A38CCF',
+    },
     pageButton: {
         padding: 30,
         borderColor: '#6BAB5F',
@@ -161,5 +159,6 @@ const styles = StyleSheet.create({
         zIndex: 10,
         width: Dimensions.get('window').width,
         textAlign: 'center',
+
     },
 });
