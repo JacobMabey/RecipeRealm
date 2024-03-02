@@ -1,4 +1,3 @@
-// server.js
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,20 +6,17 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use((req, res, next) => {
-    console.log(req.method + " " + req.url);
     next();
 })
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect('mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
-// Define User model
+
 const User = mongoose.model('User', {
     name: String,
     email: String,
@@ -28,27 +24,60 @@ const User = mongoose.model('User', {
     allergens: [String]
 });
 
-// API endpoint for user registration
-app.post('/api/signup', async (req, res) => {
 
+app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
-        console.log(name + email + password);
 
-        // Create a new user instance
-        const newUser = new User({
+        const user = new User({
             name,
             email,
             password,
             allergens
         });
-
-        // Save the user to the database
-        await newUser.save();
+        user.password = await bcrypt.hash(password, saltRounds);
+        await user.save();
 
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.delete('/api/delete/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        await User.deleteOne({ _id: userId });
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/login', async (req, res) => {
+    try {
+        const { name, password } = req.body;
+        const user = await User.findOne({ name });
+        bcrypt.compare(password, user.password);
+        res.status(200).json({ message: 'User login successful' });
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.put('/api/update/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { name, email, password, allergens } = req.body;
+
+        await User.updateOne({ _id: userId }, { name, email, password, allergens });
+        
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        console.error('Error updating user:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
