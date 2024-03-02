@@ -17,17 +17,17 @@ import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
 const { UsersAccounts } = require('../components/UserAccounts.js');
-let registerAccount = await UsersAccounts.registerUser("jramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "Bread"]);
+let registerAccount = await UsersAccounts.SignUp("jramos", "jramos#2004", "jramos@gmail.com", ["Peanuts", "Bread"]);
 
 const Home = ({ navigation }) => {
-        const imageUrls = [
+const imageUrls = [
             RecipesAPI,
     ];
 
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-            <Pressable style={styles.tabButton} onPress={registerAccount}>
+                <Pressable style={styles.tabButton} onPress={() => { registerAccount }}>
                 <Text style={styles.tabButtonText}>Breakfast</Text>
             </Pressable>
         
