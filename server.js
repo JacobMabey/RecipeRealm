@@ -2,22 +2,17 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 const app = express();
-
-app.use((req, res, next) => {
-    next();
-})
-
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://Logan:302012Lh@atlascluster.mc1zlf4.mongodb.net/RecipeRealm', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
-
-const User = mongoose.model('User', {
+const User = mongoose.model('Users', {
     name: String,
     email: String,
     password: String,
@@ -28,7 +23,6 @@ const User = mongoose.model('User', {
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
-
         const user = new User({
             name,
             email,
@@ -73,7 +67,7 @@ app.put('/api/update/:id', async (req, res) => {
         const userId = req.params.id;
         const { name, email, password, allergens } = req.body;
 
-        await User.updateOne({ _id: userId }, { name, email, password, allergens });
+        await user.updateOne({ _id: userId }, { name, email, password, allergens });
         
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
