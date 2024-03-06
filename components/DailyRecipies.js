@@ -15,9 +15,19 @@ const recipeData = {
     _Image: Image
 };
 
+const temp = async () => {
+    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+    const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
+    const PARAMS = `?apiKey=${APIKEY}`;
+    const FETCH_URL = `${BASE_URL}${PARAMS}`;
+    const response = await fetch(FETCH_URL);
+    const json = await response.json();
+    console.log('Recipe information from API:', json);
+}
+
 const handleAddRecipe = async () => {
     try {
-        const response = await axios.post('http://localhost:5000/api/signup', {
+        const response = await axios.post('http://localhost:5000/api/addRecipe', {
             name,
             email,
             password,
