@@ -1,3 +1,6 @@
+import {MongoClient} from 'mongodb';
+const uri = "";
+const dbName = 'RecipeRealm';no
 function tester()
 {
     use('RecipeRealm');
@@ -20,13 +23,15 @@ function getRecipeById (Id)
 {
     use('RecipeRealm');
 
+    Id=1;
+
     return db.getCollection('Recipes').find({id: Id});
 }
 function addRecipe (id, recipieName, calorieCount, instruction, utinciels, timeEst, ingredient, mealType)
 {
     use('RecipeRealm');
 
-    id = 1;
+    id = 2;
     recipieName = 'Test';
     calorieCount = 40;
     instruction = "cook like you would one of your french girls";

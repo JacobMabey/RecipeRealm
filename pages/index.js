@@ -1,5 +1,6 @@
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Text,
+import {
+    Text,
     SafeAreaView,
     TouchableOpacity,
     TextInput, View,
@@ -8,22 +9,20 @@ import { Text,
     ScrollView,
     Image
 } from 'react-native';
-    
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, Pressable } from 'react-native-web';
 
 import Filter from "./filter.js";
-import Recipe from "./recipe.js";
+import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-import { Colors } from 'react-native-paper';
-
-const Home = ({navigation}) => {
-    // Define your images for the image cycler
-const imageUrls = [
-    RecipesAPI,
-];
+import SignIn from '../components/LogIn.js'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const Home = ({ navigation }) => {
+    const imageUrls = [
+        RecipesAPI,
+    ];
 
     return (
         <View style={styles.container}>
@@ -44,13 +43,12 @@ const imageUrls = [
                     <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
             </View>
-
             <View>
                 <Text style={styles.featuredTitle}>Featured</Text>
                 <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
-                            <RecipesAPI/>
+                            <RecipesAPI />
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
@@ -66,29 +64,26 @@ const imageUrls = [
         
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('cookbook')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book'/>
-                <Text style={styles.pageButtonText}>My Cook Book</Text>
+                    onPress={() => navigation.navigate('cookbook')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book' />
+                    <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
-
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('planning')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt'/>
-                <Text style={styles.pageButtonText}>My Meal Planning</Text>
+                    onPress={() => navigation.navigate('planning')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt' />
+                    <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
-
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('Grocery')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart'/>
-                <Text style={styles.pageButtonText}>My Grocery List</Text>
+                    onPress={() => navigation.navigate('Grocery')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart' />
+                    <Text style={styles.pageButtonText}>My Grocery List</Text>
                 </TouchableOpacity>
             </View>
         </View>
-        
     );
 };
 
@@ -113,9 +108,9 @@ const styles = StyleSheet.create({
         width: '25%',
         height: 30,
         textAlign: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     tabButtonText: {
         fontFamily: 'Varela',
@@ -136,8 +131,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         borderWidth: 3,
         textAlign: 'center',
-        alignItems:'center',
-        backgroundColor:'#ACF39D',
+        alignItems: 'center',
+        backgroundColor: '#ACF39D',
     },
     pageButtonIcon: {
         position: 'absolute',
