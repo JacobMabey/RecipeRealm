@@ -5,16 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dimensions } from 'react-native-web';
  
-const RecipesParamsHook = ({ type }) => {
+const RecipesParamsHook = ({ type, name }) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    grabRecipesParams(type);
-  }, [type]);
+    grabRecipesParams(type, name);
+  }, [type, name]);
 
   const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
-    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
+    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
       apiKey: APIKEY,
