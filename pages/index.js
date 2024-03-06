@@ -26,26 +26,38 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.tabsContainer} >
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-                    <Text style={styles.tabButtonText}>Breakfast</Text>  
+
+            <View style={styles.headerView}>
+                <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
+                    <Text style={styles.headerTitle}>Recipe Realm</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Main_Course')}>
+
+                <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.accountButtonText}>Login</Text>
+                </Pressable>
+            </View>
+            <View style={styles.tabsContainer} >
+
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                    <Text style={styles.tabButtonText}>Breakfast</Text>
+                </Pressable>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
                     <Text style={styles.tabButtonText}>Main course</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Snack')}>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
                     <Text style={styles.tabButtonText}>snack</Text>
                 </Pressable>
 
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
                     <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
             </View>
             <View>
                 <Text style={styles.featuredTitle}>Featured</Text>
-                <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
+                <ScrollView horizontal style={{ width: Dimensions.get('window').width }}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
                             <RecipesAPI />
@@ -53,15 +65,15 @@ const Home = ({ navigation }) => {
                     ))}
                 </ScrollView>
             </View>
-            
+
             <View>
                 <Pressable style={styles.pageButtonBrowse}
-                onPress={() => navigation.navigate('Filter')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search'/>
-                <Text style={styles.pageButtonText}>Browse Recipes</Text>
+                    onPress={() => navigation.navigate('Filter')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search' />
+                    <Text style={styles.pageButtonText}>Browse Recipes</Text>
                 </Pressable>
             </View>
-        
+
             <View>
                 <TouchableOpacity style={styles.pageButton}
                     onPress={() => navigation.navigate('cookbook')}>
@@ -122,8 +134,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         borderWidth: 3,
         textAlign: 'center',
-        alignItems:'center',
-        backgroundColor:'#A38CCF',
+        alignItems: 'center',
+        backgroundColor: '#A38CCF',
     },
     pageButton: {
         padding: 30,
@@ -155,5 +167,36 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         textAlign: 'center',
 
+    }, headerView: {
+        width: Dimensions.get('window').width,
+        height: 60,
+        borderColor: '#6BAB5F',
+        borderWidth: 2,
+        borderBottomWidth: 0,
+        backgroundColor: '#ACF39D',
+        justifyContent: 'center',
     },
+    headerButton: {
+        width: '50%',
+    },
+    headerTitle: {
+        fontSize: 32,
+        fontFamily: 'Varela',
+        fontWeight: 900,
+        marginLeft: 30,
+        color: '#171738',
+    },
+    accountButton: {
+        position: 'absolute',
+        width: '100%',
+    },
+    accountButtonText: {
+        textAlign: 'right',
+        marginRight: 30,
+        fontSize: 18,
+        fontFamily: 'Varela',
+        fontStyle: 'italic',
+        fontWeight: 900,
+        color: '#171738',
+    }
 });

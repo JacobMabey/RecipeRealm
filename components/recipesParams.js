@@ -26,7 +26,7 @@ const RecipesParamsHook = ({ type, name }) => {
       Diets: Diets,
       Cuisines: Cuisines
     });
-    const PARAMS = `?apiKey=${APIKEY}&random?number=5&type=${type}`;
+    const PARAMS = `?apiKey=${APIKEY}&number=5&type=${type}`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
     //const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
 

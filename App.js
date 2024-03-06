@@ -17,30 +17,30 @@ import Breakfast from "./pages/breakfast.js";
 import Dessert from './pages/dessert.js';
 import Main_course from './pages/main_course.js';
 import Snack from './pages/snack.js';
-import { Dimensions } from 'react-native';
-import { Pressable } from 'react-native';
+import Login from './pages/login.js';
+import AppHeader from './header.js';
+import navigationRef from './RootNavigation';
 
-const Stack = createNativeStackNavigator();
+export const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
     <SafeAreaView>
-      <View style={styles.headerView}>
-        <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home') }>
-          <Text style={styles.headerTitle}>Recipe Realm</Text>
-        </Pressable>
-
-        <Pressable style={styles.accountButton} onPress={() => {}}>
-          <Text style={styles.accountButtonText}>Login</Text>
-        </Pressable>
-      </View>
       
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator initialRouteName="Home">
+        
+          
+          <Stack.Screen name="AppHeader" component={AppHeader}
+              options={{ headerShown: false }}/>
+          
           <Stack.Screen name="Home" component={Home}
               options={{ headerShown: false }}/>
               
+          <Stack.Screen name="Login" component={Login}
+              options={{headerShown:false}}/>
+
           <Stack.Screen name="Filter" component={Filter}
               options={{ headerShown: false }}/>
               
@@ -66,38 +66,3 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  headerView: {
-    width: Dimensions.get('window').width,
-    height: 60,
-    borderColor: '#6BAB5F',
-    borderWidth: 2,
-    borderBottomWidth: 0,
-    backgroundColor: '#ACF39D',
-    justifyContent: 'center',
-  },
-  headerButton: {
-    width: '50%',
-  },
-  headerTitle: {
-    fontSize: 32,
-    fontFamily: 'Varela',
-    fontWeight: 900,
-    marginLeft: 30,
-    color: '#171738',
-  },
-  accountButton: {
-    position: 'absolute',
-    width: '100%',
-  },
-  accountButtonText: {
-    textAlign: 'right',
-    marginRight: 30,
-    fontSize: 18,
-    fontFamily: 'Varela',
-    fontStyle: 'italic',
-    fontWeight: 900,
-    color: '#171738',
-  }
-})

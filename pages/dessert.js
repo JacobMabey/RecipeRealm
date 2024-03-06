@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    alignSelf: 'stretch',
+    alignSelf: 'fill',
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
   },
@@ -83,7 +83,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     bottom: 0,
-  },
+  },  image: {
+        width: Dimensions.get('window').width / 2.0,
+        height: 250,
+    },
   homeButtonText: {
     fontSize: 24,
     color: '#FFFFFF',
