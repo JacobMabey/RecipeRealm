@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
+import React, { useState } from 'react';
 
 const Login = ({ navigation }) => {
+    
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
 
     const handleLogin = () => {
         // Implement your login logic here

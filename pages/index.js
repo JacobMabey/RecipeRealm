@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     },
     headerButton: {
         width: '50%',
+        zIndex: 10
     },
     headerTitle: {
         fontSize: 32,
