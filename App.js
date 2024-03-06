@@ -17,30 +17,37 @@ import Breakfast from "./pages/breakfast.js";
 import Dessert from './pages/dessert.js';
 import Main_course from './pages/main_course.js';
 import Snack from './pages/snack.js';
+import Login from './pages/login.js';
 import { Dimensions } from 'react-native';
 import { Pressable } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App({navigation}) {
 
   return (
     <SafeAreaView>
+      <NavigationContainer>
       <View style={styles.headerView}>
         <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home') }>
           <Text style={styles.headerTitle}>Recipe Realm</Text>
         </Pressable>
 
-        <Pressable style={styles.accountButton} onPress={() => {}}>
+        <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login') }>
           <Text style={styles.accountButtonText}>Login</Text>
         </Pressable>
-      </View>
       
+      </View>
+      </NavigationContainer>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
+          
           <Stack.Screen name="Home" component={Home}
               options={{ headerShown: false }}/>
               
+          <Stack.Screen name="Login" component={Login}
+              options={{headerShown:false}}/>
+
           <Stack.Screen name="Filter" component={Filter}
               options={{ headerShown: false }}/>
               

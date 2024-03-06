@@ -28,6 +28,8 @@ const imageUrls = [
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
+
+                
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
                     <Text style={styles.tabButtonText}>Breakfast</Text>  
                 </Pressable>
