@@ -162,10 +162,15 @@ const styles = StyleSheet.create({
         height: 250,
     },
     featuredTitle: {
+        color: '#fff',
         position: 'absolute',
         zIndex: 10,
+        fontSize: 24,
+        fontFamily: 'Varela',
+        fontWeight: 'bold',
         width: Dimensions.get('window').width,
         textAlign: 'center',
+        backgroundColor: '#00000066'
 
     }, headerView: {
         width: Dimensions.get('window').width,

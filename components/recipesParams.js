@@ -14,7 +14,7 @@ const RecipesParamsHook = ({ type, name }) => {
   }, [type, name]);
 
   const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
-    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
       apiKey: APIKEY,
