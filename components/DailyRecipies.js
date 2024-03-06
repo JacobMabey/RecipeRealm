@@ -1,23 +1,45 @@
-import {MongoClient} from 'mongodb';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
+import axios from 'axios';
 const uri = "";
-const dbName = 'RecipeRealm';no
-function tester()
-{
-    use('RecipeRealm');
+const dbName = 'RecipeRealm';
 
-    // Insert a few documents into the sales collection.
-    db.getCollection('Lastest').insertMany([
-        { 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
-        { 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
-        { 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
-        { 'item': 'xyz', 'price': 5, 'quantity': 20, 'date': new Date('2014-04-04T11:21:39.736Z') },
-        { 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
-        { 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
-        { 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
-        { 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
-    ]);
+const recipeData = {
+    _RecipeName: recipieName,
+    _CalorieCount: calorieCount,
+    _Instruction: instruction,
+    _Utinciels: utinciels,
+    _TimeEst: timeEst,
+    _NutrientionalWarnings: nutrientionalWarnings,
+    _Ingredients: ingredient,
+    _Image: Image
+};
+
+const temp = async () => {
+    const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+    const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
+    const PARAMS = `?apiKey=${APIKEY}`;
+    const FETCH_URL = `${BASE_URL}${PARAMS}`;
+    const response = await fetch(FETCH_URL);
+    const json = await response.json();
+    console.log('Recipe information from API:', json);
 }
 
+const handleAddRecipe = async () => {
+    try {
+        const response = await axios.post('http://localhost:5000/api/addRecipe', {
+            name,
+            email,
+            password,
+            allergens
+        });
+
+        console.log('User registered successfully:', response.data);
+    } catch (error) {
+        console.error('Error registering user:', error);
+        setError('Registration failed. Please try again later.');
+    }
+};
 // Passes actual recipie data into a temp array
 function getRecipeById (Id)
 {
