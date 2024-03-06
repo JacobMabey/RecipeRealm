@@ -19,6 +19,7 @@ import Recipe from './recipe.js';
 import RecipesAPI from '../components/recipesAPI.js';
 import SignIn from '../components/LogIn.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppHeader from '../header.js';
 const Home = ({ navigation }) => {
     const imageUrls = [
         RecipesAPI,
@@ -26,16 +27,7 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-
-            <View style={styles.headerView}>
-                <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
-                    <Text style={styles.headerTitle}>Recipe Realm</Text>
-                </Pressable>
-
-                <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.accountButtonText}>Login</Text>
-                </Pressable>
-            </View>
+            <AppHeader/>
             <View style={styles.tabsContainer} >
 
 

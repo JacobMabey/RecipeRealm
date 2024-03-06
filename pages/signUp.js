@@ -6,39 +6,95 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Dimensions, Pressable } from 'react-native-web';
+import BackHeader from '../backHeader';
 
 const Signup = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confPassword, setConfPassword] = useState('');
+  const [allergens, setAllergens] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSignup = () => {
-    // Implement your signup logic here
+  const handleSignup = async () => {
+    try {
+      if (!name || !email || !password) {
+        setError('Please fill out all fields');
+        return;
+      }
+      if (password != confPassword) {
+        setError('Passwords does not match confirmed password')
+      }
+      const response = await axios.post('http://localhost:5000/api/signup', {
+        name,
+        email,
+        password,
+        allergens
+      });
+
+      console.log('User registered successfully:', response.data);
+      navigation.navigate("UserProfile");
+    } catch (error) {
+      console.error('Error registering user:', error);
+      setError('Registration failed. Please try again later.');
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Signup</Text>
+      <BackHeader/>
+
+      <Text style={styles.mainHeader}>Create An Account</Text>
+
+      <Text style={styles.label}>Name:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter your name"
       />
+      <Text style={styles.label}>Email:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Password"
-        secureTextEntry
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter your email"
+        keyboardType="email-address"
+      />
+      <Text style={styles.label}>Password:</Text>
+      <TextInput
+        style={styles.input}
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+        placeholder="Enter your password"
       />
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Signup</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>Confirm Password:</Text>
+      <TextInput
+        style={styles.input}
+        value={confPassword}
+        onChangeText={setConfPassword}
+        secureTextEntry={true}
+        placeholder="Confirm your password"
+      />
+      <Text style={styles.label}>Allergens:</Text>
+      <TextInput
+        style={styles.input}
+        value={allergens}
+        onChangeText={setAllergens}
+        placeholder="Enter your allergens"
+      />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      <Pressable style={styles.button} onPress={handleSignup}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </Pressable>
+
       <TouchableOpacity
-        style={styles.navigationButton}
-        onPress={() => navigation.navigate('Login')}
+          style={styles.navigationButton}
+          onPress={() => navigation.navigate('Login')}
       >
-        <Text style={styles.navigationButtonText}>Login</Text>
+          <Text style={styles.navigationButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -56,39 +112,40 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
   },
-  tabsContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    borderColor: '#6BAB5F',
-    borderWidth: 2,
-  },
-  tabButton: {
-      width: '25%',
-      height: 30,
-      textAlign: 'center',
-      alignItems:'center',
-      justifyContent: 'center',
-      backgroundColor:'#fff'
-  },
-  tabButtonText: {
-      fontFamily: 'Varela',
-      fontWeight: 'bold',
-  },
-  catTitle: {
-    fontFamily: 'Verela',
+  mainHeader: {
+    fontSize: 26,
+    fontFamily: 'Varela',
+    fontWeight: 'bold',
     color: '#171738',
+    marginVertical: 20,
   },
-  homeButton: {
-    alignItems: 'center',
-    backgroundColor: '#A38CCF',
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  input: {
+    width: '70%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
     padding: 10,
-    marginTop: 30,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    bottom: 0,
+    marginBottom: 15,
   },
-  homeButtonText: {
-    fontSize: 24,
-    color: '#FFFFFF',
-  }
+  button: {
+    width: '50%',
+    backgroundColor: '#A38CCF',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+  },
 });

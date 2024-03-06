@@ -9,19 +9,12 @@ import { Text,
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
+import AppHeader from '../header.js';
 
 const Dessert = ({navigation}) => {
 return (
   <View style={styles.container}>
-            <View style={styles.headerView}>
-            <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
-                <Text style={styles.headerTitle}>Recipe Realm</Text>
-            </Pressable>
-
-            <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.accountButtonText}>Login</Text>
-            </Pressable>
-        </View>
+    <AppHeader/>
     <View style={styles.tabsContainer} >
         <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
             <Text style={styles.tabButtonText}>Breakfast</Text>  

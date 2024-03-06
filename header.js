@@ -1,4 +1,6 @@
-import { createNavigationContainerRef } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
     Text,
     SafeAreaView,
@@ -9,24 +11,39 @@ import {
 } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Pressable } from 'react-native';
-import * as RootNavigation from './RootNavigation.js';
-import Login from './pages/login.js';
 
 const AppHeader = () => {
+    navigation = useNavigation();
+    
     return (
-        <View style={styles.headerView}>
-            <Pressable style={styles.headerButton} onPress={() => RootNavigation.navigate('Home')}>
-                <Text style={styles.headerTitle}>Recipe Realm</Text>
-            </Pressable>
+      <View style={styles.headerView}>
+        <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.headerTitle}>Recipe Realm</Text>
+        </Pressable>
 
-            <Pressable style={styles.accountButton} onPress={() => RootNavigation.navigate('Login')}>
-                <Text style={styles.accountButtonText}>Login</Text>
-            </Pressable>
-        </View>
+        <ProfileButton/>
+      </View>
     )
 }
 export default AppHeader;
 
+const ProfileButton = () => {
+  navigation = useNavigation();
+
+  /*if (Global.isLoggedIn) {
+    return (
+      <Pressable style={styles.accountButton} onPress={() => navigation.navigate('UserProfile')}>
+        <Text style={styles.accountButtonText}>Name</Text>
+      </Pressable>
+    )
+  } else {*/
+    return (
+      <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.accountButtonText}>Login</Text>
+      </Pressable>
+    )
+  //}
+}
 
 const styles = StyleSheet.create({
     headerView: {
@@ -40,6 +57,7 @@ const styles = StyleSheet.create({
     },
     headerButton: {
       width: '50%',
+      zIndex: 10,
     },
     headerTitle: {
       fontSize: 32,

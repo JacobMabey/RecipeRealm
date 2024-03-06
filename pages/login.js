@@ -11,46 +11,60 @@ import {
 import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
 import React, { useState } from 'react';
+import BackHeader from '../backHeader.js';
+import isLoggedIn from '../App.js';
 
 const Login = ({ navigation }) => {
-    
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleLogin = () => {
-        // Implement your login logic here
+    const handleLogin = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/login', {
+                params: { name, password }
+            });
+            console.log('User logged in successfully:', response.data);
+            await AsyncStorage.setItem('userData', JSON.stringify(response.data));
+            isLoggedIn = true;
+            
+            navigation.navigate("UserProfile");
+        } catch (error) {
+            console.error('Error logging in user:', error);
+            setError('Login failed. Please try again later.');
+        }
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
+            <BackHeader/>
+
+            <Text style={styles.mainHeader}>Login To An Account</Text>
+
+            <Text style={styles.label}>Name:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={(text) => setUsername(text)}
+                value={name}
+                onChangeText={setName}
+                placeholder="Enter your name"
             />
+            <Text style={styles.label}>Password:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Password"
-                secureTextEntry
                 value={password}
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+                placeholder="Enter your password"
             />
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            <Pressable style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+            </Pressable>
             <TouchableOpacity
                 style={styles.navigationButton}
-                onPress={() => navigation.navigate('Signup')}
+                onPress={() => navigation.navigate('SignUp')}
             >
                 <Text style={styles.navigationButtonText}>Signup</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.navigationButton}
-                onPress={() => navigation.navigate('UserProfile')}
-            >
-                <Text style={styles.navigationButtonText}>User Profile</Text>
             </TouchableOpacity>
         </View>
     );
@@ -59,45 +73,45 @@ export default Login;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         alignSelf: 'stretch',
         width: Dimensions.get('window').width,
         backgroundColor: '#fff',
     },
-    tabsContainer: {
-        flexDirection: 'row',
-        width: '100%',
-        borderColor: '#6BAB5F',
-        borderWidth: 2,
+    mainHeader: {
+      fontSize: 26,
+      fontFamily: 'Varela',
+      fontWeight: 'bold',
+      color: '#171738',
+      marginVertical: 20,
     },
-    tabButton: {
-        width: '25%',
-        height: 30,
-        textAlign: 'center',
+    label: {
+        fontSize: 16,
+        marginBottom: 5,
+    },
+    input: {
+        width: '70%',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 15,
+    },
+    button: {
+        width: '50%',
+        backgroundColor: '#A38CCF',
+        padding: 15,
+        borderRadius: 5,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff'
+        marginBottom: 10,
     },
-    tabButtonText: {
-        fontFamily: 'Varela',
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
         fontWeight: 'bold',
     },
-    catTitle: {
-        fontFamily: 'Verela',
-        color: '#171738',
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
     },
-    homeButton: {
-        alignItems: 'center',
-        backgroundColor: '#A38CCF',
-        padding: 10,
-        marginTop: 30,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        bottom: 0,
-    },
-    homeButtonText: {
-        fontSize: 24,
-        color: '#FFFFFF',
-    }
 });

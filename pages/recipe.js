@@ -1,57 +1,51 @@
-import { Text,
-    SafeAreaView,
-    TouchableOpacity,
-    TextInput, View,
-    Button,
-    StyleSheet,
-    ScrollView,
-    Image
+import {
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput, View,
+  Button,
+  StyleSheet,
+  ScrollView,
+  Image
 } from 'react-native';
 import { Dimensions } from 'react-native-web';
 import RecipeInformation from '../components/recipeInformation';
 import { Pressable } from 'react-native-web';
+import AppHeader from '../header';
 
-const Recipe = ({navigation}) => {
-return (
+const Recipe = ({ navigation }) => {
+  return (
     <View style={styles.container}>
-      <View style={styles.headerView}>
-                <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
-                    <Text style={styles.headerTitle}>Recipe Realm</Text>
-                </Pressable>
+      <AppHeader />
+      <View style={styles.tabsContainer} >
 
-                <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.accountButtonText}>Login</Text>
-                </Pressable>
-            </View>
-            <View style={styles.tabsContainer} >
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+          <Text style={styles.tabButtonText}>Breakfast</Text>
+        </Pressable>
 
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-                    <Text style={styles.tabButtonText}>Breakfast</Text>
-                </Pressable>
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
+          <Text style={styles.tabButtonText}>Main course</Text>
+        </Pressable>
 
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
-                    <Text style={styles.tabButtonText}>Main course</Text>
-                </Pressable>
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
+          <Text style={styles.tabButtonText}>snack</Text>
+        </Pressable>
 
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
-                    <Text style={styles.tabButtonText}>snack</Text>
-                </Pressable>
-
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
-                    <Text style={styles.tabButtonText}>Dessert</Text>
-                </Pressable>
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
+          <Text style={styles.tabButtonText}>Dessert</Text>
+        </Pressable>
       </View>
 
       <ScrollView>
         <View style={styles.container}>
-          <RecipeInformation/>
+          <RecipeInformation />
           <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
             <Text style={styles.homeButtonText}>Home Page</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
-);
+  );
 }
 export default Recipe;
 
@@ -84,16 +78,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   tabButton: {
-      width: '25%',
-      height: 30,
-      textAlign: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff'
+    width: '25%',
+    height: 30,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
   tabButtonText: {
-      fontFamily: 'Varela',
-      fontWeight: 'bold',
+    fontFamily: 'Varela',
+    fontWeight: 'bold',
   },
   headerView: {
     width: Dimensions.get('window').width,
@@ -105,27 +99,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerButton: {
-      width: '50%',
-      zIndex: 10
+    width: '50%',
+    zIndex: 10
   },
   headerTitle: {
-      fontSize: 32,
-      fontFamily: 'Varela',
-      fontWeight: 900,
-      marginLeft: 30,
-      color: '#171738',
+    fontSize: 32,
+    fontFamily: 'Varela',
+    fontWeight: 900,
+    marginLeft: 30,
+    color: '#171738',
   },
   accountButton: {
-      position: 'absolute',
-      width: '100%',
+    position: 'absolute',
+    width: '100%',
   },
   accountButtonText: {
-      textAlign: 'right',
-      marginRight: 30,
-      fontSize: 18,
-      fontFamily: 'Varela',
-      fontStyle: 'italic',
-      fontWeight: 900,
-      color: '#171738',
+    textAlign: 'right',
+    marginRight: 30,
+    fontSize: 18,
+    fontFamily: 'Varela',
+    fontStyle: 'italic',
+    fontWeight: 900,
+    color: '#171738',
   }
 });
