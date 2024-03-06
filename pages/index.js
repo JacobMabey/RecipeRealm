@@ -1,5 +1,6 @@
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Text,
+import {
+    Text,
     SafeAreaView,
     TouchableOpacity,
     TextInput, View,
@@ -8,7 +9,7 @@ import { Text,
     ScrollView,
     Image
 } from 'react-native';
-    
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, Pressable } from 'react-native-web';
@@ -19,78 +20,88 @@ import Recipe from "./recipe.js";
 import RecipesAPI from '../components/recipesAPI.js';
 import { Colors } from 'react-native-paper';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
     // Define your images for the image cycler
-const imageUrls = [
-    RecipesAPI,
-];
+    const imageUrls = [
+        RecipesAPI,
+    ];
 
     return (
         <View style={styles.container}>
+
+            <View style={styles.headerView}>
+                <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
+                    <Text style={styles.headerTitle}>Recipe Realm</Text>
+                </Pressable>
+
+                <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.accountButtonText}>Login</Text>
+                </Pressable>
+            </View>
             <View style={styles.tabsContainer} >
 
-                
+
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-                    <Text style={styles.tabButtonText}>Breakfast</Text>  
+                    <Text style={styles.tabButtonText}>Breakfast</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Main_Course')}>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
                     <Text style={styles.tabButtonText}>Main course</Text>
                 </Pressable>
-        
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Snack')}>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
                     <Text style={styles.tabButtonText}>snack</Text>
                 </Pressable>
 
-                <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
                     <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
             </View>
 
             <View>
                 <Text style={styles.featuredTitle}>Featured</Text>
-                <ScrollView horizontal style={{width: Dimensions.get('window').width}}>
+                <ScrollView horizontal style={{ width: Dimensions.get('window').width }}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
-                            <RecipesAPI/>
+                            <RecipesAPI />
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
             </View>
-            
+
             <View>
                 <Pressable style={styles.pageButtonBrowse}
-                onPress={() => navigation.navigate('Filter')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search'/>
-                <Text style={styles.pageButtonText}>Browse Recipes</Text>
+                    onPress={() => navigation.navigate('Filter')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search' />
+                    <Text style={styles.pageButtonText}>Browse Recipes</Text>
                 </Pressable>
             </View>
-        
+
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('cookbook')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book'/>
-                <Text style={styles.pageButtonText}>My Cook Book</Text>
+                    onPress={() => navigation.navigate('cookbook')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book' />
+                    <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('planning')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt'/>
-                <Text style={styles.pageButtonText}>My Meal Planning</Text>
+                    onPress={() => navigation.navigate('planning')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt' />
+                    <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                onPress={() => navigation.navigate('Grocery')}>
-                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart'/>
-                <Text style={styles.pageButtonText}>My Grocery List</Text>
+                    onPress={() => navigation.navigate('Grocery')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='shopping-cart' />
+                    <Text style={styles.pageButtonText}>My Grocery List</Text>
                 </TouchableOpacity>
             </View>
         </View>
-        
+
     );
 };
 
@@ -115,9 +126,9 @@ const styles = StyleSheet.create({
         width: '25%',
         height: 30,
         textAlign: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     tabButtonText: {
         fontFamily: 'Varela',
@@ -129,8 +140,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         borderWidth: 3,
         textAlign: 'center',
-        alignItems:'center',
-        backgroundColor:'#A38CCF',
+        alignItems: 'center',
+        backgroundColor: '#A38CCF',
     },
     pageButton: {
         padding: 30,
@@ -138,8 +149,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         borderWidth: 3,
         textAlign: 'center',
-        alignItems:'center',
-        backgroundColor:'#ACF39D',
+        alignItems: 'center',
+        backgroundColor: '#ACF39D',
     },
     pageButtonIcon: {
         position: 'absolute',
@@ -162,5 +173,36 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         textAlign: 'center',
 
+    }, headerView: {
+        width: Dimensions.get('window').width,
+        height: 60,
+        borderColor: '#6BAB5F',
+        borderWidth: 2,
+        borderBottomWidth: 0,
+        backgroundColor: '#ACF39D',
+        justifyContent: 'center',
     },
+    headerButton: {
+        width: '50%',
+    },
+    headerTitle: {
+        fontSize: 32,
+        fontFamily: 'Varela',
+        fontWeight: 900,
+        marginLeft: 30,
+        color: '#171738',
+    },
+    accountButton: {
+        position: 'absolute',
+        width: '100%',
+    },
+    accountButtonText: {
+        textAlign: 'right',
+        marginRight: 30,
+        fontSize: 18,
+        fontFamily: 'Varela',
+        fontStyle: 'italic',
+        fontWeight: 900,
+        color: '#171738',
+    }
 });
