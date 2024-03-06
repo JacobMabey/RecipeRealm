@@ -19,7 +19,6 @@ const User = mongoose.model('Users', {
     allergens: [String]
 });
 
-
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
@@ -29,7 +28,6 @@ app.post('/api/signup', async (req, res) => {
             password,
             allergens
         });
-        user.password = await bcrypt.hash(password, saltRounds);
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -40,7 +38,7 @@ app.post('/api/signup', async (req, res) => {
 
 app.delete('/api/delete/:id', async (req, res) => {
     try {
-        const { userId } = req.body;
+        const userId = req.params.id;
         await User.deleteOne({ _id: userId });
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
@@ -51,27 +49,22 @@ app.delete('/api/delete/:id', async (req, res) => {
 
 app.get('/api/login', async (req, res) => {
     try {
-        const { name, password } = req.query;
-        const user = await User.findOne({ name });
+        const {name, password} = req.query;
+        const user = await User.findOne({ name, password });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
-        const passwordMatch = await bcrypt.compare(password, user.password);
-        if (!passwordMatch) {
-            return res.status(401).json({ error: 'Invalid credentials' });
-        }
-        res.status(200).json({ message: 'User login successful' });
+        res.status(200).json({ message: 'User login successful', user });
     } catch (error) {
         console.error('Error logging in user:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-
 app.put('/api/update/:id', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
-        User.password = await bcrypt.hash(password, saltRounds);
+        const userId = req.params.id;
         await User.updateOne({ _id: userId }, { name, email, password, allergens });
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {

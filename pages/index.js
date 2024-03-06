@@ -17,7 +17,8 @@ import Filter from "./filter.js";
 import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-import SignIn from '../components/LogIn.js'
+import LogIn from '../components/LogIn.js'
+import Update from '../components/Update.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({ navigation }) => {
     const imageUrls = [
@@ -27,7 +28,8 @@ const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                
+                <LogIn />
+                <Update/>
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Lunch')}>
                     <Text style={styles.tabButtonText}>Lunch</Text>
                 </Pressable>

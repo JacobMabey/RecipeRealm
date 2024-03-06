@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserAccounts = () => {
     const [name, setName] = useState('');
@@ -11,13 +12,14 @@ const UserAccounts = () => {
 
     const handleUpdateUser = async () => {
         try {
-            const response = await axios.put('http://localhost:5000/api/update/', {
+            const userData = await AsyncStorage.getItem('userData');
+            const { _id: userId } = JSON.parse(userData);
+            const response = await axios.put(`http://localhost:5000/api/update/${userId}`, {
                 name,
                 email,
                 password,
-                allergens
+                allergens,
             });
-
             console.log('User updated successfully:', response.data);
         } catch (error) {
             console.error('Error updating user:', error);

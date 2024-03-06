@@ -14,7 +14,8 @@ const UserAccounts = () => {
                 params: { name, password }
             });
             console.log('User logged in successfully:', response.data);
-            await AsyncStorage.setItem('userData', JSON.stringify(response.data));
+            const userData = response.data.user;
+            await AsyncStorage.setItem('userData', JSON.stringify(userData));
         } catch (error) {
             console.error('Error logging in user:', error);
             setError('Login failed. Please try again later.');
