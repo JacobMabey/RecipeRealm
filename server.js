@@ -31,7 +31,6 @@ app.post('/api/signup', async (req, res) => {
         });
         user.password = await bcrypt.hash(password, saltRounds);
         await user.save();
-
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Error registering user:', error);
@@ -41,7 +40,7 @@ app.post('/api/signup', async (req, res) => {
 
 app.delete('/api/delete/:id', async (req, res) => {
     try {
-        const userId = req.params.id;
+        const { userId } = req.body;
         await User.deleteOne({ _id: userId });
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
@@ -50,11 +49,17 @@ app.delete('/api/delete/:id', async (req, res) => {
     }
 });
 
-app.post('/api/login', async (req, res) => {
+app.get('/api/login', async (req, res) => {
     try {
-        const { name, password } = req.body;
+        const { name, password } = req.query;
         const user = await User.findOne({ name });
-        bcrypt.compare(password, user.password);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
         res.status(200).json({ message: 'User login successful' });
     } catch (error) {
         console.error('Error logging in user:', error);
@@ -62,13 +67,12 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+
 app.put('/api/update/:id', async (req, res) => {
     try {
-        const userId = req.params.id;
         const { name, email, password, allergens } = req.body;
-
-        await user.updateOne({ _id: userId }, { name, email, password, allergens });
-        
+        User.password = await bcrypt.hash(password, saltRounds);
+        await User.updateOne({ _id: userId }, { name, email, password, allergens });
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
         console.error('Error updating user:', error);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
 import axios from 'axios';
 
@@ -8,52 +8,6 @@ const UserAccounts = () => {
     const [password, setPassword] = useState('');
     const [allergens, setAllergens] = useState('');
     const [error, setError] = useState('');
-
-    const handleSignup = async () => {
-        try {
-            if (!name || !email || !password) {
-                setError('Please fill out all fields');
-                return;
-            }
-            const response = await axios.post('http://localhost:5000/api/signup', {
-                name,
-                email,
-                password,
-                allergens
-            });
-
-            console.log('User registered successfully:', response.data);
-        } catch (error) {
-            console.error('Error registering user:', error);
-            setError('Registration failed. Please try again later.');
-        }
-    };
-
-    const handleDeleteUser = async () => {
-        try {
-            const response = await axios.delete('http://localhost:5000/api/delete/', {
-                data: { name, password }
-            });
-
-            console.log('User deleted successfully:', response.data);
-        } catch (error) {
-            console.error('Error deleting user:', error);
-            setError('Deletion failed. Please try again later.');
-        }
-    };
-
-    const handleLogin = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/login', {
-                params: { name, password }
-            });
-
-            console.log('User logged in successfully:', response.data);
-        } catch (error) {
-            console.error('Error logging in user:', error);
-            setError('Login failed. Please try again later.');
-        }
-    };
 
     const handleUpdateUser = async () => {
         try {
@@ -105,15 +59,6 @@ const UserAccounts = () => {
                     placeholder="Enter your allergens"
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <Pressable style={styles.button} onPress={handleSignup}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </Pressable>
-                <Pressable style={styles.button} onPress={handleDeleteUser}>
-                    <Text style={styles.buttonText}>Delete User</Text>
-                </Pressable>
-                <Pressable style={styles.button} onPress={handleLogin}>
-                    <Text style={styles.buttonText}>Login</Text>
-                </Pressable>
                 <Pressable style={styles.button} onPress={handleUpdateUser}>
                     <Text style={styles.buttonText}>Update User</Text>
                 </Pressable>

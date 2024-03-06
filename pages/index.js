@@ -17,8 +17,8 @@ import Filter from "./filter.js";
 import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-import UserAccounts from '../components/UserAccounts.js'
-
+import SignIn from '../components/LogIn.js'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({ navigation }) => {
     const imageUrls = [
         RecipesAPI,
@@ -27,21 +27,17 @@ const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.tabsContainer} >
-                <UserAccounts />
-
+                
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Lunch')}>
                     <Text style={styles.tabButtonText}>Lunch</Text>
                 </Pressable>
-
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dinner')}>
                     <Text style={styles.tabButtonText}>Dinner</Text>
                 </Pressable>
-
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Filter')}>
                     <Text style={styles.tabButtonText}>Filter</Text>
                 </Pressable>
             </View>
-
             <View>
                 <h1 style={styles.featuredTitle}>Featured</h1>
                 <ScrollView horizontal style={{ width: Dimensions.get('window').width }}>
@@ -52,7 +48,6 @@ const Home = ({ navigation }) => {
                     ))}
                 </ScrollView>
             </View>
-
             {/*
             <View style={styles.searchBarContainer}>
                 <TextInput
@@ -68,7 +63,6 @@ const Home = ({ navigation }) => {
                     onSubmitEditing={() => navigation.navigate('Ingredients')}/>
             </View>
             */}
-
             <View>
                 <TouchableOpacity style={styles.pageButton}
                     onPress={() => navigation.navigate('cookbook')}>
@@ -76,7 +70,6 @@ const Home = ({ navigation }) => {
                     <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
-
             <View>
                 <TouchableOpacity style={styles.pageButton}
                     onPress={() => navigation.navigate('planning')}>
@@ -84,7 +77,6 @@ const Home = ({ navigation }) => {
                     <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
             </View>
-
             <View>
                 <TouchableOpacity style={styles.pageButton}
                     onPress={() => navigation.navigate('Grocery')}>
@@ -93,7 +85,6 @@ const Home = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
         </View>
-
     );
 };
 
