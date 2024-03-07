@@ -22,6 +22,11 @@ import Login from './pages/login.js';
 import SignUp from './pages/signUp.js';
 import UserProfile from './pages/userProfile.js';
 import UpdateUser from './pages/updateUser.js';
+import AddRecipeInformation from './components/DailyRecipies.js';
+import AppHeader from './header.js';
+import BackHeader from './backHeader.js';
+
+
 
 export const Stack = createNativeStackNavigator();
 

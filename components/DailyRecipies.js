@@ -12,42 +12,85 @@ import axios from 'axios';
     //image: Image,
     //allergens: [String]
 
-const randomNumberInRange = (min, max) => {
-    return Math.floor(Math.random()
-        * (max - min + 1)) + min;
-};
+
 
 const AddRecipeInformation = () => {
     const [recipeInfo, setRecipeInfo] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [noGo, setNoGo] = useState(false);
     const [recipieName, setRecipieName] = useState('');
     const [calorieCount, setCalorieCount] = useState('');
     const [instruction, setInstruction] = useState('');
     const [allergens, setAllergens] = useState('');
-    const [utinciels, setUtinciels] = useState('');
     const [timeEst, setTimeEst] = useState('');
     const [ingredient, setIngredient] = useState('');
     const [image, setImage] = useState('');
+    const [ranID, setranID] = useState('');
+    const [recID, setRecID] = useState('');
+
+    const randomNumberInRange = (min, max) => {
+        return Math.floor(Math.random()
+            * (max - min + 1)) + min;
+    };
+
+    const handleAllergens = () => {
+        ingredients = [ingredient];
+        allerts = [];
+        for(i = 0; i <ingredients.length; i++)
+        {
+            if(ingredients[i] != null)
+            {
+                if(ingredients[i].name.toUppercase() == "MILK" || ingredients[i].name.toUppercase() == "EGGS" || ingredients[i].name.toUppercase() == "PEANUTS" || ingredients[i].name.toUppercase() == "SOY" || ingredients[i].name.toUppercase() == "WHEAT" || ingredients[i].name.toUppercase() == "SHELLFISH" || ingredients[i].name.toUppercase() == "FISH" || ingredients[i].name.toUppercase() == "SESAME")
+                {
+                    allerts.push(ingredients[i]);
+                }
+            }
+            setAllergens(allerts);
+        }
+    };
     useEffect(() => {
     const fetchRecipeInformation = async () => {
         try {
-            recipeID = randomNumberInRange(1, 999999);
-            const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
-            const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
-            const PARAMS = `?apiKey=${APIKEY}`;
-            const FETCH_URL = `${BASE_URL}${PARAMS}`;
-            const response = await fetch(FETCH_URL);
-            const json = await response.json();
-            console.log('Recipe information from API:', json);
-            
-            if (json && !json.hasOwnProperty('status')) 
-            {
-                handleAddRecipe();
-            } 
-            else 
-            {
-                console.error('Recipe information not found or incomplete:', json);
+            do{
+                setRecID(randomNumberInRange(1, 999999));
+                const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
+                const BASE_URL = `https://api.spoonacular.com/recipes/${recID}/information?includeNutrition=true`;
+                const PARAMS = `?apiKey=${APIKEY}`;
+                const FETCH_URL = `${BASE_URL}${PARAMS}`;
+                fetch(FETCH_URL)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((json) => {
+                    if (json.results && json.results.length > 0) {
+                        const formattedRecipes = json.results.map((recipe) => ({
+                            rName: recipe.title,
+                            calCount:recipe.summary,
+                            ing: recipe.extendedIngredients,
+                            inst: recipe.instructions,
+                            time: recipe.readyInMinutes,
+                            imager: recipe.image,
+                            rId: recipe.id
+                        }));
+                        setRecipieName(rName);
+                        setCalorieCount(calCount);
+                        setIngredient(ing);
+                        setInstruction(inst);
+                        setTimeEst(time);
+                        setImage(imager);
+                        setranID(rId);
+                        handleAllergens();
+                        handleAddRecipe();
+                    } 
+            else {
+                console.error('No results found');
+                setNoGo(true);
             }
+        })}while(!noGo)
+            
     } 
     catch (error) {
         console.error('Error fetching recipe information:', error);
@@ -63,15 +106,19 @@ const AddRecipeInformation = () => {
     const handleAddRecipe = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/addRecipe', {
+                randomizerId,
                 recipieName,
-                email,
-                password,
-                allergens
+                calorieCount,
+                instruction,
+                timeEst,
+                ingredient,
+                image,
+                allergens,
             });
         
-        console.log('User registered successfully:', response.data);
+        console.log('recipe registered successfully:', response.data);
         } catch (error) {
-            console.error('Error registering user:', error);
+            console.error('Error registering recipe:', error);
             setError('Registration failed. Please try again later.');
         }
     };

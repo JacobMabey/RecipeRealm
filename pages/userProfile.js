@@ -6,7 +6,7 @@ import { Text,
   Button,
   StyleSheet,
   ScrollView,
-  Image
+  Image,
 } from 'react-native';
 import { Alert, Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
@@ -19,7 +19,6 @@ import BackHeader from '../backHeader';
 
 const handleLogout = async () => {
 try {
-  const response = await axios.get('http://localhost:5000/api/logout');
   console.log('User logged out successfully:', response.data);
   await AsyncStorage.setItem('userData', null);
   UserLoggedInGlobal.isLoggedIn = false;

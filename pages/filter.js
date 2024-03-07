@@ -7,7 +7,7 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  Image
+  Image,
 } from 'react-native';
 import React, { useState } from 'react';
 import RecipesParams from '../components/recipesParams.js';
