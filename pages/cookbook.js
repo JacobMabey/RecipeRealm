@@ -36,7 +36,7 @@ return (
     <h1 style={styles.catTitle}>Favorite Recipes</h1>
     <ScrollView>
       <View>
-        {/*Add recipe params recipe list here!*/}
+        {/*Add recipe params favorite recipe list here!*/}
         {/*<RecipesParams type="" name=""/>*/}
 
         <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>

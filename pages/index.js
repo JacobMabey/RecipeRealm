@@ -67,14 +67,14 @@ const Home = ({ navigation }) => {
 
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                    onPress={() => navigation.navigate('cookbook')}>
+                    onPress={() => navigation.navigate('Cookbook')}>
                     <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='book' />
                     <Text style={styles.pageButtonText}>My Cook Book</Text>
                 </TouchableOpacity>
             </View>
             <View>
                 <TouchableOpacity style={styles.pageButton}
-                    onPress={() => navigation.navigate('planning')}>
+                    onPress={() => navigation.navigate('Planning')}>
                     <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='calendar-alt' />
                     <Text style={styles.pageButtonText}>My Meal Planning</Text>
                 </TouchableOpacity>
