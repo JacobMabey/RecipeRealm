@@ -14,6 +14,7 @@ import Home from "./pages/index.js";
 import Filter from "./pages/filter.js";
 import Recipe from "./pages/recipe.js";
 import Breakfast from "./pages/breakfast.js";
+import Cookbook from "./pages/cookbook.js"
 import Dessert from './pages/dessert.js';
 import Main_course from './pages/main_course.js';
 import Snack from './pages/snack.js';
@@ -57,6 +58,9 @@ export default function App() {
                         options={{ headerShown: false }} />
 
                     <Stack.Screen name="Breakfast" component={Breakfast}
+                        options={{ headerShown: false }} />
+                        
+                    <Stack.Screen name="Cookbook" component={Cookbook}
                         options={{ headerShown: false }} />
 
                     <Stack.Screen name="Main_Course" component={Main_course}
