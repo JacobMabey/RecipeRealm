@@ -8,27 +8,26 @@ import { Dimensions } from 'react-native-web';
 const RecipesParamsHook = ({ type }) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
-
+ 
   useEffect(() => {
     grabRecipesParams(type);
   }, [type]);
-
-  const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
+ 
+  const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets,Cuisines) => {
     const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
-      apiKey: APIKEY,
-      number: 5,
-      Type: Type,
-      Name: Name,
-      Ingredients: Ingredients,
-      Intolerance: Intolerance,
-      Diets: Diets,
-      Cuisines: Cuisines,
+        apiKey: APIKEY,
+        number: 5,
+        Type: Type,
+        Name: Name,
+        Ingredients: Ingredients,
+        Intolerance: Intolerance,
+        Diets: Diets,
+        Cuisines: Cuisines
     });
     const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
-
+ 
     fetch(FETCH_URL)
       .then((response) => {
         if (!response.ok) {
@@ -54,7 +53,7 @@ const RecipesParamsHook = ({ type }) => {
         console.error('Error fetching recipes:', error);
       });
   };
-
+ 
   const saveValueFunction = async (id) => {
     try {
       await AsyncStorage.setItem('recipeID', id.toString());
@@ -62,17 +61,15 @@ const RecipesParamsHook = ({ type }) => {
       console.error('Error saving recipe ID:', error);
     }
   };
-
+ 
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
   };
-
+ 
   const RecipesFormat = ({ id, name, image }) => {
+    const navigation = useNavigation();
+ 
     return (
-      <Pressable onPress={() => navigateToRecipeInfo(id)}>
-        <View style={styles.recipeContainer}>
-          <Text style={styles.title}>{name}</Text>
-          <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.image} />
       <Pressable onPress={() => {
         navigateToRecipeInfo(id);
         navigation.navigate('Recipe');
@@ -92,15 +89,15 @@ const RecipesParamsHook = ({ type }) => {
       </Pressable>
     );
   };
-
+ 
   if (loading) {
-    return (
+  return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
-
+ 
   return (
     <View>
       {recipes.map((recipe) => (
@@ -114,7 +111,7 @@ const RecipesParamsHook = ({ type }) => {
     </View>
   );
 };
-
+ 
 const styles = StyleSheet.create({
   recipeContainer: {
     marginHorizontal: 20,
@@ -179,6 +176,5 @@ const styles = StyleSheet.create({
     fontSize: 40
   }
 });
-
+ 
 export default RecipesParamsHook;
-
