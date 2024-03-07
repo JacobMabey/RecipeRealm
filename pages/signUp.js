@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import BackHeader from '../backHeader';
+import { UserLoggedInGlobal } from '../App';
 
 const Signup = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -32,8 +33,8 @@ const Signup = ({ navigation }) => {
         password,
         allergens
       });
-      
-      Global.isLoggedIn = true;
+
+      UserLoggedInGlobal.isLoggedIn = true;
       console.log('User registered successfully:', response.data);
       navigation.navigate("UserProfile");
     } catch (error) {

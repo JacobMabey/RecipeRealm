@@ -9,6 +9,21 @@ import { Text,
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
+import { UserLoggedInGlobal } from '../App';
+
+const handleLogout = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/logout');
+    console.log('User logged out successfully:', response.data);
+    await AsyncStorage.setItem('userData', null);
+    UserLoggedInGlobal.isLoggedIn = false;
+    
+    navigation.navigate("Home");
+  } catch (error) {
+      console.error('Error logging out user:', error);
+      setError('Login failed. Please try again later.');
+  }
+}
 
 const UserProfile = ({navigation}) => {
         // Fetch user profile data or implement user profile functionality
@@ -17,6 +32,10 @@ const UserProfile = ({navigation}) => {
           <View style={styles.container}>
             <Text style={styles.title}>User Profile</Text>
             {/* Display user profile information */}
+
+            <Pressable style={styles.logoutButton} onPress={handleLogout}>
+
+            </Pressable>
           </View>
         );
       };
