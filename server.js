@@ -45,7 +45,7 @@ app.post('/api/addRecipe', async (req, res) => {
             timeEst,
             ingredient,
             image,
-            allergens
+            allergens,
         });
         await recipieData.save();
         res.status(201).json({ message: 'Recipe Added successfully' });

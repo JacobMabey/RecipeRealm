@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
 import axios from 'axios';
-const uri = "";
-const dbName = 'RecipeRealm';
 
 //randomizerId: Int32,
     //recipieName: String,
@@ -65,7 +63,7 @@ const AddRecipeInformation = () => {
     const handleAddRecipe = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/addRecipe', {
-                name,
+                recipieName,
                 email,
                 password,
                 allergens
