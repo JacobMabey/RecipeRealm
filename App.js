@@ -26,7 +26,7 @@ import BackHeader from './backHeader.js';
 export const Stack = createNativeStackNavigator();
 
 export class UserLoggedInGlobal {
-    static isLoggedIn = true;
+    static isLoggedIn = false;
 }
 
 export default function App() {

@@ -5,11 +5,14 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Image,
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import BackHeader from '../backHeader';
 import { UserLoggedInGlobal } from '../App';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import recipeRealmLogo from '../assets/RecipeRealmLogo.png';
 
 const Signup = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -35,8 +38,9 @@ const Signup = ({ navigation }) => {
         allergens
       });
 
-      UserLoggedInGlobal.isLoggedIn = true;
       console.log('User registered successfully:', response.data);
+      await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
+      UserLoggedInGlobal.isLoggedIn = true;
       navigation.navigate("UserProfile");
     } catch (error) {
       console.error('Error registering user:', error);
@@ -47,6 +51,8 @@ const Signup = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <BackHeader/>
+      
+      <Image source={recipeRealmLogo} onError={() => console.log('Image not available')} style={styles.backgroundImage}/>
 
       <Text style={styles.mainHeader}>Create An Account</Text>
 
@@ -115,12 +121,21 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
   },
+  backgroundImage: {
+      position: 'absolute',
+      top: 80,
+      opacity: 0.2,
+      width: '100%',
+      height: '100%',
+      zIndex: -100,
+  },
   mainHeader: {
     fontSize: 26,
     fontFamily: 'Varela',
     fontWeight: 'bold',
     color: '#171738',
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 30,
   },
   label: {
     fontSize: 16,

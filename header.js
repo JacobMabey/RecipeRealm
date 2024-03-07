@@ -8,10 +8,12 @@ import {
     TextInput, View,
     StyleSheet,
     ScrollView,
+    Image,
 } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Pressable } from 'react-native';
 import { UserLoggedInGlobal } from './App';
+import recipeRealmLogoText from './assets/RecipeRealmLogoText.png';
 
 const AppHeader = () => {
     navigation = useNavigation();
@@ -19,7 +21,9 @@ const AppHeader = () => {
     return (
       <View style={styles.headerView}>
         <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.headerTitle}>Recipe Realm</Text>
+          <div style={{height: 80}}>
+            <Image source={recipeRealmLogoText} onError={() => console.log('Image not available')} style={styles.logoImage}/>
+          </div>
         </Pressable>
 
         <ProfileButton/>
@@ -49,15 +53,20 @@ const ProfileButton = () => {
 const styles = StyleSheet.create({
     headerView: {
       width: Dimensions.get('window').width,
-      height: 60,
+      height: 80,
       borderColor: '#6BAB5F',
       borderWidth: 2,
       borderBottomWidth: 0,
       backgroundColor: '#ACF39D',
       justifyContent: 'center',
     },
+    logoImage: {
+      height: 80,
+      aspectRatio: 38 / 21
+    },
     headerButton: {
-      width: '50%',
+      width: '70%',
+      height: 80,
       zIndex: 10,
     },
     headerTitle: {
@@ -70,6 +79,8 @@ const styles = StyleSheet.create({
     accountButton: {
       position: 'absolute',
       width: '100%',
+      alignItems: 'left',
+      alignContent: 'left'
     },
     accountButtonText: {
       textAlign: 'right',

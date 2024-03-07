@@ -13,12 +13,12 @@ import { Pressable } from 'react-native';
 
 const BackHeader = ({navigation}) => {
     navigation = useNavigation();
-    
+
     return (
       <View style={styles.headerView}>
         <View style={{flexDirection: 'row'}}>
           <Pressable style={styles.backButton} onPress={() => navigation.navigate('Home')}>
-            <Icon style={styles.backButtonIcon} name="arrow-circle-left"/>
+            <Icon style={styles.backButtonIcon} size={80} name="arrow-circle-left"/>
           </Pressable>
           <Text style={styles.headerTitle}>Recipe Realm</Text>
         </View>

@@ -12,6 +12,7 @@ import {
 import React, { useState } from 'react';
 import RecipesParams from '../components/recipesParams.js';
 import { Dimensions, Pressable } from 'react-native-web';
+import AppHeader from '../header.js';
 
 const Filter = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,6 +30,25 @@ const Filter = () => {
 
   return (
     <View style={styles.container}>
+      <AppHeader />
+      <View style={styles.tabsContainer} >
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+          <Text style={styles.tabButtonText}>Breakfast</Text>
+        </Pressable>
+
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
+          <Text style={styles.tabButtonText}>Main course</Text>
+        </Pressable>
+
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
+          <Text style={styles.tabButtonText}>snack</Text>
+        </Pressable>
+
+        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
+          <Text style={styles.tabButtonText}>Dessert</Text>
+        </Pressable>
+      </View>
+
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -55,6 +75,24 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
+  },
+  tabsContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    borderColor: '#6BAB5F',
+    borderWidth: 2,
+  },
+  tabButton: {
+    width: '25%',
+    height: 30,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  tabButtonText: {
+    fontFamily: 'Varela',
+    fontWeight: 'bold',
   },
   searchContainer: {
     width: '90%',

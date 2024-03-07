@@ -15,6 +15,7 @@ import BackHeader from '../backHeader.js';
 import { UserLoggedInGlobal } from '../App';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import recipeRealmLogo from '../assets/RecipeRealmLogo.png';
 
 const Login = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -40,6 +41,8 @@ const Login = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <BackHeader/>
+
+            <Image source={recipeRealmLogo} onError={() => console.log('Image not available')} style={styles.backgroundImage}/>
 
             <Text style={styles.mainHeader}>Login To An Account</Text>
 
@@ -80,12 +83,21 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         backgroundColor: '#fff',
     },
+    backgroundImage: {
+        position: 'absolute',
+        top: 80,
+        opacity: 0.2,
+        width: '100%',
+        height: '100%',
+        zIndex: -100,
+    },
     mainHeader: {
       fontSize: 26,
       fontFamily: 'Varela',
       fontWeight: 'bold',
       color: '#171738',
-      marginVertical: 20,
+      marginTop: 30,
+      marginBottom: 60,
     },
     label: {
         fontSize: 16,
