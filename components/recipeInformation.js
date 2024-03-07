@@ -16,7 +16,7 @@ const RecipeInformation = () => {
         setLoading(false);
         return;
       }
-      const APIKEY = '886b123c34d44502a4cedaae4f11a007';
+      const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
       const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
       const PARAMS = `?apiKey=${APIKEY}`;
       const FETCH_URL = `${BASE_URL}${PARAMS}`;
@@ -50,7 +50,7 @@ const RecipeInformation = () => {
     );
   }
 
-  recipeInfo.instructions = (recipeInfo.toString() == "" ? "" : "• ") + recipeInfo.instructions.toString().replace("<p>", "").replace("</p>", "").replaceAll(". ", "\n• ");
+  //recipeInfo.instructions = (recipeInfo.toString() == "" ? "" : "• ") + recipeInfo.instructions.toString().replace("<p>", "").replace("</p>", "").replaceAll(". ", "\n• ");
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -60,7 +60,7 @@ const RecipeInformation = () => {
         </View>
         <Image source={{ uri: recipeInfo.image }} style={styles.image} />
         <Text style={styles.servings}>Serving Size: {recipeInfo.servings}</Text>
-        <Text style={styles.description}>{recipeInfo.instructions}</Text>
+        <div dangerouslySetInnerHTML={{__html: recipeInfo.instructions}} />
       </View>
     </ScrollView>
   );
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     color: 'red',
+    marginVertical: 30,
   },
   scrollViewContent: {
     flexGrow: 1,

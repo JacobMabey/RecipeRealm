@@ -37,7 +37,7 @@ const Breakfast = ({ navigation }) => {
       <h1 style={styles.catTitle}>Breakfast Recipes</h1>
       <ScrollView>
         <View>
-          <RecipesParams type="breakfast" />
+          <RecipesParams type="breakfast" name=""/>
           <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
             <Text style={styles.homeButtonText}>Home Page</Text>
           </TouchableOpacity>

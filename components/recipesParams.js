@@ -1,9 +1,8 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dimensions } from 'react-native-web';
  
 const RecipesParamsHook = ({ type, name }) => {
   const [recipes, setRecipes] = useState([]);
@@ -14,7 +13,7 @@ const RecipesParamsHook = ({ type, name }) => {
   }, [type, name]);
 
   const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
-    const APIKEY = '886b123c34d44502a4cedaae4f11a007';
+    const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
       apiKey: APIKEY,
@@ -26,7 +25,7 @@ const RecipesParamsHook = ({ type, name }) => {
       Diets: Diets,
       Cuisines: Cuisines
     });
-    const PARAMS = `?apiKey=${APIKEY}&number=5&type=${type}`;
+    const PARAMS = `?apiKey=${APIKEY}&number=10&type=${type}&query=${name}`;
     const FETCH_URL = `${BASE_URL}${PARAMS}`;
     //const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
 
@@ -77,7 +76,7 @@ const RecipesParamsHook = ({ type, name }) => {
       <Pressable onPress={() => {
         navigateToRecipeInfo(id);
         navigation.navigate('Recipe');
-        }}>
+      }}>
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeTitle}>{name}</Text>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
@@ -97,7 +96,7 @@ const RecipesParamsHook = ({ type, name }) => {
   if (loading) {
     return (
       <View style={styles.loader}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#ACF39D" />
       </View>
     );
   }
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
   recipeTitle: {
     fontFamily: 'Roboto',
     fontSize: 20,
-    fontWeight: 900,
+    fontWeight: '900',
     marginHorizontal: 15,
     marginVertical: 5,
     color: '#171738',
@@ -180,5 +179,5 @@ const styles = StyleSheet.create({
     fontSize: 40
   }
 });
- 
+
 export default RecipesParamsHook;

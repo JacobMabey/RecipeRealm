@@ -36,7 +36,7 @@ return (
     <h1 style={styles.catTitle}>Lunch/Dinner Recipes</h1>
     <ScrollView>
       <View>
-      <RecipesParams type="main course"/>
+      <RecipesParams type="main course" name=""/>
         <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.homeButtonText}>Home Page</Text>
         </TouchableOpacity>
