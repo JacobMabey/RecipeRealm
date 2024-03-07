@@ -18,7 +18,6 @@ import BackHeader from '../backHeader';
 
 const handleLogout = async () => {
 try {
-  const response = await axios.get('http://localhost:5000/api/logout');
   console.log('User logged out successfully:', response.data);
   await AsyncStorage.setItem('userData', null);
   UserLoggedInGlobal.isLoggedIn = false;
