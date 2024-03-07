@@ -24,7 +24,7 @@ import AddRecipeInformation from './components/DailyRecipies.js';
 import AppHeader from './header.js';
 import BackHeader from './backHeader.js';
 
-<AddRecipeInformation/>
+
 
 export const Stack = createNativeStackNavigator();
 
@@ -37,6 +37,7 @@ export default function App() {
     return (
         <SafeAreaView>
             <NavigationContainer>
+                <AddRecipeInformation/>
                 <Stack.Navigator initialRouteName="Home">
 
                     <Stack.Screen name="Home" component={Home}

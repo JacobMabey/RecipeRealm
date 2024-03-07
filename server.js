@@ -22,13 +22,13 @@ const User = mongoose.model('Users', {
 
 
 const Recipie = mongoose.model('Recipes', {
-    randomizerId: Int32,
+    randomizerId: String,
     recipieName: String,
-    calorieCount: Int32,
+    calorieCount: String,
     instruction: String,
     timeEst: String,
-    ingredient: String,
-    image: Image,
+    ingredient: [String],
+    image: String,
     allergens: [String]
 });
 

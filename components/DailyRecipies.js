@@ -12,10 +12,7 @@ import axios from 'axios';
     //image: Image,
     //allergens: [String]
 
-const randomNumberInRange = (min, max) => {
-    return Math.floor(Math.random()
-        * (max - min + 1)) + min;
-};
+
 
 const AddRecipeInformation = () => {
     const [recipeInfo, setRecipeInfo] = useState(null);
@@ -28,6 +25,13 @@ const AddRecipeInformation = () => {
     const [timeEst, setTimeEst] = useState('');
     const [ingredient, setIngredient] = useState('');
     const [image, setImage] = useState('');
+    const [ranID, setranID] = useState('');
+    const [recID, setRecID] = useState('');
+
+    const randomNumberInRange = (min, max) => {
+        return Math.floor(Math.random()
+            * (max - min + 1)) + min;
+    };
 
     const handleAllergens = () => {
         ingredients = [ingredient];
@@ -48,9 +52,9 @@ const AddRecipeInformation = () => {
     const fetchRecipeInformation = async () => {
         try {
             do{
-                recipeID = randomNumberInRange(1, 999999);
+                setRecID(randomNumberInRange(1, 999999));
                 const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
-                const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information?includeNutrition=true`;
+                const BASE_URL = `https://api.spoonacular.com/recipes/${3333}/information?includeNutrition=true`;
                 const PARAMS = `?apiKey=${APIKEY}`;
                 const FETCH_URL = `${BASE_URL}${PARAMS}`;
                 fetch(FETCH_URL)
@@ -68,7 +72,8 @@ const AddRecipeInformation = () => {
                             ing: recipe.extendedIngredients,
                             inst: recipe.instructions,
                             time: recipe.readyInMinutes,
-                            imager: recipe.image
+                            imager: recipe.image,
+                            rId: recipe.id
                         }));
                         setRecipieName(rName);
                         setCalorieCount(calCount);
@@ -76,6 +81,7 @@ const AddRecipeInformation = () => {
                         setInstruction(inst);
                         setTimeEst(time);
                         setImage(imager);
+                        setranID(rId);
                         handleAllergens();
                         handleAddRecipe();
                     } 
@@ -100,13 +106,14 @@ const AddRecipeInformation = () => {
     const handleAddRecipe = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/addRecipe', {
+                randomizerId,
                 recipieName,
                 calorieCount,
                 instruction,
                 timeEst,
                 ingredient,
                 image,
-                allergens
+                allergens,
             });
         
         console.log('recipe registered successfully:', response.data);
