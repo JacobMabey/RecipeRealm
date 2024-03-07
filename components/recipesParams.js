@@ -12,6 +12,20 @@ const RecipesParamsHook = ({ type, name }) => {
     grabRecipesParams(type, name);
   }, [type, name]);
 
+  const favoriteRecipe = async (id) => {
+    try {
+      const recipeID = id;
+      const userData = await AsyncStorage.getItem('userData');
+      const { _id: userId } = JSON.parse(userData);
+      const response = await axios.put(`http://localhost:5000/api/favorite/${userId}`, {
+        recipeId: recipeID
+      });
+      console.log('Favorite recipe added successfully:', response.data);
+    } catch (error) {
+      console.error('Error adding recipe to favorites:', error);
+    }
+  }
+
   const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets, Cuisines) => {
     const APIKEY = 'b98e534d10ba4ac3a77100cb0610ff34';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
@@ -81,7 +95,7 @@ const RecipesParamsHook = ({ type, name }) => {
           <Text style={styles.recipeTitle}>{name}</Text>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
 
-          <Pressable style={styles.favButton} onPress={() => {}}>
+          <Pressable style={styles.favButton} onPress={favoriteRecipe(id)}>
             <Icon style={styles.favButtonIcon} color='#171738' name='heart-o'/>
           </Pressable>
           

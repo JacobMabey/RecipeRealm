@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
   },
   catTitle: {
-    fontFamily: 'Verela',
+    fontFamily: 'Varela',
     color: '#171738',
   },
   homeButton: {

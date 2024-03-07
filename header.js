@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Text,
     SafeAreaView,
@@ -18,6 +18,8 @@ import recipeRealmLogoText from './assets/RecipeRealmLogoText.png';
 const AppHeader = () => {
     navigation = useNavigation();
     
+    
+
     return (
       <View style={styles.headerView}>
         <Pressable style={styles.headerButton} onPress={() => navigation.navigate('Home')}>
@@ -26,6 +28,7 @@ const AppHeader = () => {
           </div>
         </Pressable>
 
+        <Text>{name}</Text>
         <ProfileButton/>
       </View>
     )
@@ -33,12 +36,30 @@ const AppHeader = () => {
 export default AppHeader;
 
 const ProfileButton = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [allergens, setAllergens] = useState('');
   navigation = useNavigation();
 
   if (UserLoggedInGlobal.isLoggedIn) {
+    useEffect(() => {
+      const fetchUserData = async () => {
+          try {
+              const userData = await AsyncStorage.getItem('userData');
+              const parsedUserData = JSON.parse(userData);
+              setName(parsedUserData.name);
+              
+          } catch (error) {
+              console.error('Error fetching user data:', error);
+              setName('Error Name');
+          }
+    };
+    fetchUserData();
+    }, []);
+
     return (
       <Pressable style={styles.accountButton} onPress={() => navigation.navigate('UserProfile')}>
-        <Text style={styles.accountButtonText}>Name</Text>
+        <Text style={styles.accountButtonText}>{name}</Text>
       </Pressable>
     )
   } else {

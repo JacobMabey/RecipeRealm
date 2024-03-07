@@ -20,13 +20,12 @@ import Snack from './pages/snack.js';
 import Login from './pages/login.js';
 import SignUp from './pages/signUp.js';
 import UserProfile from './pages/userProfile.js';
-import AppHeader from './header.js';
-import BackHeader from './backHeader.js';
+import UpdateUser from './pages/updateUser.js';
 
 export const Stack = createNativeStackNavigator();
 
 export class UserLoggedInGlobal {
-    static isLoggedIn = false;
+    static isLoggedIn = true;
 }
 
 export default function App() {
@@ -46,6 +45,9 @@ export default function App() {
                         options={{ headerShown: false }} />
 
                     <Stack.Screen name="UserProfile" component={UserProfile}
+                        options={{ headerShown: false }} />
+                        
+                    <Stack.Screen name="UpdateUser" component={UpdateUser}
                         options={{ headerShown: false }} />
 
                     <Stack.Screen name="Filter" component={Filter}

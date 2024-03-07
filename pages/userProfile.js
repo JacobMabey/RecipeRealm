@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Text,
   SafeAreaView,
   TouchableOpacity,
@@ -7,7 +8,7 @@ import { Text,
   ScrollView,
   Image
 } from 'react-native';
-import { Dimensions, Pressable } from 'react-native-web';
+import { Alert, Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
 import { UserLoggedInGlobal } from '../App';
 import axios from 'axios';
@@ -35,6 +36,7 @@ try {
   const { _id: userId } = JSON.parse(userData);
   await axios.delete(`http://localhost:5000/api/delete/${userId}`);
   console.log('User deleted successfully:', response.data);
+  UserLoggedInGlobal.isLoggedIn = false;
 } catch (error) {
   console.error('Error deleting out user:', error);
   setError('Delete failed. Please try again later.');
@@ -55,8 +57,14 @@ useEffect(() => {
             setName(name);
             setEmail(email);
             setAllergens(allergens);
+            
         } catch (error) {
             console.error('Error fetching user data:', error);
+            
+            //for testing
+            setName('John Doe');
+            setEmail('john@email.com');
+            setAllergens('Peanuts,Berries');
         }
   };
   fetchUserData();
@@ -65,15 +73,32 @@ useEffect(() => {
         <View style={styles.container}>
           <BackHeader/>
           <Text style={styles.title}>User Profile</Text>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.title}>{email}</Text>
-          <Text style={styles.title}>{allergens}</Text>
-          <Pressable style={styles.logoutButton} onPress={handleLogout}>
-              <Text>Logout</Text>
-          </Pressable>
-          <Pressable style={styles.logoutButton} onPress={deleteAccount}>
-              <Text>Delete Account</Text>
-          </Pressable>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.email}>{email}</Text>
+
+          <Text style={styles.allergensHeader}>Allergens</Text>
+          <Text style={styles.allergens}>{allergens}</Text>
+
+          <View>
+            <Pressable style={styles.pageButton} onPress={() => navigation.navigate("UpdateUser")}>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='save' />
+                <Text style={styles.pageButtonText}>Update Account</Text>
+            </Pressable>
+          </View>
+
+          <View>
+            <Pressable style={styles.pageButton} onPress={handleLogout}>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='sign-out' />
+                <Text style={styles.pageButtonText}>Logout</Text>
+            </Pressable>
+          </View>
+
+          <View>
+            <Pressable style={styles.pageButtonDelete} onPress={deleteAccount}>
+                <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='trash-o' />
+                <Text style={styles.pageButtonText}>Delete Account</Text>
+            </Pressable>
+          </View>
       </View>
       );
     };
@@ -90,46 +115,62 @@ container: {
   width: Dimensions.get('window').width,
   backgroundColor: '#fff',
 },
-tabsContainer: {
-  flexDirection: 'row',
-  width: '100%',
-  borderColor: '#6BAB5F',
-  borderWidth: 2,
+title: {
+  fontSize: 30,
+  fontFamily: 'Varela',
+  fontWeight: 'bold',
+  color: '#171738',
+  marginVertical: 20,
 },
-tabButton: {
-    width: '25%',
-    height: 30,
-    textAlign: 'center',
-    alignItems:'center',
-    justifyContent: 'center',
-    backgroundColor:'#fff'
-},
-tabButtonText: {
-    fontFamily: 'Varela',
-    fontWeight: 'bold',
-},
-catTitle: {
-  fontFamily: 'Verela',
+name: {
+  fontSize: 24,
+  fontFamily: 'Varela',
+  fontWeight: 'bold',
+  marginBottom: 10,
   color: '#171738',
 },
-homeButton: {
-  alignItems: 'center',
-  backgroundColor: '#A38CCF',
-  padding: 10,
+email: {
+  fontSize: 20,
+  fontFamily: 'Varela',
+  color: '#A38CCF',
+},
+allergensHeader: {
+  fontSize: 20,
   marginTop: 30,
-  borderTopLeftRadius: 50,
-  borderTopRightRadius: 50,
-  bottom: 0,
 },
-homeButtonText: {
-  fontSize: 24,
-  color: '#FFFFFF',
+allergens: {
+  fontSize: 18,
+  fontFamily: 'Varela',
+  color: '#6BAB5F',
+  marginBottom: 60,
 },
-logoutButton: {
-  backgroundColor: '#007bff',
-      padding: 15,
-      borderRadius: 5,
-      alignItems: 'center',
-      marginBottom: 10,
-}
+pageButtonDelete: {
+  padding: 30,
+  borderColor: '#AE5555',
+  width: Dimensions.get('window').width,
+  borderWidth: 3,
+  textAlign: 'center',
+  alignItems: 'center',
+  backgroundColor: '#F58383',
+},
+pageButton: {
+  padding: 30,
+  borderColor: '#6BAB5F',
+  width: Dimensions.get('window').width,
+  borderWidth: 3,
+  textAlign: 'center',
+  alignItems: 'center',
+  backgroundColor: '#ACF39D',
+},
+pageButtonIcon: {
+  position: 'absolute',
+  left: '10%',
+  fontSize: 36
+},
+pageButtonText: {
+  color: '#171738',
+  fontWeight: '900',
+  fontFamily: 'Varela',
+  fontSize: 20,
+},
 });
