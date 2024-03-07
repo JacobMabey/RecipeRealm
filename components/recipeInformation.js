@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet, Dimensions, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,7 +18,7 @@ const RecipeInformation = () => {
         setLoading(false);
         return;
       }
-      const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
+      const APIKEY = 'b98e534d10ba4ac3a77100cb0610ff34';
       const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
       const PARAMS = `?apiKey=${APIKEY}`;
       const FETCH_URL = `${BASE_URL}${PARAMS}`;
@@ -64,7 +65,11 @@ const favoriteRecipe = async () => {
     );
   }
 
-  //recipeInfo.instructions = (recipeInfo.toString() == "" ? "" : "• ") + recipeInfo.instructions.toString().replace("<p>", "").replace("</p>", "").replaceAll(". ", "\n• ");
+  const ingredientsList = () => {
+    return (
+      ingredients.forEach(i => <Text>i.name</Text>)
+    )
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -74,12 +79,27 @@ const favoriteRecipe = async () => {
         </View>
         <Image source={{ uri: recipeInfo.image }} style={styles.image} />
         <Text style={styles.servings}>Serving Size: {recipeInfo.servings}</Text>
-        <div dangerouslySetInnerHTML={{ __html: recipeInfo.instructions }} />
-        <Pressable onPress={favoriteRecipe} style={styles.button}></Pressable>
+        <div style={{padding: 20, fontSize: 14, textAlign: 'center' }}dangerouslySetInnerHTML={{ __html: recipeInfo.summary }} />
+        
+        <Text style={styles.ingredientHeader}>Ingredients</Text>
+        {recipeInfo.extendedIngredients.map((ing) => (
+          <View key={ing.id} style={styles.ingredientsList}>
+            <Text style={styles.ingredientName}>{ing.original}</Text>
+          </View>
+        )
+        )}
+        <Text style={styles.directionsHeader}>Directions</Text>
+        <div style={{padding: 20}} dangerouslySetInnerHTML={{ __html: recipeInfo.instructions }} />
+        <Pressable onPress={favoriteRecipe} style={styles.favButton}>
+            <Icon style={styles.favButtonIcon} color='#171738' name='heart-o'/>
+        </Pressable>
       </View>
     </ScrollView>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -108,14 +128,46 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
+  summary: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily: 'Varela',
+    color: '#171738',
+  },
   servings: {
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'Varela',
     color: '#6BAB5F',
   },
+  ingredientsList: {
+    flexDirection: 'row',
+    height: 60,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ingredientHeader: {
+    fontSize: 30,
+    fontFamily: 'Varela',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 40
+  },
+  ingredientName: {
+    fontSize: 18,
+    fontFamily: 'Varela',
+    color: '#171738',
+  },
+  directionsHeader: {
+    fontSize: 30,
+    fontFamily: 'Varela',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 40
+  },
   description: {
-    marginVertical: 15,
+    marginBottom: 15,
     marginHorizontal: 10,
     fontSize: 18,
     fontFamily: 'Varela',
@@ -144,13 +196,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
-  button: {
-    backgroundColor: '#007bff',
-      padding: 15,
-      borderRadius: 5,
-      alignItems: 'center',
-      marginBottom: 10,
-  }
+  favButton: {
+    alignContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    padding: 7,
+    margin: 7,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+  },
+  favButtonIcon: {
+    fontSize: 40
+  },
 });
 
 export default RecipeInformation;
