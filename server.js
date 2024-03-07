@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const { Int32 } = require('mongodb');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,72 +20,6 @@ const User = mongoose.model('Users', {
 });
 
 
-const Recipie = mongoose.model('Recipes', {
-    randomizerId: Int32,
-    recipieName: String,
-    calorieCount: Int32,
-    instruction: String,
-    utinciels: String,
-    timeEst: String,
-    ingredient: String,
-    image: Image,
-    allergens: [String]
-});
-
-app.post('/api/addRecipe', async (req, res) => {
-    try {
-        const { randomizerId, recipieName, calorieCount, instruction, utinciels, timeEst, ingredient, image, allergens} = req.body;
-        const recipieData = new Recipie ({
-            randomizerId,
-            recipieName,
-            calorieCount,
-            instruction,
-            utinciels,
-            timeEst,
-            ingredient,
-            image,
-            allergens
-        });
-        await recipieData.save();
-        res.status(201).json({ message: 'Recipe Added successfully' });
-    } catch (error) {
-        console.error('Error adding recipie:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-app.get('/api/getRecipeByName', async (req, res) => {
-    try {
-        const { recipieName } = req.query;
-        const recipie = await Recipe.findOne({ recipieName });
-        if (!recipie) {
-            return res.status(404).json({ error: 'recipie not found' });
-        }
-        res.status(200).json({ message: 'Recipie found' });
-        return recipie;
-    } catch (error) {
-        console.error('Error fetching recipie:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-app.get('/api/getRecipeByRanId', async (req, res) => {
-    try {
-        const { randomizerId } = req.query;
-        const recipie = await Recipe.findOne({ randomizerId });
-        if (!recipie) {
-            return res.status(404).json({ error: 'recipie not found' });
-        }
-        res.status(200).json({ message: 'Recipie Found' });
-        return recipie;
-    } catch (error) {
-        console.error('Error fetching recipie:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-
-//f26bd74a80d6f98d13e8820a2ac879a2897e16df
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
@@ -96,6 +29,7 @@ app.post('/api/signup', async (req, res) => {
             password,
             allergens
         });
+        //user.password = await bcrypt.hash(password, saltRounds);
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -106,7 +40,7 @@ app.post('/api/signup', async (req, res) => {
 
 app.delete('/api/delete/:id', async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId  = req.params.id;
         await User.deleteOne({ _id: userId });
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
@@ -128,6 +62,7 @@ app.get('/api/login', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 app.put('/api/update/:id', async (req, res) => {
     try {

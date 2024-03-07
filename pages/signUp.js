@@ -9,6 +9,7 @@ import {
 import { Dimensions, Pressable } from 'react-native-web';
 import BackHeader from '../backHeader';
 import { UserLoggedInGlobal } from '../App';
+import axios from 'axios';
 
 const Signup = ({ navigation }) => {
   const [name, setName] = useState('');
