@@ -24,7 +24,6 @@ const AddRecipeInformation = () => {
     const [calorieCount, setCalorieCount] = useState('');
     const [instruction, setInstruction] = useState('');
     const [allergens, setAllergens] = useState('');
-    const [utinciels, setUtinciels] = useState('');
     const [timeEst, setTimeEst] = useState('');
     const [ingredient, setIngredient] = useState('');
     const [image, setImage] = useState('');
@@ -67,16 +66,15 @@ const AddRecipeInformation = () => {
                         ing: recipe.extendedIngredients,
                         inst: recipe.instructions,
                         time: recipe.readyInMinutes,
-                        image: recipe.image
+                        imager: recipe.image
                     }));
                     setRecipieName(rName);
                     setCalorieCount(calCount);
                     setIngredient(ing);
                     setInstruction(inst);
                     setTimeEst(time);
-                    setImage(image);
+                    setImage(imager);
                     handleAllergens();
-                    setRecipes(formattedRecipes);
                 } 
         else {
             console.error('No results found');
@@ -100,7 +98,6 @@ const AddRecipeInformation = () => {
                 recipieName,
                 calorieCount,
                 instruction,
-                utinciels,
                 timeEst,
                 ingredient,
                 image,
