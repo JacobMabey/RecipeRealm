@@ -28,7 +28,6 @@ const Recipie = mongoose.model('Recipes', {
     instruction: String,
     utinciels: String,
     timeEst: String,
-    nutrientionalWarnings: String,
     ingredient: String,
     image: Image,
     allergens: [String]
@@ -36,15 +35,14 @@ const Recipie = mongoose.model('Recipes', {
 
 app.post('/api/addRecipe', async (req, res) => {
     try {
-        const { randomizerId, recipieName, calorieCount, instruction, utinciels, timeEst, nutrientionalWarnings, ingredient, image, allergens} = req.body;
-        const recipieData = new Recipe ({
+        const { randomizerId, recipieName, calorieCount, instruction, utinciels, timeEst, ingredient, image, allergens} = req.body;
+        const recipieData = new Recipie ({
             randomizerId,
             recipieName,
             calorieCount,
             instruction,
             utinciels,
             timeEst,
-            nutrientionalWarnings,
             ingredient,
             image,
             allergens
@@ -88,7 +86,7 @@ app.get('/api/getRecipeByRanId', async (req, res) => {
 });
 
 
->>>>>>> f26bd74a80d6f98d13e8820a2ac879a2897e16df
+//f26bd74a80d6f98d13e8820a2ac879a2897e16df
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
