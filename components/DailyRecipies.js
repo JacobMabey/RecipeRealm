@@ -28,27 +28,60 @@ const AddRecipeInformation = () => {
     const [timeEst, setTimeEst] = useState('');
     const [ingredient, setIngredient] = useState('');
     const [image, setImage] = useState('');
+
+    const handleAllergens = () => {
+        ingredients = [ingredient];
+        allerts = [];
+        for(i = 0; i <ingredients.length; i++)
+        {
+            if(ingredients[i] != null)
+            {
+                if(ingredients[i].name.toUppercase() == "MILK" || ingredients[i].name.toUppercase() == "EGGS" || ingredients[i].name.toUppercase() == "PEANUTS" || ingredients[i].name.toUppercase() == "SOY" || ingredients[i].name.toUppercase() == "WHEAT" || ingredients[i].name.toUppercase() == "SHELLFISH" || ingredients[i].name.toUppercase() == "FISH" || ingredients[i].name.toUppercase() == "SESAME")
+                {
+                    allerts.push(ingredients[i]);
+                }
+            }
+            setAllergens(allerts);
+        }
+    };
     useEffect(() => {
     const fetchRecipeInformation = async () => {
         try {
             recipeID = randomNumberInRange(1, 999999);
-            const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
-            const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
+            const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
+            const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information?includeNutrition=true`;
             const PARAMS = `?apiKey=${APIKEY}`;
             const FETCH_URL = `${BASE_URL}${PARAMS}`;
-            const response = await fetch(FETCH_URL);
-            const json = await response.json();
-            console.log('Recipe information from API:', json);
-            
-            if (json && !json.hasOwnProperty('status')) 
-            {
-                
-                handleAddRecipe();
-            } 
-            else 
-            {
-                console.error('Recipe information not found or incomplete:', json);
-            }
+            fetch(FETCH_URL)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((json) => {
+                if (json.results && json.results.length > 0) {
+                    const formattedRecipes = json.results.map((recipe) => ({
+                        rName: recipe.title,
+                        calCount:recipe.summary,
+                        ing: recipe.extendedIngredients,
+                        inst: recipe.instructions,
+                        time: recipe.readyInMinutes,
+                        image: recipe.image
+                    }));
+                    setRecipieName(rName);
+                    setCalorieCount(calCount);
+                    setIngredient(ing);
+                    setInstruction(inst);
+                    setTimeEst(time);
+                    setImage(image);
+                    handleAllergens();
+                    setRecipes(formattedRecipes);
+                } 
+        else {
+            console.error('No results found');
+        }
+    })
     } 
     catch (error) {
         console.error('Error fetching recipe information:', error);
