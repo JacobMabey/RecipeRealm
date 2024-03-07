@@ -1,33 +1,34 @@
-import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dimensions } from 'react-native-web';
- 
-const RecipesParamsHook = ({ type }) => {
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const RecipesParamsHook = ({ filterParams }) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
- 
-  useEffect(() => {
-    grabRecipesParams(type);
-  }, [type]);
- 
-  const grabRecipesParams = (Type, Name, Ingredients, Intolerance, Diets,Cuisines) => {
+
+  const grabRecipesParams = (params) => {
+    if (!params) {
+      return;
+    }
+
+    const { type, name, ingredients, intolerance, diets, cuisines } = params;
+
     const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
     const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
     const queryParams = new URLSearchParams({
-        apiKey: APIKEY,
-        number: 5,
-        Type: Type,
-        Name: Name,
-        Ingredients: Ingredients,
-        Intolerance: Intolerance,
-        Diets: Diets,
-        Cuisines: Cuisines
+      apiKey: APIKEY,
+      number: 5,
+      type: type,
+      name: name,
+      ingredients: ingredients,
+      intolerance: intolerance,
+      diets: diets,
+      cuisines: cuisines
     });
     const FETCH_URL = `${BASE_URL}?${queryParams.toString()}`;
- 
+
     fetch(FETCH_URL)
       .then((response) => {
         if (!response.ok) {
@@ -53,7 +54,11 @@ const RecipesParamsHook = ({ type }) => {
         console.error('Error fetching recipes:', error);
       });
   };
- 
+
+  useEffect(() => {
+    grabRecipesParams(filterParams);
+  }, [filterParams]);
+
   const saveValueFunction = async (id) => {
     try {
       await AsyncStorage.setItem('recipeID', id.toString());
@@ -61,19 +66,19 @@ const RecipesParamsHook = ({ type }) => {
       console.error('Error saving recipe ID:', error);
     }
   };
- 
+
   const navigateToRecipeInfo = (id) => {
     saveValueFunction(id);
   };
- 
+
   const RecipesFormat = ({ id, name, image }) => {
     const navigation = useNavigation();
- 
+
     return (
       <Pressable onPress={() => {
         navigateToRecipeInfo(id);
         navigation.navigate('Recipe');
-        }}>
+      }}>
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeTitle}>{name}</Text>
           <Image source={{ uri: image }} onError={() => console.log('Image not available')} style={styles.recipeImage} />
@@ -89,15 +94,15 @@ const RecipesParamsHook = ({ type }) => {
       </Pressable>
     );
   };
- 
+
   if (loading) {
-  return (
+    return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
- 
+
   return (
     <View>
       {recipes.map((recipe) => (
@@ -111,7 +116,7 @@ const RecipesParamsHook = ({ type }) => {
     </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
   recipeContainer: {
     marginHorizontal: 20,
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
   recipeTitle: {
     fontFamily: 'Roboto',
     fontSize: 20,
-    fontWeight: 900,
+    fontWeight: '900',
     marginHorizontal: 15,
     marginVertical: 5,
     color: '#171738',
@@ -176,5 +181,5 @@ const styles = StyleSheet.create({
     fontSize: 40
   }
 });
- 
+
 export default RecipesParamsHook;
