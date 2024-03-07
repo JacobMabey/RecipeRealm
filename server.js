@@ -16,7 +16,8 @@ const User = mongoose.model('Users', {
     name: String,
     email: String,
     password: String,
-    allergens: [String]
+    allergens: [String],
+    favoriteRecipes: [String]
 });
 
 
@@ -69,6 +70,18 @@ app.put('/api/update/:id', async (req, res) => {
         const { name, email, password, allergens } = req.body;
         const userId = req.params.id;
         await User.updateOne({ _id: userId }, { name, email, password, allergens });
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.put('/api/favorite/:id', async (req, res) => {
+    try {
+        const { recipeId } = req.body;
+        const userId = req.params.id;
+        await User.findByIdAndUpdate(userId, { $push: { favoriteRecipes: recipeId } });
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
         console.error('Error updating user:', error);

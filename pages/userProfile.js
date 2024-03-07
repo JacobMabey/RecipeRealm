@@ -13,6 +13,7 @@ import { UserLoggedInGlobal } from '../App';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
+import BackHeader from '../backHeader';
 
 
 const handleLogout = async () => {
@@ -62,6 +63,7 @@ useEffect(() => {
   }, []);
       return (
         <View style={styles.container}>
+          <BackHeader/>
           <Text style={styles.title}>User Profile</Text>
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.title}>{email}</Text>
