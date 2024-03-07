@@ -4,9 +4,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
+  StyleSheet,  Dimensions, Pressable
 } from 'react-native';
-import { Dimensions, Pressable } from 'react-native-web';
 import BackHeader from '../backHeader';
 import { UserLoggedInGlobal } from '../App';
 import axios from 'axios';

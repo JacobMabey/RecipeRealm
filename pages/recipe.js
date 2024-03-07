@@ -6,11 +6,9 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  Image
+  Image, Dimensions, Pressable
 } from 'react-native';
-import { Dimensions } from 'react-native-web';
 import RecipeInformation from '../components/recipeInformation';
-import { Pressable } from 'react-native-web';
 import AppHeader from '../header';
 
 const Recipe = ({ navigation }) => {
