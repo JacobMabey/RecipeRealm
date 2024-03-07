@@ -6,11 +6,10 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  Image
+  Image, Dimensions
 } from 'react-native';
 import React, { useState } from 'react';
 import RecipesParams from '../components/recipesParams.js';
-import { Dimensions } from 'react-native-web';
 
 const Filter = () => {
   const [searchTerm, setSearchTerm] = useState('');

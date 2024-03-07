@@ -21,16 +21,16 @@ const User = mongoose.model('Users', {
 });
 
 
-const Recipie = mongoose.model('Recipes', {
-    randomizerId: Int32,
-    recipieName: String,
-    calorieCount: Int32,
-    instruction: String,
-    timeEst: String,
-    ingredient: String,
-    image: Image,
-    allergens: [String]
-});
+// const Recipie = mongoose.model('Recipes', {
+//     randomizerId: Int32,
+//     recipieName: String,
+//     calorieCount: Int32,
+//     instruction: String,
+//     timeEst: String,
+//     ingredient: String,
+//     image: Image,
+//     allergens: [String]
+// });
 
 app.post('/api/addRecipe', async (req, res) => {
     try {
