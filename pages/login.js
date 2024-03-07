@@ -12,7 +12,7 @@ import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
 import React, { useState } from 'react';
 import BackHeader from '../backHeader.js';
-import isLoggedIn from '../App.js';
+import { UserLoggedInGlobal } from '../App';
 
 const Login = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
             });
             console.log('User logged in successfully:', response.data);
             await AsyncStorage.setItem('userData', JSON.stringify(response.data));
-            isLoggedIn = true;
+            UserLoggedInGlobal.isLoggedIn = true;
             
             navigation.navigate("UserProfile");
         } catch (error) {

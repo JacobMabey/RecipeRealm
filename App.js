@@ -25,7 +25,7 @@ import BackHeader from './backHeader.js';
 
 export const Stack = createNativeStackNavigator();
 
-class Global extends React.Component {
+export class UserLoggedInGlobal {
     static isLoggedIn = false;
 }
 

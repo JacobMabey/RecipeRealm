@@ -32,7 +32,8 @@ const Signup = ({ navigation }) => {
         password,
         allergens
       });
-
+      
+      Global.isLoggedIn = true;
       console.log('User registered successfully:', response.data);
       navigation.navigate("UserProfile");
     } catch (error) {

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Pressable } from 'react-native';
+import { UserLoggedInGlobal } from './App';
 
 const AppHeader = () => {
     navigation = useNavigation();
@@ -30,19 +31,19 @@ export default AppHeader;
 const ProfileButton = () => {
   navigation = useNavigation();
 
-  /*if (Global.isLoggedIn) {
+  if (UserLoggedInGlobal.isLoggedIn) {
     return (
       <Pressable style={styles.accountButton} onPress={() => navigation.navigate('UserProfile')}>
         <Text style={styles.accountButtonText}>Name</Text>
       </Pressable>
     )
-  } else {*/
+  } else {
     return (
       <Pressable style={styles.accountButton} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.accountButtonText}>Login</Text>
       </Pressable>
     )
-  //}
+  }
 }
 
 const styles = StyleSheet.create({
