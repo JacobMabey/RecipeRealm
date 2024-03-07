@@ -7,11 +7,11 @@ import {
     Button,
     StyleSheet,
     ScrollView,
-    Image, Dimensions, Pressable
+    Image
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { Dimensions, Pressable } from 'react-native-web';
 import Filter from "./filter.js";
 import Recipe from './recipe.js';
 

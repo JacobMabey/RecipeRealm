@@ -37,7 +37,6 @@ export default function App() {
     return (
         <SafeAreaView>
             <NavigationContainer>
-            <AddRecipeInformation/>
                 <Stack.Navigator initialRouteName="Home">
 
                     <Stack.Screen name="Home" component={Home}
