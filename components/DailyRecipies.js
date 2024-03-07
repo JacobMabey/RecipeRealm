@@ -54,7 +54,7 @@ const AddRecipeInformation = () => {
             do{
                 setRecID(randomNumberInRange(1, 999999));
                 const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
-                const BASE_URL = `https://api.spoonacular.com/recipes/${3333}/information?includeNutrition=true`;
+                const BASE_URL = `https://api.spoonacular.com/recipes/${recID}/information?includeNutrition=true`;
                 const PARAMS = `?apiKey=${APIKEY}`;
                 const FETCH_URL = `${BASE_URL}${PARAMS}`;
                 fetch(FETCH_URL)
