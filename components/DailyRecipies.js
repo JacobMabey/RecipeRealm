@@ -20,6 +20,7 @@ const randomNumberInRange = (min, max) => {
 const AddRecipeInformation = () => {
     const [recipeInfo, setRecipeInfo] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [noGo, setNoGo] = useState(false);
     const [recipieName, setRecipieName] = useState('');
     const [calorieCount, setCalorieCount] = useState('');
     const [instruction, setInstruction] = useState('');
@@ -46,40 +47,44 @@ const AddRecipeInformation = () => {
     useEffect(() => {
     const fetchRecipeInformation = async () => {
         try {
-            recipeID = randomNumberInRange(1, 999999);
-            const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
-            const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information?includeNutrition=true`;
-            const PARAMS = `?apiKey=${APIKEY}`;
-            const FETCH_URL = `${BASE_URL}${PARAMS}`;
-            fetch(FETCH_URL)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((json) => {
-                if (json.results && json.results.length > 0) {
-                    const formattedRecipes = json.results.map((recipe) => ({
-                        rName: recipe.title,
-                        calCount:recipe.summary,
-                        ing: recipe.extendedIngredients,
-                        inst: recipe.instructions,
-                        time: recipe.readyInMinutes,
-                        imager: recipe.image
-                    }));
-                    setRecipieName(rName);
-                    setCalorieCount(calCount);
-                    setIngredient(ing);
-                    setInstruction(inst);
-                    setTimeEst(time);
-                    setImage(imager);
-                    handleAllergens();
-                } 
-        else {
-            console.error('No results found');
-        }
-    })
+            do{
+                recipeID = randomNumberInRange(1, 999999);
+                const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
+                const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information?includeNutrition=true`;
+                const PARAMS = `?apiKey=${APIKEY}`;
+                const FETCH_URL = `${BASE_URL}${PARAMS}`;
+                fetch(FETCH_URL)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((json) => {
+                    if (json.results && json.results.length > 0) {
+                        const formattedRecipes = json.results.map((recipe) => ({
+                            rName: recipe.title,
+                            calCount:recipe.summary,
+                            ing: recipe.extendedIngredients,
+                            inst: recipe.instructions,
+                            time: recipe.readyInMinutes,
+                            imager: recipe.image
+                        }));
+                        setRecipieName(rName);
+                        setCalorieCount(calCount);
+                        setIngredient(ing);
+                        setInstruction(inst);
+                        setTimeEst(time);
+                        setImage(imager);
+                        handleAllergens();
+                        handleAddRecipe();
+                    } 
+            else {
+                console.error('No results found');
+                setNoGo(true);
+            }
+        })}while(!noGo)
+            
     } 
     catch (error) {
         console.error('Error fetching recipe information:', error);
@@ -104,9 +109,9 @@ const AddRecipeInformation = () => {
                 allergens
             });
         
-        console.log('User registered successfully:', response.data);
+        console.log('recipe registered successfully:', response.data);
         } catch (error) {
-            console.error('Error registering user:', error);
+            console.error('Error registering recipe:', error);
             setError('Registration failed. Please try again later.');
         }
     };
