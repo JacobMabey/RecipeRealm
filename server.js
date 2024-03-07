@@ -21,7 +21,6 @@ const User = mongoose.model('Users', {
 });
 
 
-<<<<<<< HEAD
 const Recipie = mongoose.model('Recipes', {
     randomizerId: Int32,
     recipieName: String,
@@ -88,8 +87,6 @@ app.get('/api/getRecipeByRanId', async (req, res) => {
 
 
 //f26bd74a80d6f98d13e8820a2ac879a2897e16df
-=======
->>>>>>> fef89ef98f20eb13ff96ac9cd7c7731eb6d07fee
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;

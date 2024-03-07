@@ -42,6 +42,7 @@ const AddRecipeInformation = () => {
             
             if (json && !json.hasOwnProperty('status')) 
             {
+                
                 handleAddRecipe();
             } 
             else 
@@ -64,8 +65,12 @@ const AddRecipeInformation = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/addRecipe', {
                 recipieName,
-                email,
-                password,
+                calorieCount,
+                instruction,
+                utinciels,
+                timeEst,
+                ingredient,
+                image,
                 allergens
             });
         
