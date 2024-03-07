@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Text,
   SafeAreaView,
@@ -10,7 +11,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import RecipesParams from '../components/recipesParams.js';
-import { Dimensions } from 'react-native-web';
+import { Dimensions, Pressable } from 'react-native-web';
 
 const Filter = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,12 +29,18 @@ const Filter = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="Search..."
-        value={searchTerm}
-        onChangeText={setSearchTerm}
-      />
-      <Button title="Search" onPress={handleSearch} />
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search..."
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+        />
+        <Pressable style={styles.searchButton} title="Search" onPress={handleSearch} >
+          <Icon style={styles.searchButtonIcon} name="search" size={25} color={'#171738'}/>
+        </Pressable>
+      </View>
+
       <RecipesParams type="" name={search}/>
     </View>
   );
@@ -49,4 +56,25 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     backgroundColor: '#fff',
   },
+  searchContainer: {
+    width: '90%',
+    flexDirection: 'row',
+    marginVertical: 20,
+    alignItems: 'center',
+  },
+  searchInput: {
+    width: '100%',
+    alignSelf: 'stretch',
+    padding: 4,
+    fontSize: 16,
+    fontFamily: 'Varela',
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#171738',
+    paddingLeft: 10
+  },
+  searchButton: {
+    width: '10%',
+    marginHorizontal: 10,
+  }
 });

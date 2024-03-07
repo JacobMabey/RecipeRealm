@@ -17,7 +17,8 @@ import Filter from "./filter.js";
 import Recipe from './recipe.js';
 
 import RecipesAPI from '../components/recipesAPI.js';
-import SignIn from '../components/LogIn.js'
+import LogIn from '../components/LogIn.js'
+import Update from '../components/Update.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppHeader from '../header.js';
 const Home = ({ navigation }) => {
@@ -29,8 +30,6 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
             <AppHeader/>
             <View style={styles.tabsContainer} >
-
-
                 <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
                     <Text style={styles.tabButtonText}>Breakfast</Text>
                 </Pressable>

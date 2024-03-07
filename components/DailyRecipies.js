@@ -1,23 +1,81 @@
-import {MongoClient} from 'mongodb';
-const uri = "";
-const dbName = 'RecipeRealm';no
-function tester()
-{
-    use('RecipeRealm');
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
+import axios from 'axios';
 
-    // Insert a few documents into the sales collection.
-    db.getCollection('Lastest').insertMany([
-        { 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
-        { 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
-        { 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
-        { 'item': 'xyz', 'price': 5, 'quantity': 20, 'date': new Date('2014-04-04T11:21:39.736Z') },
-        { 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
-        { 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
-        { 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
-        { 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
-    ]);
+//randomizerId: Int32,
+    //recipieName: String,
+    //calorieCount: Int32,
+    //instruction: String,
+    //utinciels: String,
+    //timeEst: String,
+    //ingredient: String,
+    //image: Image,
+    //allergens: [String]
+
+const randomNumberInRange = (min, max) => {
+    return Math.floor(Math.random()
+        * (max - min + 1)) + min;
+};
+
+const AddRecipeInformation = () => {
+    const [recipeInfo, setRecipeInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [recipieName, setRecipieName] = useState('');
+    const [calorieCount, setCalorieCount] = useState('');
+    const [instruction, setInstruction] = useState('');
+    const [allergens, setAllergens] = useState('');
+    const [utinciels, setUtinciels] = useState('');
+    const [timeEst, setTimeEst] = useState('');
+    const [ingredient, setIngredient] = useState('');
+    const [image, setImage] = useState('');
+    useEffect(() => {
+    const fetchRecipeInformation = async () => {
+        try {
+            recipeID = randomNumberInRange(1, 999999);
+            const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+            const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
+            const PARAMS = `?apiKey=${APIKEY}`;
+            const FETCH_URL = `${BASE_URL}${PARAMS}`;
+            const response = await fetch(FETCH_URL);
+            const json = await response.json();
+            console.log('Recipe information from API:', json);
+            
+            if (json && !json.hasOwnProperty('status')) 
+            {
+                handleAddRecipe();
+            } 
+            else 
+            {
+                console.error('Recipe information not found or incomplete:', json);
+            }
+    } 
+    catch (error) {
+        console.error('Error fetching recipe information:', error);
+    } 
+    finally {
+        setLoading(false);
+    }
+    };
+    fetchRecipeInformation();
+    }, []);
+
+
+    const handleAddRecipe = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/addRecipe', {
+                recipieName,
+                email,
+                password,
+                allergens
+            });
+        
+        console.log('User registered successfully:', response.data);
+        } catch (error) {
+            console.error('Error registering user:', error);
+            setError('Registration failed. Please try again later.');
+        }
+    };
 }
-
 // Passes actual recipie data into a temp array
 function getRecipeById (Id)
 {
@@ -45,3 +103,5 @@ function addRecipe (id, recipieName, calorieCount, instruction, utinciels, timeE
         { 'id': id, 'item': recipieName, 'calories': calorieCount, 'qusine': 'American', 'instructions': instruction, 'Utinciels': utinciels, 'Time': timeEst, 'ingredients': ingredient, 'meal': mealType}
     ]);
 }
+
+export default AddRecipeInformation;

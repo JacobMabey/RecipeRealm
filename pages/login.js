@@ -13,6 +13,8 @@ import RecipesParams from '../components/recipesParams.js';
 import React, { useState } from 'react';
 import BackHeader from '../backHeader.js';
 import { UserLoggedInGlobal } from '../App';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -25,7 +27,7 @@ const Login = ({ navigation }) => {
                 params: { name, password }
             });
             console.log('User logged in successfully:', response.data);
-            await AsyncStorage.setItem('userData', JSON.stringify(response.data));
+            await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
             UserLoggedInGlobal.isLoggedIn = true;
             
             navigation.navigate("UserProfile");

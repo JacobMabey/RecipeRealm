@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet, Dimensions, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from 'react-native-paper';
+import axios from 'axios';
 
 const RecipeInformation = () => {
   const [recipeInfo, setRecipeInfo] = useState(null);
@@ -38,6 +39,19 @@ const RecipeInformation = () => {
   fetchRecipeInformation();
 }, []);
 
+const favoriteRecipe = async () => {
+  try {
+    const recipeID = await AsyncStorage.getItem('recipeID');
+    const userData = await AsyncStorage.getItem('userData');
+    const { _id: userId } = JSON.parse(userData);
+    const response = await axios.put(`http://localhost:5000/api/favorite/${userId}`, {
+      recipeId: recipeID
+    });
+    console.log('Favorite recipe added successfully:', response.data);
+  } catch (error) {
+    console.error('Error adding recipe to favorites:', error);
+  }
+}
   if (loading) {
     return <ActivityIndicator style={styles.loader} />;
   }
@@ -60,7 +74,8 @@ const RecipeInformation = () => {
         </View>
         <Image source={{ uri: recipeInfo.image }} style={styles.image} />
         <Text style={styles.servings}>Serving Size: {recipeInfo.servings}</Text>
-        <div dangerouslySetInnerHTML={{__html: recipeInfo.instructions}} />
+        <div dangerouslySetInnerHTML={{ __html: recipeInfo.instructions }} />
+        <Pressable onPress={favoriteRecipe} style={styles.button}></Pressable>
       </View>
     </ScrollView>
   );
@@ -110,8 +125,11 @@ const styles = StyleSheet.create({
   image: {
     width: Dimensions.get('window').width,
     height: 200,
-    marginBottom: 10,
-    resizeMode: 'cover',
+    objectFit: 'Fill',
+    border: 1,
+    borderColor:'black',
+    borderWidth:1,
+    bottom:2
   },
   loader: {
     marginTop: 20,
@@ -120,11 +138,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'red',
     marginVertical: 30,
+    marginVertical: 30,
   },
   scrollViewContent: {
     flexGrow: 1,
     justifyContent: 'center',
   },
+  button: {
+    backgroundColor: '#007bff',
+      padding: 15,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginBottom: 10,
+  }
 });
 
 export default RecipeInformation;
