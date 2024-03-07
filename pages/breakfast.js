@@ -6,8 +6,9 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  Image, Dimensions, Pressable
+  Image
 } from 'react-native';
+import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
 import AppHeader from '../header.js';
 
