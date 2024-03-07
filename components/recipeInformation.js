@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Colors } from 'react-native-paper';
 
 const RecipeInformation = () => {
   const [recipeInfo, setRecipeInfo] = useState(null);
@@ -15,7 +16,7 @@ const RecipeInformation = () => {
         setLoading(false);
         return;
       }
-      const APIKEY = '1e0518e8abf44e5ea1955e843797d8a4';
+      const APIKEY = '644cd0c5013146b0bb6021ab0c0027f2';
       const BASE_URL = `https://api.spoonacular.com/recipes/${recipeID}/information`;
       const PARAMS = `?apiKey=${APIKEY}`;
       const FETCH_URL = `${BASE_URL}${PARAMS}`;
@@ -49,13 +50,17 @@ const RecipeInformation = () => {
     );
   }
 
+  //recipeInfo.instructions = (recipeInfo.toString() == "" ? "" : "• ") + recipeInfo.instructions.toString().replace("<p>", "").replace("</p>", "").replaceAll(". ", "\n• ");
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.recipeContainer}>
-        <Text style={styles.title}>{recipeInfo.title}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{recipeInfo.title}</Text>
+        </View>
         <Image source={{ uri: recipeInfo.image }} style={styles.image} />
-        <Text style={styles.title}>Serving Size: {recipeInfo.servings}</Text>
-        <Text style={styles.title}>{recipeInfo.instructions}</Text>
+        <Text style={styles.servings}>Serving Size: {recipeInfo.servings}</Text>
+        <div dangerouslySetInnerHTML={{__html: recipeInfo.instructions}} />
       </View>
     </ScrollView>
   );
@@ -64,6 +69,7 @@ const RecipeInformation = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: Dimensions.get('window').width,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -71,13 +77,38 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignItems: 'center',
   },
+  titleContainer: {
+    width: '100%',
+    position: 'absolute',
+    alignItems: 'center',
+    padding: 10,
+    zIndex: 10,
+    backgroundColor: '#00000066'
+  },
   title: {
+    fontSize: 24,
+    color: '#fff',
+    fontFamily: 'Varela',
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  servings: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    fontFamily: 'Varela',
+    color: '#6BAB5F',
+  },
+  description: {
+    marginVertical: 15,
+    marginHorizontal: 10,
+    fontSize: 18,
+    fontFamily: 'Varela',
+    fontWeight: 'bold',
+    lineHeight: 40,
   },
   image: {
-    width: '100%',
+    width: Dimensions.get('window').width,
     height: 200,
     marginBottom: 10,
     resizeMode: 'cover',
@@ -88,6 +119,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     color: 'red',
+    marginVertical: 30,
   },
   scrollViewContent: {
     flexGrow: 1,
