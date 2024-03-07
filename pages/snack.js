@@ -1,52 +1,51 @@
-import {
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  TextInput, View,
-  Button,
-  StyleSheet,
-  ScrollView,
-  Image
+import { Text,
+    SafeAreaView,
+    TouchableOpacity,
+    TextInput, View,
+    Button,
+    StyleSheet,
+    ScrollView,
+    Image
 } from 'react-native';
 import { Dimensions, Pressable } from 'react-native-web';
 import RecipesParams from '../components/recipesParams.js';
 import AppHeader from '../header.js';
 
-const Breakfast = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <AppHeader />
-      <View style={styles.tabsContainer} >
+const Snack = ({navigation}) => {
+return (
+  <View style={styles.container}>
+    <AppHeader/>
+    <View style={styles.tabsContainer} >
         <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
-          <Text style={styles.tabButtonText}>Breakfast</Text>
+            <Text style={styles.tabButtonText}>Breakfast</Text>  
         </Pressable>
 
-        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
-          <Text style={styles.tabButtonText}>Main course</Text>
+        <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Main_Course')}>
+            <Text style={styles.tabButtonText}>Main course</Text>
         </Pressable>
 
-        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
-          <Text style={styles.tabButtonText}>snack</Text>
+        <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Snack')}>
+            <Text style={styles.tabButtonText}>snack</Text>
         </Pressable>
 
-        <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
-          <Text style={styles.tabButtonText}>Dessert</Text>
+        <Pressable style={styles.tabButton}  onPress={() => navigation.navigate('Dessert')}>
+            <Text style={styles.tabButtonText}>Dessert</Text>
         </Pressable>
-      </View>
-
-      <h1 style={styles.catTitle}>Breakfast Recipes</h1>
-      <ScrollView>
-        <View>
-          <RecipesParams type="breakfast" name=""/>
-          <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.homeButtonText}>Home Page</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
     </View>
-  );
+    
+    <h1 style={styles.catTitle}>Snack Recipes</h1>
+    <ScrollView>
+      <View>
+      <RecipesParams type="snack" name=""/>
+        <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.homeButtonText}>Home Page</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  </View>
+);
 }
-export default Breakfast;
+export default Snack;
 
 const styles = StyleSheet.create({
   container: {
@@ -63,16 +62,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   tabButton: {
-    width: '25%',
-    height: 30,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff'
+      width: '25%',
+      height: 30,
+      textAlign: 'center',
+      alignItems:'center',
+      justifyContent: 'center',
+      backgroundColor:'#fff'
   },
   tabButtonText: {
-    fontFamily: 'Varela',
-    fontWeight: 'bold',
+      fontFamily: 'Varela',
+      fontWeight: 'bold',
   },
   catTitle: {
     fontFamily: 'Verela',
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
   homeButtonText: {
     fontSize: 24,
     color: '#FFFFFF',
-  }, headerView: {
+  },    headerView: {
     width: Dimensions.get('window').width,
     height: 60,
     borderColor: '#6BAB5F',

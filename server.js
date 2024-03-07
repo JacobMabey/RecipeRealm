@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const { Int32 } = require('mongodb');
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,10 +16,12 @@ const User = mongoose.model('Users', {
     name: String,
     email: String,
     password: String,
-    allergens: [String]
+    allergens: [String],
+    favoriteRecipes: [String]
 });
 
 
+<<<<<<< HEAD
 const Recipie = mongoose.model('Recipes', {
     randomizerId: Int32,
     recipieName: String,
@@ -87,6 +88,8 @@ app.get('/api/getRecipeByRanId', async (req, res) => {
 
 
 //f26bd74a80d6f98d13e8820a2ac879a2897e16df
+=======
+>>>>>>> fef89ef98f20eb13ff96ac9cd7c7731eb6d07fee
 app.post('/api/signup', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
@@ -96,6 +99,7 @@ app.post('/api/signup', async (req, res) => {
             password,
             allergens
         });
+        //user.password = await bcrypt.hash(password, saltRounds);
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -106,7 +110,7 @@ app.post('/api/signup', async (req, res) => {
 
 app.delete('/api/delete/:id', async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId  = req.params.id;
         await User.deleteOne({ _id: userId });
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
@@ -129,11 +133,24 @@ app.get('/api/login', async (req, res) => {
     }
 });
 
+
 app.put('/api/update/:id', async (req, res) => {
     try {
         const { name, email, password, allergens } = req.body;
         const userId = req.params.id;
         await User.updateOne({ _id: userId }, { name, email, password, allergens });
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.put('/api/favorite/:id', async (req, res) => {
+    try {
+        const { recipeId } = req.body;
+        const userId = req.params.id;
+        await User.findByIdAndUpdate(userId, { $push: { favoriteRecipes: recipeId } });
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
         console.error('Error updating user:', error);

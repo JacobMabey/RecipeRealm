@@ -45,7 +45,7 @@ const RecipesHook = () => {
     }
   };
 
-  const RecipesFormat = ({ id, name, image }) => {
+  const RecipesFormat = ({ id, image }) => {
     const navigation = useNavigation();
 
     const navigateToRecipeInfo = () => {

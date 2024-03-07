@@ -20,6 +20,7 @@ import RecipesAPI from '../components/recipesAPI.js';
 import LogIn from '../components/LogIn.js'
 import Update from '../components/Update.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppHeader from '../header.js';
 const Home = ({ navigation }) => {
     const imageUrls = [
         RecipesAPI,
@@ -27,21 +28,26 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <AppHeader/>
             <View style={styles.tabsContainer} >
-                <LogIn />
-                <Update/>
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Lunch')}>
-                    <Text style={styles.tabButtonText}>Lunch</Text>
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Breakfast')}>
+                    <Text style={styles.tabButtonText}>Breakfast</Text>
                 </Pressable>
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dinner')}>
-                    <Text style={styles.tabButtonText}>Dinner</Text>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Main_Course')}>
+                    <Text style={styles.tabButtonText}>Main course</Text>
                 </Pressable>
-                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Filter')}>
-                    <Text style={styles.tabButtonText}>Filter</Text>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Snack')}>
+                    <Text style={styles.tabButtonText}>snack</Text>
+                </Pressable>
+
+                <Pressable style={styles.tabButton} onPress={() => navigation.navigate('Dessert')}>
+                    <Text style={styles.tabButtonText}>Dessert</Text>
                 </Pressable>
             </View>
             <View>
-                <h1 style={styles.featuredTitle}>Featured</h1>
+                <Text style={styles.featuredTitle}>Featured</Text>
                 <ScrollView horizontal style={{ width: Dimensions.get('window').width }}>
                     {imageUrls.map((url, index) => (
                         <TouchableOpacity key={index} onPress={() => navigation.navigate('Recipe')}>
@@ -50,21 +56,15 @@ const Home = ({ navigation }) => {
                     ))}
                 </ScrollView>
             </View>
-            {/*
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for recipes"
-                    onSubmitEditing={() => navigation.navigate('Recipes')}/>
-                    <Stack.Screen name="Recipes" component={RecipePage} />
+
+            <View>
+                <Pressable style={styles.pageButtonBrowse}
+                    onPress={() => navigation.navigate('Filter')}>
+                    <Icon style={styles.pageButtonIcon} size='40' color='#171738' name='search' />
+                    <Text style={styles.pageButtonText}>Browse Recipes</Text>
+                </Pressable>
             </View>
-            <View style={styles.searchBarContainer}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Browse for Ingredients"
-                    onSubmitEditing={() => navigation.navigate('Ingredients')}/>
-            </View>
-            */}
+
             <View>
                 <TouchableOpacity style={styles.pageButton}
                     onPress={() => navigation.navigate('cookbook')}>
@@ -119,6 +119,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Varela',
         fontWeight: 'bold',
     },
+    pageButtonBrowse: {
+        padding: 30,
+        borderColor: '#8774A9',
+        width: Dimensions.get('window').width,
+        borderWidth: 3,
+        textAlign: 'center',
+        alignItems: 'center',
+        backgroundColor: '#A38CCF',
+    },
     pageButton: {
         padding: 30,
         borderColor: '#6BAB5F',
@@ -144,9 +153,47 @@ const styles = StyleSheet.create({
         height: 250,
     },
     featuredTitle: {
+        color: '#fff',
         position: 'absolute',
         zIndex: 10,
+        fontSize: 24,
+        fontFamily: 'Varela',
+        fontWeight: 'bold',
         width: Dimensions.get('window').width,
         textAlign: 'center',
+        backgroundColor: '#00000066'
+
+    }, headerView: {
+        width: Dimensions.get('window').width,
+        height: 60,
+        borderColor: '#6BAB5F',
+        borderWidth: 2,
+        borderBottomWidth: 0,
+        backgroundColor: '#ACF39D',
+        justifyContent: 'center',
     },
+    headerButton: {
+        width: '50%',
+        zIndex: 10
+    },
+    headerTitle: {
+        fontSize: 32,
+        fontFamily: 'Varela',
+        fontWeight: 900,
+        marginLeft: 30,
+        color: '#171738',
+    },
+    accountButton: {
+        position: 'absolute',
+        width: '100%',
+    },
+    accountButtonText: {
+        textAlign: 'right',
+        marginRight: 30,
+        fontSize: 18,
+        fontFamily: 'Varela',
+        fontStyle: 'italic',
+        fontWeight: 900,
+        color: '#171738',
+    }
 });
