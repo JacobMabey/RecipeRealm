@@ -26,7 +26,6 @@ const AddRecipeInformation = () => {
     const [ingredient, setIngredient] = useState('');
     const [image, setImage] = useState('');
     const [ranID, setranID] = useState('');
-    const [recID, setRecID] = useState('');
 
     const randomNumberInRange = (min, max) => {
         return Math.floor(Math.random()
@@ -51,10 +50,11 @@ const AddRecipeInformation = () => {
     useEffect(() => {
     const fetchRecipeInformation = async () => {
         try {
-            do{
-                setRecID(randomNumberInRange(1, 999999));
+            for(var i = 0; i<30; i++){
+                const recID = randomNumberInRange(1, 999999);
+                console.log(recID);
                 const APIKEY = '727f8e718e7846989b980e08b4d7e0ff';
-                const BASE_URL = `https://api.spoonacular.com/recipes/${recID}/information?includeNutrition=true`;
+                const BASE_URL = `https://api.spoonacular.com/recipes/${recID}/information`;
                 const PARAMS = `?apiKey=${APIKEY}`;
                 const FETCH_URL = `${BASE_URL}${PARAMS}`;
                 fetch(FETCH_URL)
@@ -89,7 +89,7 @@ const AddRecipeInformation = () => {
                 console.error('No results found');
                 setNoGo(true);
             }
-        })}while(!noGo)
+        })}
             
     } 
     catch (error) {
